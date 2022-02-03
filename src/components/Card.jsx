@@ -9,11 +9,7 @@ import {
 } from "@mui/material";
 
 const CategoryCard = ({ data: postByCategory }) => {
-  const imageUrl =
-    process.env.NODE_ENV !== "development"
-      ? postByCategory.attributes.image.data.attributes.url
-      : process.env.REACT_APP_BACKEND_URL +
-        postByCategory.attributes.image.data.attributes.url;
+  const imageUrl = process.env.REACT_APP_BACKEND_URL + postByCategory.attributes.image.data.attributes.url;
 
   return (
     <Card sx={{ maxWidth: 345 }}>

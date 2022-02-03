@@ -23,11 +23,9 @@ const SignUp = () => {
   const password = useInput("");
   const confirmPassword = useInput("");
 
-  const { currentUser, localSignup, authError, setAuthError } = useAuth();
+  const { localSignup, authError, setAuthError } = useAuth();
   // const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  console.log("User from signup page", currentUser);
 
   const handleLocalSignup = async (e) => {
     e.preventDefault();

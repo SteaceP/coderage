@@ -26,9 +26,10 @@ export function AuthProvider({ children }) {
         if (process.env.NODE_ENV !== "development") {
           Cookie.set("token", login.jwt, {
             secure: true,
+            HttpOnly: true,
             domain: "coderage.pro",
             sameSite: "strict",
-            expires: 30,
+            expires: 15,
           });
           
           Cookie.set("token", login.jwt);
@@ -50,7 +51,17 @@ export function AuthProvider({ children }) {
         username,
       },
       onCompleted: ({ register }) => {
-        Cookie.set("token", register.jwt);
+        if (process.env.NODE_ENV !== "development") {
+          Cookie.set("token", register.jwt, {
+            secure: true,
+            HttpOnly: true,
+            domain: "coderage.pro",
+            sameSite: "strict",
+            expires: 15,
+          });
+          
+          Cookie.set("token", register.jwt);
+        }
         setCurrentUser(register.user);
         navigate("/");
       },
@@ -59,10 +70,6 @@ export function AuthProvider({ children }) {
       },
     });
   };
-
-  // const Auth0Login = () => {
-
-  // }
 
   const logout = () => {
     setCurrentUser(null);
@@ -76,8 +83,7 @@ export function AuthProvider({ children }) {
     const token = Cookie.get("token");
 
     if (token) {
-      setCurrentUser(); // Make a cookie with more than just the token?
-      console.log("User logged in automatically: ", currentUser);
+      setCurrentUser(true); // Make a cookie with more than just the token?
     }
   }, [currentUser]);
 

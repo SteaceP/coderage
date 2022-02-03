@@ -164,7 +164,6 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </form>
-      <Button onClick={() => console.log(currentUser)}>Log current user</Button>
     </Container>
   );
 };

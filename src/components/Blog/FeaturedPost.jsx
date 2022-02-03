@@ -18,11 +18,7 @@ const FeaturedPost = ({ data: featuredPosts }) => {
   return (
     <>
       {featuredPosts.map((posts) => {
-        const imageUrl =
-          process.env.NODE_ENV !== "development"
-            ? posts.attributes.image.data.attributes.url
-            : process.env.REACT_APP_BACKEND_URL +
-              posts.attributes.image.data.attributes.url;
+        const imageUrl = process.env.REACT_APP_BACKEND_URL + posts.attributes.image.data.attributes.url;
 
         return (
           <Grid item xs={12} md={6} key={seed(posts)}>

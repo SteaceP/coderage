@@ -27,11 +27,7 @@ const ArticleContainer = (props) => {
         {({ data: post }) => {
           const posts = post.posts.data;
 
-          const imageUrl =
-            process.env.NODE_ENV !== "development"
-              ? posts[0].attributes.image.data.attributes.url
-              : process.env.REACT_APP_BACKEND_URL +
-                posts[0].attributes.image.data.attributes.url;
+          const imageUrl = process.env.REACT_APP_BACKEND_URL + posts[0].attributes.image.data.attributes.url;
 
           return (
             <Grid

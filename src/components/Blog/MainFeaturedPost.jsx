@@ -10,10 +10,7 @@ const MainFeaturedPost = ({ data: mainFeaturedPost }) => {
   return (
     <>
       {mainFeaturedPost.map((posts) => {
-        const imageUrl =
-          process.env.NODE_ENV !== "development"
-            ? posts.attributes.image.data.attributes.url
-            : process.env.REACT_APP_BACKEND_URL +
+        const imageUrl = process.env.REACT_APP_BACKEND_URL +
               posts.attributes.image.data.attributes.url;
 
         return (
