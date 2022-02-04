@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -13,8 +13,7 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
-
-const AuthHeader = lazy(() => import("../../components/Auth/AuthHeader"));
+import AuthHeader from "../../components/Auth/AuthHeader"
 
 const Dashboard = () => {
   const displayName = useInput("");
@@ -65,13 +64,13 @@ const Dashboard = () => {
         <title>My Profile - Hacktive</title>
         <meta
           name="description"
-          content="Your Profile page for Hacktive Web Development. You can change your display name, email and password"
+          content="Your Profile page for Code Rage. You can change your display name, email and password"
         />
-        <link rel="canonical" href="https://steace.live/auth/signup" />
+        <link rel="canonical" href="https://coderage.pro/auth/signup" />
       </Helmet>
-      <Suspense fallback={<div>Loading...</div>}>
-        <AuthHeader title="Your Profile" />
-      </Suspense>{" "}
+
+      <AuthHeader title="Your Profile" />
+
       {error && (
         <Alert
           sx={{ width: "100%" }}

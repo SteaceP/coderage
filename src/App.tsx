@@ -1,23 +1,28 @@
+import { lazy, Suspense } from 'react';
 import { Helmet } from "react-helmet";
 import { AuthProvider } from "./contexts/AuthContext";
 import { DarkThemeProvider } from "./contexts/DarkModeContext";
 import { Routes, Route } from "react-router-dom";
+// import {TransitionGroup, CSSTransition } from "react-transition-group";
 import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
 import Home from "./containers/Home";
 import NoMatch from "./containers/404";
-import Login from "./containers/auth/login";
-import SignUp from "./containers/auth/Signup";
-import Dashboard from "./containers/auth/Dashboard";
 import RequireAuth from "./components/RequireAuth";
-import ForgotPassword from "./containers/auth/ForgotPassword";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
-import Portfolio from "./containers/Portfolio";
-import Category from "./containers/blog/CategoriesContainer";
-import ArticleContainer from "./containers/blog/ArticleContainer";
 import LoginRedirect from "./utils/LoginRedirect";
+import CircularLoading from './components/Loading';
+
+const Category = lazy(() => import("./containers/blog/CategoriesContainer"))
+const ArticleContainer = lazy(() => import("./containers/blog/ArticleContainer"))
+const Dashboard = lazy(() => import("./containers/auth/Dashboard"))
+const Login = lazy(() => import("./containers/auth/login"))
+const SignUp = lazy(() => import("./containers/auth/Signup"))
+const ForgotPassword = lazy(() => import("./containers/auth/ForgotPassword"))
+const Portfolio = lazy(() => import("./containers/Portfolio"))
+
 
 const App = () => {
   return (
@@ -47,12 +52,36 @@ const App = () => {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/category/:id" element={<Category />} />
-            <Route path="/post/:id" element={<ArticleContainer />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/auth/signup" element={<SignUp />} />
-            <Route path="/auth/login" element={<Login />} />
-            <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+            <Route path="/category/:id" element={
+              <Suspense fallback={<CircularLoading />}>
+                <Category />
+              </Suspense>
+            } />
+            <Route path="/post/:id" element={
+              <Suspense fallback={<CircularLoading />}>
+                <ArticleContainer />
+              </Suspense>
+            } />
+            <Route path="/portfolio" element={
+              <Suspense fallback={<CircularLoading />}>
+                <Portfolio />
+              </Suspense>
+            } />
+            <Route path="/auth/signup" element={
+              <Suspense fallback={<CircularLoading />}>
+                <SignUp />
+              </Suspense>
+            } />
+            <Route path="/auth/login" element={
+              <Suspense fallback={<CircularLoading />}>
+                <Login />
+              </Suspense>
+            } />
+            <Route path="/auth/forgot-password" element={
+              <Suspense fallback={<CircularLoading />}>
+                <ForgotPassword />
+              </Suspense>
+            } />
             <Route path="/connect/auth0/redirect" element={<LoginRedirect />} />
             <Route
               path="/auth/dashboard"

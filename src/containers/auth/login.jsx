@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link as RouterLink } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -15,7 +15,7 @@ import {
   Container,
 } from "@mui/material";
 
-const AuthHeader = lazy(() => import("../../components/Auth/AuthHeader"));
+import AuthHeader from "../../components/Auth/AuthHeader";
 
 const Login = () => {
   const email = useInput("");
@@ -47,9 +47,7 @@ const Login = () => {
         <link rel="canonical" href="https://coderage.pro/login" />
       </Helmet>
 
-      <Suspense fallback={<div>Loading...</div>}>
         <AuthHeader title="Log In" />
-      </Suspense>
 
       {authError && (
         <Alert

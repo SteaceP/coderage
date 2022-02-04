@@ -37,7 +37,9 @@ const ForgotPassword = () => {
         />
         <link rel="canonical" href="https://steace.live/auth/forgot-password" />
       </Helmet>
+      
       <AuthHeader title="Password Reset" />
+      
       {error && (
         <Alert
           sx={{ width: "100%" }}

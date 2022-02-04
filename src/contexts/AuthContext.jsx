@@ -26,7 +26,6 @@ export function AuthProvider({ children }) {
         if (process.env.NODE_ENV !== "development") {
           Cookie.set("token", login.jwt, {
             secure: true,
-            HttpOnly: true,
             domain: "coderage.pro",
             sameSite: "strict",
             expires: 15,
@@ -54,16 +53,18 @@ export function AuthProvider({ children }) {
         if (process.env.NODE_ENV !== "development") {
           Cookie.set("token", register.jwt, {
             secure: true,
-            HttpOnly: true,
             domain: "coderage.pro",
             sameSite: "strict",
             expires: 15,
           });
           
           Cookie.set("token", register.jwt);
+          setCurrentUser(register.user);
+          navigate("/");
+        } else {
+          Cookie.set("token", register.jwt);
+          setCurrentUser(register.user);
         }
-        setCurrentUser(register.user);
-        navigate("/");
       },
       onError: (error) => {
         setAuthError(error.message);
