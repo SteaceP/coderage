@@ -12,32 +12,34 @@ import {
 } from "@mui/material";
 import Moment from "react-moment";
 
-const FeaturedPost = ({ data: featuredPosts }) => {
-  const seed = useUIDSeed();
+const FeaturedPost = ({ data: featuredPostsArray }) => {
+  const uid = useUIDSeed();
 
   return (
     <>
-      {featuredPosts.map((posts) => {
-        const imageUrl = process.env.REACT_APP_BACKEND_URL + posts.attributes.image.data.attributes.url;
+      {featuredPostsArray.map((post: any) => {
+        const imageUrl =
+          process.env.REACT_APP_BACKEND_URL +
+          post.attributes.image.data.attributes.url;
 
         return (
-          <Grid item xs={12} md={6} key={seed(posts)}>
+          <Grid item xs={12} md={6} key={uid(post)}>
             <CardActionArea
               component={Link}
-              to={`post/${posts.attributes.slug}`}
+              to={`post/${post.attributes.slug}`}
             >
               <Card sx={{ display: "flex" }}>
                 <Box sx={{ flex: 1 }}>
                   <CardContent sx={{ flex: 1 }}>
                     <Typography component="h2" variant="h5">
-                      {posts.attributes.title}
+                      {post.attributes.title}
                     </Typography>
                     <Typography variant="subtitle1" paragraph>
-                      {posts.attributes.synopsis} ...
+                      {post.attributes.synopsis} ...
                     </Typography>
                     <Typography variant="subtitle1" color="textSecondary">
                       <Moment format="MMM Do YYYY">
-                        {posts.attributes.publishedAt}
+                        {post.attributes.publishedAt}
                       </Moment>
                     </Typography>
                   </CardContent>
@@ -45,10 +47,10 @@ const FeaturedPost = ({ data: featuredPosts }) => {
                 <Hidden xsDown>
                   <CardMedia
                     component="img"
-                    title={posts.attributes.title}
+                    title={post.attributes.title}
                     sx={{ width: 160, display: { xs: "none", sm: "block" } }}
                     image={imageUrl}
-                    alt={posts.attributes.title}
+                    alt={post.attributes.title}
                   />
                 </Hidden>
               </Card>

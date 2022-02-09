@@ -12,6 +12,7 @@
     "@mui/lab": "^5.0.0-alpha.49",
     "@mui/material": "^5.2.4",
     "@sendgrid/mail": "^7.6.0",
+    "axios": "^0.25.0",
     "buttercms": "^1.2.8",
     "graphql": "^16.1.0",
     "js-cookie": "^3.0.1",

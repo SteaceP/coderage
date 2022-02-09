@@ -1,39 +1,49 @@
 import { Avatar } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import Query from "../Query";
-import AUTH_USER_QUERY from "../../graphql/queries/query.auth.user";
 
-export const UserPicture = () => (
-  <Query query={AUTH_USER_QUERY} slug={undefined}>
-    {({ data: userPicture }) => {
-      const picture =
-        userPicture.usersPermissionsUser.data.attributes.picture.data.attributes
-          .formats.thumbnail.url;
+import { UserQuery } from "components/ApolloQuery";
+import AUTH_USER_GETPICTURE from "graphql/queries/query.auth.userPicture";
 
-      const avatarAlt =
-        userPicture.usersPermissionsUser.data.attributes.picture.data.attributes
-          .alternativeText;
+const UserPicture = () => {
+  return (
+    <UserQuery query={AUTH_USER_GETPICTURE}>
+      {({ data }) => {
+        if (!data.usersPermissionsUser.data.attributes.picture.data) {
+          return (
+            <Avatar
+              component={NavLink}
+              to="/auth/dashboard"
+              sx={{
+                width: 32,
+                height: 32,
+                ml: 2.3,
+              }}
+            />
+          );
+        } else {
+          const query =
+            data.usersPermissionsUser.data.attributes.picture.data.attributes;
 
-      const avatarUrl =
-        process.env.NODE_ENV !== "development"
-          ? picture
-          : process.env.REACT_APP_BACKEND_URL + picture;
+          const avatarAlt = query.alternativeText;
+          const avatarUrl = `${process.env.REACT_APP_BACKEND_URL}${query.formats.thumbnail.url}`;
 
-      return (
-        <>
-          <Avatar
-            component={NavLink}
-            to="/auth/dashboard"
-            src={avatarUrl}
-            alt={avatarAlt}
-            sx={{
-              width: 32,
-              height: 32,
-              ml: 2.3,
-            }}
-          />
-        </>
-      );
-    }}
-  </Query>
-);
+          return (
+            <Avatar
+              component={NavLink}
+              to="/auth/dashboard"
+              src={avatarUrl}
+              alt={avatarAlt}
+              sx={{
+                width: 32,
+                height: 32,
+                ml: 2.3,
+              }}
+            />
+          );
+        }
+      }}
+    </UserQuery>
+  );
+};
+
+export default UserPicture;

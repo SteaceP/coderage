@@ -2,8 +2,6 @@ import Markdown from "../Markdown";
 import { Typography, Grid, Divider, Box } from "@mui/material";
 
 const Rules = () => {
-
-
   return (
     <Grid item xs={12} md={8}>
       <Typography variant="h6" gutterBottom>

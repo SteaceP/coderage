@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
+import { To, useNavigate } from "react-router-dom";
 import {
   Box,
   ListItemIcon,
@@ -9,27 +8,27 @@ import {
   IconButton,
   Divider,
 } from "@mui/material";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import Settings from "@mui/icons-material/Settings";
-import { UserPicture } from "./UserPicture";
-
 import Logout from "@mui/icons-material/Logout";
 
-import { menuProps } from "./mobileMenuProps";
-
-//TODO: replace the divs with something else(rethink the logic) fragments gives a mui error
+import { useAuthState } from "contexts/AuthContext";
+import { menuProps } from "components/Header/mobileMenuProps";
+import UserPicture from "components/Header/UserPicture";
 
 const MobileMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = !!anchorEl;
-  const { currentUser, logout } = useAuth();
-  let navigate = useNavigate();
+  const { user } = useAuthState();
+  const logout = null;
+  const navigate = useNavigate();
 
-  const handleMenu = (e) => {
+  const handleMenu = (e: { currentTarget: any }) => {
     setAnchorEl(e.currentTarget);
   };
 
-  const handleMenuClick = (route) => {
+  const handleMenuClick = (route: To) => {
     navigate(route);
     setAnchorEl(null);
   };
@@ -38,7 +37,7 @@ const MobileMenu = () => {
     <>
       <Box
         sx={{
-          "@media screen and (min-width: 601px)": {
+          "@media screen and (min-width: 600px)": {
             display: "none",
           },
         }}
@@ -62,8 +61,8 @@ const MobileMenu = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {currentUser ? (
-          <div>
+        {user ? (
+          <Box component="div">
             <MenuItem onClick={() => handleMenuClick("/auth/dashboard")}>
               <UserPicture />
               Profile
@@ -84,9 +83,9 @@ const MobileMenu = () => {
               </ListItemIcon>
               Logout
             </MenuItem>
-          </div>
+          </Box>
         ) : (
-          <div>
+          <Box component="div">
             <MenuItem onClick={() => handleMenuClick("/auth/login")}>
               <ListItemIcon>
                 <Logout fontSize="small" />
@@ -100,7 +99,7 @@ const MobileMenu = () => {
               </ListItemIcon>
               Signup
             </MenuItem>
-          </div>
+          </Box>
         )}
       </Menu>
     </>

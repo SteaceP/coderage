@@ -23,13 +23,25 @@
     "noResolve": false,
     "noEmit": true,
     "noImplicitAny": false,
-    "noImplicitThis": false,
+    "noImplicitThis": true,
     "strictNullChecks": false,
-    "jsx": "react-jsx"
+    "baseUrl": "./src",
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/components/*": [
+        "./components/*"
+      ],
+      "@/containers/*": [
+        "./containers/*"
+      ],
+      "@/contexts/*": [
+        "./contexts/*"
+      ],
+    }
   },
-  "include": [
-    "src/**/*"
-  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"

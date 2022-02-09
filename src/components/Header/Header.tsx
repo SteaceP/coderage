@@ -1,25 +1,26 @@
-import * as React from "react";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
-import { useAuth } from "../../contexts/AuthContext";
 import { Toolbar, Button, Box, Divider } from "@mui/material";
+
 import IconButton from "@mui/material/IconButton";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { UserPicture } from "./UserPicture";
 
-import logoWhiteTheme from "../../assets/images/logoTextWhiteTheme.png"
-import logoBlackTheme from "../../assets/images/logoTextBlackTheme.png";
+import logoWhiteTheme from "assets/images/logoTextWhiteTheme.png";
+import logoBlackTheme from "assets/images/logoTextBlackTheme.png";
 
-import { ColorModeContext } from "../../contexts/DarkModeContext";
+import { useAuthState } from "contexts/AuthContext";
+import { ColorModeContext } from "contexts/DarkModeContext";
+import UserPicture from "components/Header/UserPicture";
 
 import Categories from "./Categories";
 import MobileMenu from "./MobileMenu";
 
 const Header = () => {
-  const { currentUser } = useAuth();
+  const { user } = useAuthState();
+  const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
-  const colorMode = React.useContext(ColorModeContext);
 
   return (
     <>
@@ -29,7 +30,6 @@ const Header = () => {
           justifyContent: "space-between",
         }}
       >
-        
         <Box component={NavLink} to="/">
           {theme.palette.mode === "light" ? (
             <img src={logoWhiteTheme} alt="logo" height={60} width={100} />
@@ -65,7 +65,7 @@ const Header = () => {
               },
             }}
           >
-            {!currentUser ? (
+            {!user ? (
               <Button
                 component={NavLink}
                 to="/auth/signup"

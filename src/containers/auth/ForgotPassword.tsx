@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link as RouterLink } from "react-router-dom";
-// import { useAuth } from "../../Contexts/AuthContext";
-import { useInput } from "../../utils/hooks";
 import {
   Button,
   TextField,
@@ -13,16 +11,19 @@ import {
   Container,
 } from "@mui/material";
 
-import AuthHeader from "../../components/Auth/AuthHeader";
+import { useInput } from "utils/hooks";
+
+import AuthHeader from "components/Auth/AuthHeader";
+
+// TODO: A token is needed to be able to reset the password. An email need to be sent. Implement Sendgrid
 
 const ForgotPassword = () => {
   const email = useInput("");
-  // const auth = useAuth();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
   };
 
@@ -30,16 +31,19 @@ const ForgotPassword = () => {
     <Container component="main" maxWidth="sm">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Forgot Password - Hacktive</title>
+        <title>Forgot Password - Code Rage</title>
         <meta
           name="description"
-          content="Forgot Password page for Hacktive Web Development."
+          content="Forgot Password page for Code Rage."
         />
-        <link rel="canonical" href="https://steace.live/auth/forgot-password" />
+        <link
+          rel="canonical"
+          href="https://coderage.pro/auth/forgot-password"
+        />
       </Helmet>
-      
+
       <AuthHeader title="Password Reset" />
-      
+
       {error && (
         <Alert
           sx={{ width: "100%" }}
