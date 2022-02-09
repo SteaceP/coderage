@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { useMutation } from "@apollo/client";
 import { Helmet } from "react-helmet";
 import { Link as RouterLink } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
-import { useInput } from "../../utils/hooks";
+import Cookie from "js-cookie";
 import {
   Button,
   TextField,
@@ -15,50 +15,83 @@ import {
   Container,
 } from "@mui/material";
 
-import AuthHeader from "../../components/Auth/AuthHeader";
+import AUTH_LOGIN_MUTATION from "graphql/mutation/mutation.auth.login";
+import { useInput } from "utils/hooks";
+import { useAuthDispatch } from "contexts/AuthContext";
+
+import AuthHeader from "components/Auth/AuthHeader";
 
 const Login = () => {
-  const email = useInput("");
-  const password = useInput("");
-  const { localLogin, authError, setAuthError } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const userEmail = useInput("");
+  const userPassword = useInput("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
+  const dispatch = useAuthDispatch();
+  const [login] = useMutation(AUTH_LOGIN_MUTATION);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleEmailLogin = async () => {
+    setIsLoading(true);
 
-    setLoading(true);
-    await localLogin(email.value, password.value);
-    setLoading(false);
+    await login({
+      variables: {
+        email: userEmail.value,
+        password: userPassword.value,
+      },
+      onCompleted: ({ login }) => {
+        if (process.env.NODE_ENV !== "development") {
+          Cookie.set("token", login.jwt, {
+            secure: true,
+            domain: "coderage.pro",
+            sameSite: "strict",
+            expires: 7,
+          });
+        } else {
+          Cookie.set("token", login.jwt, {
+            secure: true,
+            expires: 3,
+          });
+        }
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            username: login.user.username,
+            email: login.user.email,
+            userID: login.user.id,
+            confirmed: login.user.confirmed,
+          },
+        });
+        dispatch({ type: "STOP_LOADING" });
+        // navigate("/");
+      },
+      onError: (error) => {
+        setLoginError(error.message);
+      },
+    });
   };
 
-  const handleGoogleSubmit = async (e) => {
-    e.preventDefault();
-  };
+  const handleGoogleLogin = async () => {};
 
   return (
     <Container maxWidth="sm">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Login - Hacktive</title>
-        <meta
-          name="description"
-          content="Log In page for Code Rage."
-        />
+        <title>Login - Code Rage</title>
+        <meta name="description" content="Login page for Code Rage." />
         <link rel="canonical" href="https://coderage.pro/login" />
       </Helmet>
 
-        <AuthHeader title="Log In" />
+      <AuthHeader title="Log In" />
 
-      {authError && (
+      {loginError && (
         <Alert
           sx={{ width: "100%" }}
           severity="error"
           onClose={() => {
-            setAuthError("")
+            setLoginError("");
           }}
         >
           <AlertTitle>Error</AlertTitle>
-          {authError}
+          {loginError}
         </Alert>
       )}
 
@@ -71,7 +104,7 @@ const Login = () => {
           id="email"
           label="Email Address"
           autoComplete="email"
-          {...email}
+          {...userEmail}
         />
         <TextField
           variant="outlined"
@@ -80,9 +113,9 @@ const Login = () => {
           fullWidth
           label="Password"
           type="password"
-          id="password"
+          id="userPassword"
           autoComplete="current-password"
-          {...password}
+          {...userPassword}
         />
         <FormControlLabel
           control={<Checkbox value="remember" color="primary" />}
@@ -90,12 +123,12 @@ const Login = () => {
         />
 
         <Button
-          disabled={loading}
+          disabled={isLoading}
           type="submit"
           fullWidth
           variant="contained"
           color="primary"
-          onClick={handleSubmit}
+          onClick={handleEmailLogin}
           sx={{
             mt: 3,
           }}
@@ -104,12 +137,12 @@ const Login = () => {
         </Button>
 
         <Button
-          disabled={loading}
+          disabled={isLoading}
           type="submit"
           fullWidth
           variant="contained"
           color="primary"
-          onClick={handleGoogleSubmit}
+          onClick={handleGoogleLogin}
           sx={{
             mt: 3,
           }}

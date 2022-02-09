@@ -1,5 +1,5 @@
 import ReactMarkdown from "markdown-to-jsx";
-import {Typography, Link, Box} from "@mui/material";
+import { Typography, Link, Box } from "@mui/material";
 
 function MarkdownListItem(props: object) {
   return <Box component="li" sx={{ mt: 1, typography: "body1" }} {...props} />;
@@ -13,7 +13,6 @@ const options = {
         gutterBottom: true,
         variant: "h4",
         component: "h1",
-        
       },
     },
     h2: {
@@ -39,8 +38,8 @@ const options = {
     a: {
       component: Link,
       props: {
-        underline: "hover"
-      }
+        underline: "hover",
+      },
     },
     li: {
       component: MarkdownListItem,

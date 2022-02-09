@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
-import { useInput } from "../../utils/hooks";
 import {
   Button,
   TextField,
@@ -13,34 +11,38 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
-import AuthHeader from "../../components/Auth/AuthHeader"
+
+import { useAuthDispatch, useAuthState } from "contexts/AuthContext";
+import { useInput } from "utils/hooks";
+
+import AuthHeader from "components/Auth/AuthHeader";
 
 const Dashboard = () => {
-  const displayName = useInput("");
-  const email = useInput("");
-  const password = useInput("");
-  const confirmPassword = useInput("");
-  const navigate = useNavigate();
-  const { currentUser, logout } = useAuth();
+  const usernameInput = useInput("");
+  const emailInput = useInput("");
+  const passwordInput = useInput("");
+  const confirmPasswordInput = useInput("");
+  const { user, loading } = useAuthState();
+  const dispatch = useAuthDispatch();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    if (password.value !== confirmPassword.value) {
+    if (passwordInput.value !== confirmPasswordInput.value) {
       return setError("Passwords don't match");
     }
 
     const promises = [];
-    setLoading(true);
+    // setLoading(true);
     setError("");
 
-    if (email.value !== currentUser.email) {
-      // promises.push(updateEmail(email.value));
+    if (emailInput.value !== user.email) {
+      // promises.push(updateEmail(emailInput.value));
       console.log("should work!!");
     }
-    if (password.value) {
+    if (passwordInput.value) {
       // promises.push(currentUser.updatePassword(password.value));
       console.log("Should work too!");
     }
@@ -53,8 +55,12 @@ const Dashboard = () => {
         setError("Failed to update account");
       })
       .finally(() => {
-        setLoading(false);
+        // setLoading(false);
       });
+  };
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
   };
 
   return (
@@ -88,20 +94,20 @@ const Dashboard = () => {
             <TextField
               variant="outlined"
               fullWidth
-              id="displayName"
+              id="usernameInput"
               label="Display Name"
-              placeholder={`Your current username is "${currentUser.username}"`}
-              {...displayName}
+              placeholder={`Your current username is "${user.username}"`}
+              {...usernameInput}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               variant="outlined"
               fullWidth
-              id="email"
+              id="emailInput"
               label="Email Address"
-              placeholder={`Your current email is "${currentUser.email}"`}
-              {...email}
+              placeholder={`Your current email is "${user.email}"`}
+              {...emailInput}
             />
           </Grid>
           <Grid item xs={12}>
@@ -110,9 +116,9 @@ const Dashboard = () => {
               fullWidth
               label="Password"
               type="password"
-              id="password"
+              id="passwordInput"
               placeholder="Leave blank to keep the same password"
-              {...password}
+              {...passwordInput}
             />
           </Grid>
           <Grid item xs={12}>
@@ -121,9 +127,9 @@ const Dashboard = () => {
               fullWidth
               label="Confirm Password"
               type="password"
-              id="confirmPassword"
+              id="confirmPasswordInput"
               placeholder="Retype your new password..."
-              {...confirmPassword}
+              {...confirmPasswordInput}
             />
           </Grid>
           <Grid item xs={12}>
@@ -150,7 +156,7 @@ const Dashboard = () => {
           fullWidth
           variant="contained"
           color="primary"
-          onClick={logout}
+          onClick={() => handleLogout}
           sx={{ mt: 2, mb: 2 }}
         >
           LogOut

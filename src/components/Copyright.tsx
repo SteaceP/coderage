@@ -1,12 +1,10 @@
 import { Link, Typography, Box } from "@mui/material";
 
-//TODO:
-
 const Copyright = () => {
   return (
     <Box
       sx={{
-        mt: 1,
+        mt: 0.5,
       }}
     >
       <Typography variant="body2" color="textSecondary" align="center">

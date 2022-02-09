@@ -1,9 +1,9 @@
-import React from "react";
 import { Helmet } from "react-helmet";
+import { useUIDSeed } from "react-uid";
 import { Grid, Typography, Link } from "@mui/material";
 
 const works = [
-  {title: "E-Commerce with React and Redux", url: "https://example.com"},
+  { title: "E-Commerce with React and Redux", url: "https://example.com" },
   { title: "The Counselor", url: "https://thecounselor.ca" },
   {
     title: "Source Code for this WebSite (Under high Development)",
@@ -12,11 +12,13 @@ const works = [
 ];
 
 const Portfolio = () => {
+  let uid = useUIDSeed();
+
   return (
-    <>f
+    <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Portfolio - Hacktive</title>
+        <title>Portfolio - Steacy Paquette</title>
         <meta
           name="description"
           content="Work that I have done that is not behind a Non-Disclosure Agreement (N.D.A.). or the N.D.A. is lifted"
@@ -42,6 +44,7 @@ const Portfolio = () => {
             href={work.url}
             underline="hover"
             gutterBottom
+            key={uid(work)}
           >
             {work.title}
           </Link>

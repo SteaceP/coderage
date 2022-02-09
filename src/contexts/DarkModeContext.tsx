@@ -4,11 +4,13 @@ import {
   createTheme,
   responsiveFontSizes,
 } from "@mui/material/styles";
-import {PaletteMode} from '@mui/material'
+import { PaletteMode } from "@mui/material";
 
-import { getDesignTokens } from "../assets/theme";
+import { getDesignTokens } from "assets/theme";
 
-export const ColorModeContext = createContext({ toggleColorMode: () => {} });
+export const ColorModeContext = createContext({
+  toggleColorMode: () => {},
+});
 
 ColorModeContext.displayName = "DarkModeContext"; // Only give a name for the dev tools, make sure it's in the production build
 
@@ -18,7 +20,6 @@ export const useDarkTheme = () => {
 
 export const DarkThemeProvider = ({ children }) => {
   const [mode, setMode] = useState<PaletteMode>("dark");
-
 
   const colorMode = useMemo(
     () => ({
@@ -30,13 +31,13 @@ export const DarkThemeProvider = ({ children }) => {
   );
 
   // Update the theme only if the mode changes
- const theme = useMemo(
-    () =>
-      createTheme(getDesignTokens(mode)), [mode]);
+  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={responsiveFontSizes(theme)}>{children}</ThemeProvider>
+      <ThemeProvider theme={responsiveFontSizes(theme)}>
+        {children}
+      </ThemeProvider>
     </ColorModeContext.Provider>
   );
 };

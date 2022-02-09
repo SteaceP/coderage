@@ -1,5 +1,3 @@
-import Query from "../../components/Query";
-import ARTICLE_QUERY from "../../graphql/queries/query.article";
 import Moment from "react-moment";
 import { useParams } from "react-router";
 import {
@@ -13,29 +11,34 @@ import {
   Fab,
   Divider,
 } from "@mui/material";
-import Markdown from "../../components/Markdown";
+
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-import ScrollTop from "../../components/BackToTop";
+import { GetPostsQuery } from "components/ApolloQuery";
+import ARTICLE_QUERY from "graphql/queries/query.article";
 
-const ArticleContainer = (props) => {
-  let { id } = useParams();
+import Markdown from "components/Markdown";
+import ScrollTop from "components/BackToTop";
+
+const ArticleContainer = (props: any) => {
+  const { id } = useParams();
 
   return (
     <>
-      <Query query={ARTICLE_QUERY} slug={id}>
+      <GetPostsQuery query={ARTICLE_QUERY} slug={id}>
         {({ data: post }) => {
           const posts = post.posts.data;
 
-          const imageUrl = process.env.REACT_APP_BACKEND_URL + posts[0].attributes.image.data.attributes.url;
+          const imageUrl =
+            process.env.REACT_APP_BACKEND_URL +
+            posts[0].attributes.image.data.attributes.url;
 
           return (
             <Grid
               container
               spacing={0}
               direction="column"
-              alignItems="center"
-              justify="center"
+              sx={{ alignItems: "center", justifyContent: "center" }}
             >
               <Card
                 sx={{
@@ -72,7 +75,6 @@ const ArticleContainer = (props) => {
                     <Typography
                       align="left"
                       variant="caption"
-                      gutterBottom="true"
                       sx={{
                         mt: 3,
                       }}
@@ -93,7 +95,7 @@ const ArticleContainer = (props) => {
             </Grid>
           );
         }}
-      </Query>
+      </GetPostsQuery>
       <ScrollTop {...props}>
         <Fab color="primary" size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />

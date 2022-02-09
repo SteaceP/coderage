@@ -9,26 +9,23 @@ import {
 } from "@mui/material";
 
 const CategoryCard = ({ data: postByCategory }) => {
-  const imageUrl = process.env.REACT_APP_BACKEND_URL + postByCategory.attributes.image.data.attributes.url;
+  const query = postByCategory.attributes;
+  const imageUrl = `${process.env.REACT_APP_BACKEND_URL}${query.image.data.attributes.url}`;
 
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia component="img" alt="C sa!" height="200" image={imageUrl} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {postByCategory.attributes.title}
+          {query.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {postByCategory.attributes.synopsis}...
+          {query.synopsis}...
         </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>
-        <Button
-          size="small"
-          component={Link}
-          to={`/post/${postByCategory.attributes.slug}`}
-        >
+        <Button size="small" component={Link} to={`/post/${query.slug}`}>
           Read post
         </Button>
       </CardActions>

@@ -1,7 +1,7 @@
 import { Box, Typography, Avatar } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-export default function AuthHeader({ title }) {
+const AuthHeader = (props: { title: string }) => {
   return (
     <Box
       sx={{
@@ -20,8 +20,10 @@ export default function AuthHeader({ title }) {
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        {title}
+        {props.title}
       </Typography>
     </Box>
   );
-}
+};
+
+export default AuthHeader;

@@ -1,5 +1,6 @@
 import { Container, Box, Link, Grid } from "@mui/material";
 import { useUIDSeed } from "react-uid";
+
 import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -7,10 +8,10 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import Copyright from "./Copyright";
 
-export default function Footer() {
-  let seed = useUIDSeed();
+const Footer = () => {
+  const seed = useUIDSeed();
 
-  const socialIcon = [
+  const socialNetworks = [
     {
       name: "GitHub",
       icon: GitHubIcon,
@@ -35,7 +36,7 @@ export default function Footer() {
       url: "https://www.facebook.com/steacyp",
       ariaLabel: "Facebook Account",
     },
-  ]; // No good reason(s) to have this on the backend. Don't touch or put in a separate file.
+  ]; // No good reasons to have this on the backend. Don't touch or put in a separate file.
 
   return (
     <Box
@@ -57,7 +58,7 @@ export default function Footer() {
             justifyContent: "space-around",
           }}
         >
-          {socialIcon.map((network) => (
+          {socialNetworks.map((network) => (
             <Link
               key={seed(network)}
               component="a"
@@ -92,4 +93,6 @@ export default function Footer() {
       </Container>
     </Box>
   );
-}
+};
+
+export default Footer;

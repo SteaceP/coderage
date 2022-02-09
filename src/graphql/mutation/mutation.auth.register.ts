@@ -7,8 +7,10 @@ const AUTH_REGISTER_MUTATION = gql`
     ) {
       jwt
       user {
+        id
         username
         email
+        confirmed
       }
     }
   }
