@@ -6,24 +6,23 @@ import { Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import Home from "./containers/Home";
-import NoMatch from "./containers/404";
-// import RequireAuth from "./components/Auth/RequireAuth";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer";
-import LoginRedirect from "./utils/LoginRedirect";
 import CircularLoading from "./components/Loading";
 
+const Home = lazy(() => import("containers/Home"));
+const Header = lazy(() => import("components/Header/Header"));
 const Category = lazy(() => import("./containers/blog/CategoriesContainer"));
-const ArticleContainer = lazy(
-  () => import("./containers/blog/ArticleContainer")
-);
-const Dashboard = lazy(() => import("containers/auth/Dashboard"));
 const Login = lazy(() => import("containers/auth/Login"));
 const SignUp = lazy(() => import("containers/auth/Signup"));
 const ForgotPassword = lazy(() => import("containers/auth/ForgotPassword"));
 const Portfolio = lazy(() => import("containers/Portfolio"));
 const RequireAuth = lazy(() => import("components/Auth/RequireAuth"));
+const Dashboard = lazy(() => import("containers/auth/Dashboard"));
+const Footer = lazy(() => import("components/Footer"));
+const LoginRedirect = lazy(() => import("utils/LoginRedirect"));
+const NoMatch = lazy(() => import("containers/404"));
+const ArticleContainer = lazy(
+  () => import("./containers/blog/ArticleContainer")
+);
 
 const App = () => {
   return (
@@ -47,8 +46,8 @@ const App = () => {
             minHeight: "100vh",
           }}
         >
-          <Header />
           <Suspense fallback={<CircularLoading />}>
+            <Header />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/category/:id" element={<Category />} />
@@ -74,9 +73,9 @@ const App = () => {
               />
               <Route path="*" element={<NoMatch />} />
             </Routes>
-          </Suspense>
 
-          <Footer />
+            <Footer />
+          </Suspense>
         </Box>
       </DarkThemeProvider>
     </AuthProvider>

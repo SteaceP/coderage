@@ -67,7 +67,7 @@ const Dashboard = () => {
     <Container component="main" maxWidth="sm">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>My Profile - Hacktive</title>
+        <title>My Profile @ Code Rage</title>
         <meta
           name="description"
           content="Your Profile page for Code Rage. You can change your display name, email and password"
