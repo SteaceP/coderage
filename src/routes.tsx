@@ -9,7 +9,6 @@ const ForgotPassword = lazy(() => import("containers/auth/ForgotPassword"));
 const Portfolio = lazy(() => import("containers/Portfolio"));
 const RequireAuth = lazy(() => import("components/Auth/RequireAuth"));
 const Dashboard = lazy(() => import("containers/auth/Dashboard"));
-const LoginRedirect = lazy(() => import("utils/LoginRedirect"));
 const NoMatch = lazy(() => import("containers/404"));
 const ArticleContainer = lazy(
   () => import("./containers/blog/ArticleContainer")
@@ -53,11 +52,6 @@ const Routing = () => {
         </RequireAuth>
       ),
     },
-    {
-      path: "/connect/auth0/redirect",
-      element: <LoginRedirect />,
-    },
-
     {
       path: "*",
       element: <NoMatch />,
