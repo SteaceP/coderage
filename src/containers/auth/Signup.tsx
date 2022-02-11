@@ -63,7 +63,7 @@ const SignUp = () => {
           payload: {
             username: register.user.username,
             email: register.user.email,
-            userID: register.user.id,
+            id: register.user.id,
             confirmed: register.user.confirmed,
           },
         });

@@ -56,7 +56,7 @@ const Login = () => {
           payload: {
             username: login.user.username,
             email: login.user.email,
-            userID: login.user.id,
+            id: login.user.id,
             confirmed: login.user.confirmed,
           },
         });
@@ -67,6 +67,7 @@ const Login = () => {
         setLoginError(error.message);
       },
     });
+    setIsLoading(true);
   };
 
   const handleGoogleLogin = async () => {};

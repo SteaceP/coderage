@@ -1,11 +1,10 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
 import Cookie from "js-cookie";
-import axios from "axios";
 
 type User = {
   email: string;
   username: string;
-  userID: number;
+  id: number;
   confirmed: boolean;
 } | null;
 
@@ -78,38 +77,42 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loading: true,
   });
 
-  //TODO: Swith to fetch ASAP
   useEffect(() => {
-    const getUser = () => {
+    const getUser = async (): Promise<User> => {
       const token = Cookie.get("token");
       if (token === null || token === undefined) {
         return;
       }
-      axios
-        .get(`${process.env.REACT_APP_BACKEND_URL}/api/users/me`, {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/api/users/me`,
+        {
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        })
-        .then((res) =>
-          dispatch({
-            type: "LOGIN",
-            payload: {
-              username: res.data.username,
-              email: res.data.email,
-              userID: res.data.id,
-              confirmed: res.data.confirmed,
-            },
-          })
-        )
-        .catch((error) => {
-          console.log(error);
-        })
-        .then(() => dispatch({ type: "STOP_LOADING" }));
+        }
+      );
+      const data = await response.json();
+      return data;
     };
 
-    getUser();
+    getUser()
+      .then((res) =>
+        dispatch({
+          type: "LOGIN",
+          payload: {
+            username: res.username,
+            email: res.email,
+            id: res.id,
+            confirmed: res.confirmed,
+          },
+        })
+      )
+      .catch((error) => {
+        console.log(error);
+      })
+      .then(() => dispatch({ type: "STOP_LOADING" }));
   }, []);
 
   return (

@@ -25,7 +25,7 @@ export const GetPostsQuery = ({ children, query, slug }) => {
 
 export const UserQuery = ({ children, query }) => {
   const { user } = useAuthState();
-  const userID = user.userID ? user.userID : undefined;
+  const userID = user.id ? user.id : undefined;
 
   const { data, loading, error } = useQuery(query, {
     variables: { userID: userID },
