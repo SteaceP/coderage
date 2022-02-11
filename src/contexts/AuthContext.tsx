@@ -78,11 +78,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   useEffect(() => {
+    const token = Cookie.get("token");
+    if (token === null || token === undefined) {
+      return;
+    }
+
     const getUser = async (): Promise<User> => {
-      const token = Cookie.get("token");
-      if (token === null || token === undefined) {
-        return;
-      }
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/users/me`,
         {

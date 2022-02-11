@@ -178,7 +178,13 @@ const SignUp = () => {
             Sign Up With Google
           </Button>
         </Grid>
-        <Grid container justifyContent="flex-end">
+        <Grid
+          container
+          justifyContent="flex-end"
+          sx={{
+            mt: 2,
+          }}
+        >
           <Grid item>
             <Link component={RouterLink} to="/auth/login" variant="body2">
               Already have an account? Login

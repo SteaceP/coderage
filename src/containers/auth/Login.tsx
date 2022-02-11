@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Helmet } from "react-helmet";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Cookie from "js-cookie";
 import {
   Button,
@@ -28,6 +28,7 @@ const Login = () => {
   const [loginError, setLoginError] = useState("");
   const dispatch = useAuthDispatch();
   const [login] = useMutation(AUTH_LOGIN_MUTATION);
+  const navigate = useNavigate();
 
   const handleEmailLogin = async () => {
     setIsLoading(true);
@@ -61,13 +62,13 @@ const Login = () => {
           },
         });
         dispatch({ type: "STOP_LOADING" });
-        // navigate("/");
+        navigate("/");
       },
       onError: (error) => {
         setLoginError(error.message);
       },
     });
-    setIsLoading(true);
+    setIsLoading(false);
   };
 
   const handleGoogleLogin = async () => {};

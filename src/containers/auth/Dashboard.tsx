@@ -59,7 +59,8 @@ const Dashboard = () => {
       });
   };
 
-  const handleLogout = () => {
+  const handleLogout = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     dispatch({ type: "LOGOUT" });
   };
 
@@ -156,7 +157,7 @@ const Dashboard = () => {
           fullWidth
           variant="contained"
           color="primary"
-          onClick={() => handleLogout}
+          onClick={handleLogout}
           sx={{ mt: 2, mb: 2 }}
         >
           LogOut
