@@ -3,8 +3,23 @@ import { useUIDSeed } from "react-uid";
 import { Grid, Typography, Link } from "@mui/material";
 
 const works = [
-  { title: "E-Commerce with React and Redux", url: "https://example.com" },
-  { title: "The Counselor", url: "https://thecounselor.ca" },
+  {
+    title: "First project that I made, updated over the years",
+    url: "https://yelpcamp.coderage.pro",
+  },
+  {
+    title: "E-Commerce with React, Redux and Firebase",
+    url: "https://e-commerce-demo.coderage.pro/",
+  },
+  {
+    title: "The Counselor(L'Intervenant), made with WordPress for a client",
+    url: "https://thecounselor.ca",
+  },
+  {
+    title:
+      "Pokedex, first project to learn Material-UI(MUI). Refactor of the orignal project from Anthony Still, added pagination to the Pokemon API",
+    url: "https://pokedex.coderage.pro",
+  },
   {
     title: "Source Code for this WebSite (Under high Development)",
     url: "https://github.com/SteaceP/coderage",
@@ -12,7 +27,7 @@ const works = [
 ];
 
 const Portfolio = () => {
-  let uid = useUIDSeed();
+  const uid = useUIDSeed();
 
   return (
     <>
