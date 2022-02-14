@@ -1,37 +1,56 @@
-import { createContext, useContext, useState, useMemo } from "react";
+import { createContext, useContext, useState, useMemo, useEffect } from "react";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   ThemeProvider,
   createTheme,
   responsiveFontSizes,
 } from "@mui/material/styles";
-import { PaletteMode } from "@mui/material";
-
-import { getDesignTokens } from "assets/theme";
 
 export const ColorModeContext = createContext({
   toggleColorMode: () => {},
 });
 
-ColorModeContext.displayName = "DarkModeContext"; // Only give a name for the dev tools, make sure it's in the production build
+ColorModeContext.displayName = "DarkModeContext";
 
 export const useDarkTheme = () => {
   return useContext(ColorModeContext);
 };
 
 export const DarkThemeProvider = ({ children }) => {
-  const [mode, setMode] = useState<PaletteMode>("dark");
+  const storedColorMode = window.localStorage.getItem("storedColorMode");
+
+  const [mode, setMode] = useState<
+    "(prefers-color-scheme: light)" | "(prefers-color-scheme: dark)" | string
+  >(storedColorMode ? storedColorMode : "(prefers-color-scheme: dark)");
+
+  const prefersDarkMode = useMediaQuery(mode);
 
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        setMode((prevMode) =>
+          prevMode === "(prefers-color-scheme: light)"
+            ? "(prefers-color-scheme: dark)"
+            : "(prefers-color-scheme: light)"
+        );
       },
     }),
     []
   );
 
-  // Update the theme only if the mode changes
-  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? "dark" : "light",
+        },
+      }),
+    [prefersDarkMode]
+  );
+
+  useEffect(() => {
+    window.localStorage.setItem("storedColorMode", mode);
+  }, [mode]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>
