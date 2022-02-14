@@ -3,8 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 import App from "./App";
 import client from "./lib/apolloClient";
-import React from "react";
-
+import "assets/fonts";
 ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
