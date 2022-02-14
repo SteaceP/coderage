@@ -22,6 +22,7 @@
     "react-moment": "^1.1.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
+    "react-transition-group": "^4.4.2",
     "react-uid": "^2.3.1"
   },
   "scripts": {
@@ -31,6 +32,17 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "rules": {
+      "no-restricted-imports": [
+        "error",
+        {
+          "patterns": [
+            "@mui/*/*/*",
+            "!@mui/material/test-utils/*"
+          ]
+        }
+      ]
+    },
     "extends": [
       "react-app",
       "react-app/jest"

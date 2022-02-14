@@ -1,36 +1,85 @@
+import { useState, SyntheticEvent } from "react";
 import { Helmet } from "react-helmet";
 import { useUIDSeed } from "react-uid";
-import { Grid, Typography, Link } from "@mui/material";
+import {
+  Typography,
+  Link,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
+
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const works = [
   {
-    title: "First project that I made, updated over the years",
+    name: "Yelpcamp",
+    description:
+      "It's the first project that I made but has been updated several times over the years. Fake data has been seeded for the MapBox features to work.  Using Node, Express, EJS as templating, Mongoose to communicate with MongoDB Atlas and Passport for authentication.",
     url: "https://yelpcamp.coderage.pro",
+    panelId: 1,
+    attributes: {
+      id: "panel1bh-header",
+      ariaControls: "panel1bh-content",
+    },
   },
   {
-    title: "E-Commerce with React, Redux and Firebase",
-    url: "https://e-commerce-demo.coderage.pro/",
+    name: "React E-Commerce",
+    description:
+      "Simple but effective E-Commerce made with React, Redux and Firebase: Firestore as database, Google Authentication",
+    panelId: 2,
+    url: "https://e-commerce-demo.coderage.pro",
+    attributes: {
+      ariaControls: "panel2bh-content",
+      id: "panel2bh-header",
+    },
   },
   {
-    title: "The Counselor(L'Intervenant), made with WordPress for a client",
+    name: "The Counselor (L'Intervenant)",
+    description:
+      "Made with WordPress with the Optima - Psychology and Counseling theme.",
     url: "https://thecounselor.ca",
+    panelId: 3,
+    attributes: {
+      ariaControls: "panel3bh-content",
+      id: "panel3bh-header",
+    },
   },
   {
-    title:
-      "Pokedex, first project to learn Material-UI(MUI). Refactor of the orignal project from Anthony Still, added pagination to the Pokemon API",
+    name: "Pokedex",
+    description:
+      "Project that I follow to learn Material-UI(MUI). Refactored from the orignal project by Anthony Still. Pagination was added for the Pokemon API",
     url: "https://pokedex.coderage.pro",
+    panelId: 4,
+    attributes: {
+      ariaControls: "panel4bh-content",
+      id: "panel4bh-header",
+    },
   },
   {
-    title: "Source Code for this WebSite (Under high Development)",
+    name: "Code Rage",
+    description:
+      "Source code for this website (Under Development), backend is private for now",
     url: "https://github.com/SteaceP/coderage",
+    panelId: 5,
+    attributes: {
+      ariaControls: "panel5bh-content",
+      id: "panel5bh-header",
+    },
   },
 ];
 
 const Portfolio = () => {
+  const [expanded, setExpanded] = useState<string | false>(false);
   const uid = useUIDSeed();
 
+  const handleChange =
+    (panel: string) => (event: SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
+
   return (
-    <>
+    <div>
       <Helmet>
         <meta charSet="utf-8" />
         <title>Portfolio - Steacy Paquette</title>
@@ -40,40 +89,51 @@ const Portfolio = () => {
         />
         <link rel="canonical" href="https://coderage.pro/portfolio" />
       </Helmet>
-      <Grid
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          mt: 6,
-        }}
+      <Typography variant="subtitle1" align="center">
+        Portfolio
+      </Typography>
+      <Typography
+        variant="subtitle2"
+        align="center"
+        sx={{ color: "text.secondary", mb: 3 }}
       >
-        <Typography variant="h6" gutterBottom>
-          Portfolio:
-        </Typography>
-        {works.map((work) => (
-          <Link
-            rel="noopener"
-            target="_blank"
-            href={work.url}
-            underline="hover"
-            gutterBottom
-            key={uid(work)}
-          >
-            {work.title}
-          </Link>
-        ))}
-        <Typography
-          variant="body2"
-          sx={{
-            mt: 5,
-          }}
+        Link goes to the live project
+      </Typography>
+      {works.map((work) => (
+        <Accordion
+          expanded={expanded === `${work.panelId}`}
+          onChange={handleChange(`${work.panelId}`)}
+          key={uid(work)}
+          sx={{ mr: 5, ml: 5 }}
         >
-          I'll add more soon, as well as coding the page a lot better than this!
-        </Typography>
-      </Grid>
-    </>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls={work.attributes.ariaControls}
+            id={work.attributes.id}
+          >
+            <Typography sx={{ width: "40%", flexShrink: 0 }}>
+              {work.name}
+            </Typography>
+            <Typography>
+              {" "}
+              <Link
+                target="_blank"
+                rel="noopener noreferrer"
+                href={work.url}
+                underline="hover"
+              >
+                {work.url.slice(8)}
+              </Link>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography sx={{ color: "text.secondary" }}>
+              {work.description}
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      ))}
+    </div>
   );
 };
 
