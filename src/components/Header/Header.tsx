@@ -12,7 +12,7 @@ import logoBlackTheme from "assets/images/logoTextBlackTheme.png";
 
 import { useAuthState } from "contexts/AuthContext";
 import { ColorModeContext } from "contexts/DarkModeContext";
-import UserPicture from "components/Header/UserPicture";
+import UserPicture from "components/Header/UserAvatar";
 
 import Categories from "./Categories";
 import MobileMenu from "./MobileMenu";

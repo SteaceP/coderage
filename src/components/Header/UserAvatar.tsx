@@ -2,13 +2,13 @@ import { Avatar } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import { UserQuery } from "components/ApolloQuery";
-import AUTH_USER_GETPICTURE from "graphql/queries/query.auth.userPicture";
+import GET_USER_AVATAR_QUERY from "graphql/queries/query.getUserAvatar";
 
-const UserPicture = () => {
+const UserAvatar = () => {
   return (
-    <UserQuery query={AUTH_USER_GETPICTURE}>
+    <UserQuery query={GET_USER_AVATAR_QUERY}>
       {({ data }) => {
-        if (!data.usersPermissionsUser.data.attributes.picture.data) {
+        if (!data.usersPermissionsUser.data.attributes.avatar.data) {
           return (
             <Avatar
               component={NavLink}
@@ -22,7 +22,7 @@ const UserPicture = () => {
           );
         } else {
           const query =
-            data.usersPermissionsUser.data.attributes.picture.data.attributes;
+            data.usersPermissionsUser.data.attributes.avatar.data.attributes;
 
           const avatarAlt = query.alternativeText;
           const avatarUrl = `${process.env.REACT_APP_BACKEND_URL}${query.formats.thumbnail.url}`;
@@ -46,4 +46,4 @@ const UserPicture = () => {
   );
 };
 
-export default UserPicture;
+export default UserAvatar;

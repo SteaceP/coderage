@@ -15,7 +15,7 @@ import Logout from "@mui/icons-material/Logout";
 
 import { useAuthState } from "contexts/AuthContext";
 import { menuProps } from "components/Header/mobileMenuProps";
-import UserPicture from "components/Header/UserPicture";
+import UserPicture from "components/Header/UserAvatar";
 
 const MobileMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);

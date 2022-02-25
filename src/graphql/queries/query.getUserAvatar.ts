@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const AUTH_USER_GETPICTURE = gql`
+const GET_USER_AVATAR_QUERY = gql`
   query getUserPicture($id: ID!) {
     usersPermissionsUser(id: $id) {
       data {
@@ -22,4 +22,4 @@ const AUTH_USER_GETPICTURE = gql`
   }
 `;
 
-export default AUTH_USER_GETPICTURE;
+export default GET_USER_AVATAR_QUERY;
