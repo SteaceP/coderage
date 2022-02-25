@@ -1,13 +1,13 @@
 import { gql } from "@apollo/client";
 
 const GET_USER_AVATAR_QUERY = gql`
-  query getUserPicture($id: ID!) {
-    usersPermissionsUser(id: $id) {
+  query getUserAvatar($userID: ID!) {
+    usersPermissionsUser(id: $userID) {
       data {
         id
         attributes {
           username
-          picture {
+          avatar {
             data {
               attributes {
                 url

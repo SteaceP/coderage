@@ -1,14 +1,9 @@
 import { gql } from "@apollo/client";
 
-const CREATE_COMMENT = gql`
-  mutation createComment {
+const CREATE_COMMENT_MUTATION = gql`
+  mutation createComment($payload: Object!) {
   createComment(
-    input: {
-      relation: "api::post.post:1"
-      content: "Hello World!"
-      threadOf: 3
-      author: { id: "1", name: "John Wick", email: "test@test.pl" }
-    }
+    input: {$payload}
   ) {
     id
     content
@@ -21,6 +16,6 @@ const CREATE_COMMENT = gql`
     }
   }
 }
-`;
+`
 
-export default CREATE_COMMENT;
+export default CREATE_COMMENT_MUTATION

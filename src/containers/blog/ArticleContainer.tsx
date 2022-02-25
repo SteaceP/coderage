@@ -18,6 +18,7 @@ import { GetPostsQuery } from "components/ApolloQuery";
 import ARTICLE_QUERY from "graphql/queries/query.article";
 
 import Markdown from "components/Markdown";
+import CommentsContainer from "./CommentsContainer";
 import ScrollTop from "components/BackToTop";
 
 const ArticleContainer = (props: any) => {
@@ -92,10 +93,12 @@ const ArticleContainer = (props: any) => {
                   )}
                 </CardContent>
               </Card>
+              <CommentsContainer postId={posts[0].id} />
             </Grid>
           );
         }}
       </GetPostsQuery>
+
       <ScrollTop {...props}>
         <Fab color="primary" size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />

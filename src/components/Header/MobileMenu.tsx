@@ -15,7 +15,7 @@ import Logout from "@mui/icons-material/Logout";
 
 import { useAuthState } from "contexts/AuthContext";
 import { menuProps } from "components/Header/mobileMenuProps";
-import UserPicture from "components/Header/UserAvatar";
+import UserAvatar from "components/Header/UserAvatar";
 
 const MobileMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -64,7 +64,7 @@ const MobileMenu = () => {
         {user ? (
           <Box component="div">
             <MenuItem onClick={() => handleMenuClick("/auth/dashboard")}>
-              <UserPicture />
+              <UserAvatar />
               Profile
             </MenuItem>
 

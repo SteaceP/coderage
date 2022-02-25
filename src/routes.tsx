@@ -1,6 +1,8 @@
 import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
 
+import ArticleContainer from "containers/blog/ArticleContainer";
+
 const Home = lazy(() => import("containers/Home"));
 const Category = lazy(() => import("./containers/blog/CategoriesContainer"));
 const Login = lazy(() => import("containers/auth/Login"));
@@ -11,9 +13,6 @@ const RequireAuth = lazy(() => import("components/Auth/RequireAuth"));
 const Dashboard = lazy(() => import("containers/auth/Dashboard"));
 const LoginRedirect = lazy(() => import("utils/LoginRedirect"));
 const NoMatch = lazy(() => import("containers/404"));
-const ArticleContainer = lazy(
-  () => import("./containers/blog/ArticleContainer")
-);
 
 const Routing = () => {
   let elements = useRoutes([

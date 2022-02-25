@@ -1,12 +1,12 @@
 import { Avatar } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-import { UserQuery } from "components/ApolloQuery";
+import { GetLoggedInUserAvatar } from "components/ApolloQuery";
 import GET_USER_AVATAR_QUERY from "graphql/queries/query.getUserAvatar";
 
 const UserAvatar = () => {
   return (
-    <UserQuery query={GET_USER_AVATAR_QUERY}>
+    <GetLoggedInUserAvatar query={GET_USER_AVATAR_QUERY}>
       {({ data }) => {
         if (!data.usersPermissionsUser.data.attributes.avatar.data) {
           return (
@@ -42,7 +42,7 @@ const UserAvatar = () => {
           );
         }
       }}
-    </UserQuery>
+    </GetLoggedInUserAvatar>
   );
 };
 
