@@ -1,4 +1,4 @@
-import Moment from "react-moment";
+// import Moment from "react-moment";
 import { useParams } from "react-router";
 import {
   Grid,
@@ -55,11 +55,11 @@ const ArticleContainer = (props: any) => {
                 >
                   <CardHeader
                     title={posts[0].attributes.title}
-                    subheader={
-                      <Moment format="MMMM Do YYYY">
-                        {posts[0].attributes.publishedAt}
-                      </Moment>
-                    }
+                    // subheader={
+                    //   <Moment format="MMMM Do YYYY">
+                    //     {posts[0].attributes.publishedAt}
+                    //   </Moment>
+                    // }
                   />
                 </Box>
                 <CardMedia
@@ -81,9 +81,9 @@ const ArticleContainer = (props: any) => {
                     >
                       Edited on{" "}
                       {
-                        <Moment format="MMMM Do YYYY @ hh:mm">
-                          {posts[0].attributes.updatedAt}
-                        </Moment>
+                        // <Moment format="MMMM Do YYYY @ hh:mm">
+                        //   {posts[0].attributes.updatedAt}
+                        // </Moment>
                       }{" "}
                       ET
                     </Typography>
