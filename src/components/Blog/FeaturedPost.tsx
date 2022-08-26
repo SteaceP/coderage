@@ -39,15 +39,6 @@ const FeaturedPost = ({ data: featuredPostsArray }) => {
                     </Typography>
                   </CardContent>
                 </Box>
-                <Hidden xsDown>
-                  <CardMedia
-                    component="img"
-                    title={post.attributes.title}
-                    sx={{ width: 160, display: { xs: "none", sm: "block" } }}
-                    image={imageUrl}
-                    alt={post.attributes.title}
-                  />
-                </Hidden>
               </Card>
             </CardActionArea>
           </Grid>
