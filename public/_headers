@@ -1,0 +1,10 @@
+# Headers to use with Cloudflare Pages
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options:
+  nosniff
+  Referrer-Policy: no-referrer
+  
+  https://:coderage.pages.dev/*
+      Access-Control-Allow-Origin: https://api.dockerservers.com/
