@@ -2,16 +2,10 @@
 
 /*
   X-Frame-Options: DENY
-  X-Content-Type-Options:
-  nosniff
-  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff\
+  Access-Control-Allow-Origin: *
   
- /*
-  Access-Control-Allow-Origin: https://api.dockerservers.com/graphql
- 
-https://:coderage.pages.dev/*
-      Access-Control-Allow-Origin: https://api.dockerservers.com/graphql
 
 # Prevent the pages.dev deployments showing in search results
-https://:coderage.pages.dev/*
+https://coderage.pages.dev/*
   X-Robots-Tag: noindex
