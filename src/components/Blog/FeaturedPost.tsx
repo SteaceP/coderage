@@ -10,7 +10,7 @@ import {
   Hidden,
   Box,
 } from "@mui/material";
-import Moment from "react-moment";
+// import Moment from "react-moment";
 
 const FeaturedPost = ({ data: featuredPostsArray }) => {
   const uid = useUIDSeed();
@@ -38,9 +38,9 @@ const FeaturedPost = ({ data: featuredPostsArray }) => {
                       {post.attributes.synopsis} ...
                     </Typography>
                     <Typography variant="subtitle1" color="textSecondary">
-                      <Moment format="MMM Do YYYY">
+<!--                       <Moment format="MMM Do YYYY">
                         {post.attributes.publishedAt}
-                      </Moment>
+                      </Moment> -->
                     </Typography>
                   </CardContent>
                 </Box>
