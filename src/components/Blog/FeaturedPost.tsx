@@ -37,11 +37,6 @@ const FeaturedPost = ({ data: featuredPostsArray }) => {
                     <Typography variant="subtitle1" paragraph>
                       {post.attributes.synopsis} ...
                     </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-<!--                       <Moment format="MMM Do YYYY">
-                        {post.attributes.publishedAt}
-                      </Moment> -->
-                    </Typography>
                   </CardContent>
                 </Box>
                 <Hidden xsDown>
