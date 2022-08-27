@@ -14,7 +14,7 @@ const Rules = () => {
           flexDirection: "column",
         }}
       >
-        <Markdown>- This functionnality is being coded right now.</Markdown>
+        <Markdown>- This functionality is being coded right now.</Markdown>
       </Box>
     </Grid>
   );

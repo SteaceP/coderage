@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           },
         }
       );
-      const data = await response.json();
+      const data: { email: string; username: string; id: number; confirmed: boolean; } = await response.json();
       return data;
     };
 

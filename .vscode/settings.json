@@ -3,7 +3,16 @@
         "bgcolor",
         "browserslist",
         "clickaway",
+        "coderage",
+        "Cond",
+        "fontsource",
+        "mainpost",
+        "noindex",
+        "roboto",
+        "sendgrid",
         "signup",
-        "textfields"
+        "Strapi",
+        "textfields",
+        "Unraid"
     ]
 }
