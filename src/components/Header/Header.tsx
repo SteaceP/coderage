@@ -12,10 +12,10 @@ import logoBlackTheme from "assets/images/logoTextBlackTheme.png";
 
 import { useAuthState } from "contexts/AuthContext";
 import { ColorModeContext } from "contexts/DarkModeContext";
-import UserPicture from "components/Header/UserAvatar";
+import UserPicture from "components/Header/Menu/UserAvatar";
 
 import Categories from "./Categories";
-import MobileMenu from "./MobileMenu";
+import MainMenu from "./Menu/MainMenu";
 
 const Header = () => {
   const { user } = useAuthState();
@@ -82,7 +82,7 @@ const Header = () => {
             )}
           </Box>
         </Box>
-        <MobileMenu />
+        <MainMenu />
       </Toolbar>
 
       <Divider variant="middle" light={true} />

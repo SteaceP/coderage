@@ -7,7 +7,7 @@ export const HomePageQuery = ({ children, query }) => {
   const { data, loading, error } = useQuery(query);
 
   if (loading) return <CircularLoading />;
-  if (error) return <p>Error: {JSON.stringify(error)}</p>;
+  if (error) return console.error(`(Apollo)HomePageQuery: ${error}`);
   if (!data) return <p>No data!</p>;
   return children({ data });
 };
@@ -18,7 +18,7 @@ export const GetPostsQuery = ({ children, query, slug }) => {
   });
 
   if (loading) return <CircularLoading />;
-  if (error) return <p>Error: {JSON.stringify(error)}</p>;
+  if (error) return console.error(`(Apollo)GetPostsQuery: ${error}`);
   if (!data) return <p>No data!</p>;
   return children({ data });
 };
@@ -32,7 +32,7 @@ export const UserQuery = ({ children, query }) => {
   });
 
   if (loading) return <CircularLoading />;
-  if (error) return <p>Error: {JSON.stringify(error)}</p>;
+  if (error) return console.error(`(Apollo)UserQuery: ${error}`);
   if (!data) return <p>No data!</p>;
   return children({ data });
 };

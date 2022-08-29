@@ -11,20 +11,20 @@ import {
   Container,
 } from "@mui/material";
 
+import { useAuthState } from "contexts/AuthContext";
 import { useInput } from "utils/hooks";
 
 import AuthHeader from "components/Auth/AuthHeader";
-
-// TODO: A token is needed to be able to reset the password. An email need to be sent. Implement Sendgrid
 
 const ForgotPassword = () => {
   const email = useInput("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { loading } = useAuthState();
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    // TODO: A token is needed to be able to reset the password. An email need to be sent. Implement Sendgrid
   };
 
   return (
