@@ -12,7 +12,7 @@ import MAIN_FEATURED_ARTICLES_QUERY from "graphql/queries/query.isMainFeatured";
 const sidebar = {
   title: "About",
   description:
-    "At the beginning, I was strugling with ES5/ES6, backend/frontend, React class vs Functionnal Component, etc. I was really lost with all those documentations, guides and tutorials. There wasn't really a great way (none that I found at that time) to demystify all of that. The main goal of this Website/Blog is to help newcomers find what they need minus the headaches.",
+    "At the beginning, I was struggling with ES5/ES6, backend/frontend, React class vs Functional Component, etc. I was really lost with all those documentations, guides and tutorials. There wasn't really a great way (none that I found at that time) to demystify all of that. The main goal of this Website/Blog is to help newcomers find what they need minus the headaches.",
 };
 
 const Home = () => {
