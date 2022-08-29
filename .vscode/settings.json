@@ -5,14 +5,21 @@
         "clickaway",
         "coderage",
         "Cond",
+        "Firestore",
         "fontsource",
+        "L'Intervenant",
         "mainpost",
         "noindex",
+        "Paquette",
+        "Pokedex",
         "roboto",
         "sendgrid",
         "signup",
+        "Steacy",
         "Strapi",
+        "templating",
         "textfields",
-        "Unraid"
+        "Unraid",
+        "Yelpcamp"
     ]
 }

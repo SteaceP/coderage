@@ -48,7 +48,7 @@ const works = [
   {
     name: "Pokedex",
     description:
-      "Project that I follow to learn Material-UI(MUI). Refactored from the orignal project by Anthony Still. Pagination was added for the Pokemon API",
+      "Project that I followed to learn Material-UI(MUI). Refactored from the original project by Anthony Still. Pagination was added for the Pokemon API",
     url: "https://pokedex.coderage.pro",
     panelId: 4,
     attributes: {
@@ -57,15 +57,26 @@ const works = [
     },
   },
   {
-    name: "Code Rage",
+    name: "Code Rage Frontend",
     description:
-      "Source code for this website (Under Development), backend is private for now",
+      "Source code for this website (Under Development as you can see)",
     url: "https://github.com/SteaceP/coderage",
     panelId: 5,
     attributes: {
       ariaControls: "panel5bh-content",
       id: "panel5bh-header",
-    },
+    }
+  },
+  {
+    name: "Code Rage Backend",
+    description:
+      "Source code for this website (Under Development as you can see)",
+    url: "https://github.com/SteaceP/coderage-backend",
+    panelId: 5,
+    attributes: {
+      ariaControls: "panel5bh-content",
+      id: "panel5bh-header",
+    }
   },
 ];
 

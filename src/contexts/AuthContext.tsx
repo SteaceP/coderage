@@ -77,44 +77,44 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loading: true,
   });
 
-  useEffect(() => {
-    const token = Cookie.get("token");
-    if (token === null || token === undefined) {
-      return;
-    }
+  // useEffect(() => {
+  //   const token = Cookie.get("token");
+  //   if (token === null || token === undefined) {
+  //     return;
+  //   }
 
-    const getUser = async (): Promise<User> => {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/api/users/me`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const data: { email: string; username: string; id: number; confirmed: boolean; } = await response.json();
-      return data;
-    };
+  //   const getUser = async (): Promise<User> => {
+  //     const response = await fetch(
+  //       `${process.env.REACT_APP_BACKEND_URL}/api/users/me`,
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           "Authorization": `Bearer ${token}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+  //     const data: User = await response.json();
+  //     return data;
+  //   };
 
-    getUser()
-      .then((res) =>
-        dispatch({
-          type: "LOGIN",
-          payload: {
-            username: res.username,
-            email: res.email,
-            id: res.id,
-            confirmed: res.confirmed,
-          },
-        })
-      )
-      .catch((error) => {
-        console.log(error);
-      })
-      .then(() => dispatch({ type: "STOP_LOADING" }));
-  }, []);
+  //   getUser()
+  //     .then((res) =>
+  //       dispatch({
+  //         type: "LOGIN",
+  //         payload: {
+  //           username: res.username,
+  //           email: res.email,
+  //           id: res.id,
+  //           confirmed: res.confirmed,
+  //         },
+  //       })
+  //     )
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
+  //     .then(() => dispatch({ type: "STOP_LOADING" }));
+  // }, []);
 
   return (
     <AuthStateContext.Provider value={state}>

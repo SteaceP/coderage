@@ -7,7 +7,6 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
-  Hidden,
   Box,
 } from "@mui/material";
 // import Moment from "react-moment";
@@ -29,8 +28,8 @@ const FeaturedPost = ({ data: featuredPostsArray }) => {
               to={`post/${post.attributes.slug}`}
             >
               <Card sx={{ display: "flex" }}>
-                <Box sx={{ flex: 1 }}>
-                  <CardContent sx={{ flex: 1 }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  <CardContent sx={{ flex: '1 0 auto' }}>
                     <Typography component="h2" variant="h5">
                       {post.attributes.title}
                     </Typography>
@@ -38,7 +37,16 @@ const FeaturedPost = ({ data: featuredPostsArray }) => {
                       {post.attributes.synopsis} ...
                     </Typography>
                   </CardContent>
-                </Box>
+                    </Box>
+                  <Box>
+                  <CardMedia
+                        component="img"
+                        title={post.attributes.title}
+                        sx={{ width: 160, height: "100%", display: { xs: "none", sm: "block" } }}
+                        image={imageUrl}
+                        alt={post.attributes.title}
+                      />
+                  </Box>
               </Card>
             </CardActionArea>
           </Grid>

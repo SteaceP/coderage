@@ -18,14 +18,16 @@ const UserAvatar = () => {
                 height: 32,
                 ml: 2.3,
               }}
-            />
+              >
+                {data.usersPermissionsUser.data.attributes.username[0]}
+            </Avatar>
           );
         } else {
           const query =
             data.usersPermissionsUser.data.attributes.avatar.data.attributes;
-
-          const avatarAlt = query.alternativeText;
-          const avatarUrl = `${process.env.REACT_APP_BACKEND_URL}${query.formats.thumbnail.url}`;
+            
+          const avatarAlt = query.alternativeText || undefined;
+          const avatarUrl = `${process.env.REACT_APP_BACKEND_URL}${query.formats.thumbnail.url}` || undefined;
 
           return (
             <Avatar
