@@ -7,7 +7,7 @@ const GET_USER_AVATAR_QUERY = gql`
         id
         attributes {
           username
-          picture {
+          avatar {
             data {
               attributes {
                 url
