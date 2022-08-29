@@ -5,7 +5,7 @@ import App from "./App";
 import client from "./lib/apolloClient";
 import "assets/fonts";
 
-const container = document.getElementById('root');
+const container = document.getElementById('app');
 const root = createRoot(container!);
 
 root.render(

@@ -11,6 +11,7 @@ import {
   Fab,
   Divider,
 } from "@mui/material";
+import { format } from 'date-fns'
 
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
@@ -33,6 +34,9 @@ const ArticleContainer = (props: any) => {
             process.env.REACT_APP_BACKEND_URL +
             posts[0].attributes.image.data.attributes.url;
 
+           const datePublished = format(new Date(posts[0].attributes.publishedAt), 'MMMM do, yyyy');
+           const dateEdited = format(new Date(posts[0].attributes.updatedAt), 'MMMM do, yyyy');
+           
           return (
             <Grid
               container
@@ -55,11 +59,7 @@ const ArticleContainer = (props: any) => {
                 >
                   <CardHeader
                     title={posts[0].attributes.title}
-                    // subheader={
-                    //   <Moment format="MMMM Do YYYY">
-                    //     {posts[0].attributes.publishedAt}
-                    //   </Moment>
-                    // }
+                    subheader={datePublished}
                   />
                 </Box>
                 <CardMedia
@@ -80,12 +80,7 @@ const ArticleContainer = (props: any) => {
                       }}
                     >
                       Edited on{" "}
-                      {
-                        // <Moment format="MMMM Do YYYY @ hh:mm">
-                        //   {posts[0].attributes.updatedAt}
-                        // </Moment>
-                      }{" "}
-                      ET
+                      {dateEdited}
                     </Typography>
                   ) : (
                     ""

@@ -13,15 +13,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 
-import { useAuthState } from "contexts/AuthContext";
-import { menuProps } from "components/Header/mobileMenuProps";
-import UserPicture from "components/Header/UserAvatar";
+import { useAuthDispatch, useAuthState } from "contexts/AuthContext";
+import { menuProps } from "components/Header/Menu/mobileMenuProps";
+import UserPicture from "components/Header/Menu/UserAvatar";
 
-const MobileMenu = () => {
+
+const MainMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = !!anchorEl;
   const { user } = useAuthState();
-  const logout = null;
+  const dispatch = useAuthDispatch();
   const navigate = useNavigate();
 
   const handleMenu = (e: { currentTarget: any }) => {
@@ -31,6 +32,11 @@ const MobileMenu = () => {
   const handleMenuClick = (route: To) => {
     navigate(route);
     setAnchorEl(null);
+  };
+
+  const handleLogout = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    dispatch({ type: "LOGOUT" });
   };
 
   return (
@@ -77,7 +83,7 @@ const MobileMenu = () => {
               My blog posts
             </MenuItem>
 
-            <MenuItem onClick={logout}>
+            <MenuItem onClick={handleLogout}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
@@ -106,4 +112,4 @@ const MobileMenu = () => {
   );
 };
 
-export default MobileMenu;
+export default MainMenu;
