@@ -1,5 +1,16 @@
 # Headers to use with Cloudflare Pages
   
 # Prevent the pages.dev deployments showing in search results
-https://coderage.pages.dev/*
+https://*.coderage.pages.dev/*
   X-Robots-Tag: noindex
+
+/auth/*
+  X-Robots-Tag: noindex
+
+https://coderage.pro/*
+  Access-Control-Allow-Origin: https://api.dockerservers.com/
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: document-domain=()
+  Content-Security-Policy: script-src 'self'; frame-ancestors 'none';
