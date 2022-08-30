@@ -27,17 +27,13 @@ const ArticleContainer = (props: any) => {
   return (
     <>
       <GetPostsQuery query={ARTICLE_QUERY} slug={id}>
-        {({ data }) => {
-          const posts = data.posts.data;
-          const post = posts[0];
+        {({ data: post }) => {
+          const posts = post.posts.data;
 
           const imageUrl =
             process.env.REACT_APP_BACKEND_URL +
-            post.attributes.image.data.attributes.url;
+            posts[0].attributes.image.data.attributes.url;
 
-           const datePublished = format(new Date(post.attributes.publishedAt), 'MMMM do, yyyy');
-           const dateEdited = format(new Date(post.attributes.updatedAt), 'MMMM do, yyyy');
-           
           return (
             <Grid
               container
@@ -59,8 +55,12 @@ const ArticleContainer = (props: any) => {
                   }}
                 >
                   <CardHeader
-                    title={post.attributes.title}
-                    subheader={datePublished}
+                    title={posts[0].attributes.title}
+                    // subheader={
+                    //   <Moment format="MMMM Do YYYY">
+                    //     {posts[0].attributes.publishedAt}
+                    //   </Moment>
+                    // }
                   />
                 </Box>
                 <CardMedia
@@ -72,7 +72,7 @@ const ArticleContainer = (props: any) => {
                 <CardContent>
                   <Markdown>{post.attributes.content}</Markdown>
                   <Divider />
-                  {post.attributes.updatedAt != null ? (
+                  {posts[0].attributes.updatedAt != null ? (
                     <Typography
                       align="left"
                       variant="caption"
