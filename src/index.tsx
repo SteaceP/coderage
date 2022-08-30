@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import { createRoot } from 'react-dom/client';
 import {
-    Routes,
+    // Routes,
     BrowserRouter,
     useLocation,
     useNavigationType,
@@ -35,14 +35,14 @@ Sentry.init({
 
 const container = document.getElementById('app');
 const root = createRoot(container!);
-const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes)
+// const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes)
 
 root.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <SentryRoutes>
+      {/* <SentryRoutes> */}
         <App />
-      </SentryRoutes>
+      {/* </SentryRoutes> */}
     </BrowserRouter>
   </ApolloProvider>
   );
