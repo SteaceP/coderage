@@ -9,7 +9,6 @@ import {
   CardMedia,
   Box,
 } from "@mui/material";
-// import Moment from "react-moment";
 
 const FeaturedPost = ({ data: featuredPostsArray }) => {
   const uid = useUIDSeed();

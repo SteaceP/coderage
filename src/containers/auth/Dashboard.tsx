@@ -22,9 +22,10 @@ const Dashboard = () => {
   const emailInput = useInput("");
   const passwordInput = useInput("");
   const confirmPasswordInput = useInput("");
-  const { user, loading } = useAuthState();
+  const { user } = useAuthState();
   const dispatch = useAuthDispatch();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
@@ -35,8 +36,7 @@ const Dashboard = () => {
     }
 
     const promises = [];
-    // setLoading(true);
-    setError("");
+    setLoading(true);
 
     if (emailInput.value !== user.email) {
       // promises.push(updateEmail(emailInput.value));
@@ -55,7 +55,7 @@ const Dashboard = () => {
         setError("Failed to update account");
       })
       .finally(() => {
-        // setLoading(false);
+        setLoading(false);
       });
   };
 

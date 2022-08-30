@@ -27,20 +27,16 @@ const ArticleContainer = (props: any) => {
   return (
     <>
       <GetPostsQuery query={ARTICLE_QUERY} slug={id}>
-        {({ data: post }) => {
-          const posts = post.posts.data;
-
-          async function getImageUrl({ env }) {
-            const test = new Response(env.REACT_APP_BACKEND_URL);
-            console.log(test);
-          }
+        {({ data }) => {
+          const posts = data.posts.data;
+          const post = posts[0];
 
           const imageUrl =
             process.env.REACT_APP_BACKEND_URL +
-            posts[0].attributes.image.data.attributes.url;
+            post.attributes.image.data.attributes.url;
 
-           const datePublished = format(new Date(posts[0].attributes.publishedAt), 'MMMM do, yyyy');
-           const dateEdited = format(new Date(posts[0].attributes.updatedAt), 'MMMM do, yyyy');
+           const datePublished = format(new Date(post.attributes.publishedAt), 'MMMM do, yyyy');
+           const dateEdited = format(new Date(post.attributes.updatedAt), 'MMMM do, yyyy');
            
           return (
             <Grid
@@ -63,7 +59,7 @@ const ArticleContainer = (props: any) => {
                   }}
                 >
                   <CardHeader
-                    title={posts[0].attributes.title}
+                    title={post.attributes.title}
                     subheader={datePublished}
                   />
                 </Box>
@@ -71,13 +67,12 @@ const ArticleContainer = (props: any) => {
                   component="img"
                   height="350"
                   src={imageUrl}
-                  alt={posts[0].attributes.title}
+                  alt={post.attributes.title}
                 />
                 <CardContent>
-                  <Markdown>{posts[0].attributes.content}</Markdown>
+                  <Markdown>{post.attributes.content}</Markdown>
                   <Divider />
-                  <button onClick={() => getImageUrl}></button>
-                  {posts[0].attributes.updatedAt != null ? (
+                  {post.attributes.updatedAt != null ? (
                     <Typography
                       align="left"
                       variant="caption"

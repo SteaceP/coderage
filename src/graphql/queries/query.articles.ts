@@ -11,7 +11,7 @@ const ARTICLES_QUERY = gql`
             data {
               attributes {
                 slug
-                name
+                Name
               }
             }
           }

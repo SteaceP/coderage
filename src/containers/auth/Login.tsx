@@ -17,21 +17,20 @@ import {
 
 import AUTH_LOGIN_MUTATION from "graphql/mutation/mutation.auth.login";
 import { useInput } from "utils/hooks";
-import { useAuthDispatch } from "contexts/AuthContext";
+import { useAuthDispatch, useAuthState } from "contexts/AuthContext";
 
 import AuthHeader from "components/Auth/AuthHeader";
 
 const Login = () => {
   const userEmail = useInput("");
   const userPassword = useInput("");
-  const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
   const dispatch = useAuthDispatch();
   const [login] = useMutation(AUTH_LOGIN_MUTATION);
   const navigate = useNavigate();
+  const { loading } = useAuthState();
 
   const handleEmailLogin = async () => {
-    setIsLoading(true);
 
     await login({
       variables: {
@@ -68,10 +67,11 @@ const Login = () => {
         setLoginError(error.message);
       },
     });
-    setIsLoading(false);
   };
 
-  const handleGoogleLogin = async () => {};
+  const handleGoogleLogin = async () => {
+    //TODO: Google login
+  };
 
   return (
     <Container maxWidth="sm">
@@ -125,7 +125,7 @@ const Login = () => {
         />
 
         <Button
-          disabled={isLoading}
+          disabled={loading}
           type="submit"
           fullWidth
           variant="contained"
@@ -139,7 +139,7 @@ const Login = () => {
         </Button>
 
         <Button
-          disabled={isLoading}
+          disabled={loading}
           type="submit"
           fullWidth
           variant="contained"
