@@ -4,5 +4,4 @@
 X-Robots-Tag: noindex
 
 /*
-Access-Control-Allow-Origin: https://api.dockerservers.com/
-Content-Security-Policy: script-src 'self' https://api.dockerservers.com https://static.cloudflareinsights.com; img-src *; frame-ancestors 'none'; default-src https://api.dockerservers.com;
+Access-Control-Allow-Origin: *
