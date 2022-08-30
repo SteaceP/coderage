@@ -11,6 +11,8 @@
     "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.10.2",
     "@sendgrid/mail": "^7.7.0",
+    "@sentry/react": "^7.11.1",
+    "@sentry/tracing": "^7.11.1",
     "date-fns": "^2.29.2",
     "graphql": "^16.6.0",
     "js-cookie": "^3.0.1",
@@ -22,7 +24,8 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "react-transition-group": "^4.4.5",
-    "react-uid": "^2.3.2"
+    "react-uid": "^2.3.2",
+    "wrangler": "^2.0.28"
   },
   "scripts": {
     "start": "react-scripts start",

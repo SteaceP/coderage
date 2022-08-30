@@ -30,6 +30,11 @@ const ArticleContainer = (props: any) => {
         {({ data: post }) => {
           const posts = post.posts.data;
 
+          async function getImageUrl({ env }) {
+            const test = new Response(env.REACT_APP_BACKEND_URL);
+            console.log(test);
+          }
+
           const imageUrl =
             process.env.REACT_APP_BACKEND_URL +
             posts[0].attributes.image.data.attributes.url;
@@ -71,6 +76,7 @@ const ArticleContainer = (props: any) => {
                 <CardContent>
                   <Markdown>{posts[0].attributes.content}</Markdown>
                   <Divider />
+                  <button onClick={() => getImageUrl}></button>
                   {posts[0].attributes.updatedAt != null ? (
                     <Typography
                       align="left"
