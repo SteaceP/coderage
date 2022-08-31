@@ -15,7 +15,7 @@ const works = [
   {
     name: "Yelpcamp",
     description:
-      "It's the first project that I made but has been updated several times over the years. Fake data has been seeded for the MapBox features to work.  Using Node, Express, EJS as templating, Mongoose to communicate with MongoDB Atlas and Passport for authentication.",
+      "(Offline, fix soon)It's the first project that I made but has been updated several times over the years. Fake data has been seeded for the MapBox features to work.  Using Node, Express, EJS as templating, Mongoose to communicate with MongoDB Atlas and Passport for authentication.",
     url: "https://yelpcamp.coderage.pro",
     panelId: 1,
     attributes: {
@@ -72,10 +72,10 @@ const works = [
     description:
       "Source code for this website (Under Development as you can see)",
     url: "https://github.com/SteaceP/coderage-backend",
-    panelId: 5,
+    panelId: 6,
     attributes: {
-      ariaControls: "panel5bh-content",
-      id: "panel5bh-header",
+      ariaControls: "panel6bh-content",
+      id: "panel6bh-header",
     }
   },
 ];
@@ -109,6 +109,10 @@ const Portfolio = () => {
         sx={{ color: "text.secondary", mb: 3 }}
       >
         Link goes to the live project
+        <br />
+        Those are projects that are exclusively made by me, others that I worked on are on the way.
+        <br />
+        I just need to make sure witch one I can show.
       </Typography>
       {works.map((work) => (
         <Accordion
