@@ -42,7 +42,7 @@ const Login = () => {
           Cookie.set("token", login.jwt, {
             secure: true,
             domain: "coderage.pro",
-            sameSite: "strict",
+            sameSite: "strict", 
             expires: 7,
           });
         } else {

@@ -33,10 +33,10 @@ export const useArray = (initialValue: any) => {
         slice: (arg0: number, arg1: number) => any;
         lenght: number;
       }) => [
-        ...array.slice(0, index),
-        newElement,
-        ...array.slice(index + 1, array.lenght - 1),
-      ]
+          ...array.slice(0, index),
+          newElement,
+          ...array.slice(index + 1, array.lenght - 1),
+        ]
     );
   };
 
@@ -46,9 +46,9 @@ export const useArray = (initialValue: any) => {
         slice: (arg0: number, arg1: number) => any;
         lenght: number;
       }) => [
-        ...array.slice(0, index),
-        ...array.slice(index + 1, array.lenght - 1),
-      ]
+          ...array.slice(0, index),
+          ...array.slice(index + 1, array.lenght - 1),
+        ]
     );
   };
 
