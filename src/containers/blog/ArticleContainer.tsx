@@ -30,9 +30,7 @@ const ArticleContainer = (props: any) => {
           const posts = data.posts.data;
           const post = posts[0];
 
-          const imageUrl =
-            process.env.REACT_APP_BACKEND_URL +
-            post.attributes.image.data.attributes.url;
+          const imageUrl = post.attributes.image.data.attributes.url;
 
            const datePublished = format(new Date(post.attributes.publishedAt), 'MMMM do, yyyy');
            const dateEdited = format(new Date(post.attributes.updatedAt), 'MMMM do, yyyy');

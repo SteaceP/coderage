@@ -31,11 +31,11 @@ export const useArray = (initialValue: any) => {
     setArray(
       (array: {
         slice: (arg0: number, arg1: number) => any;
-        lenght: number;
+        length: number;
       }) => [
           ...array.slice(0, index),
           newElement,
-          ...array.slice(index + 1, array.lenght - 1),
+          ...array.slice(index + 1, array.length - 1),
         ]
     );
   };
@@ -44,10 +44,10 @@ export const useArray = (initialValue: any) => {
     setArray(
       (array: {
         slice: (arg0: number, arg1: number) => any;
-        lenght: number;
+        length: number;
       }) => [
           ...array.slice(0, index),
-          ...array.slice(index + 1, array.lenght - 1),
+          ...array.slice(index + 1, array.length - 1),
         ]
     );
   };

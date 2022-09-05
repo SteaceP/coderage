@@ -10,40 +10,38 @@ import {
   Box,
 } from "@mui/material";
 
-const FeaturedPost = ({ data: featuredPostsArray }) => {
+const FeaturedPost = ({ data: featuredPosts }) => {
   const uid = useUIDSeed();
 
   return (
     <>
-      {featuredPostsArray.map((post: any) => {
-        const imageUrl =
-          process.env.REACT_APP_BACKEND_URL +
-          post.attributes.image.data.attributes.url;
+      {featuredPosts.map((post) => {
+        const data = post.attributes;
 
         return (
           <Grid item xs={12} md={6} key={uid(post)}>
             <CardActionArea
               component={Link}
-              to={`post/${post.attributes.slug}`}
+              to={`post/${data.slug}`}
             >
               <Card sx={{ display: "flex" }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   <CardContent sx={{ flex: '1 0 auto' }}>
                     <Typography component="h2" variant="h5">
-                      {post.attributes.title}
+                      {data.title}
                     </Typography>
                     <Typography variant="subtitle1" paragraph>
-                      {post.attributes.synopsis} ...
+                      {data.synopsis} ...
                     </Typography>
                   </CardContent>
                     </Box>
                   <Box>
                   <CardMedia
                         component="img"
-                        title={post.attributes.title}
+                        title={data.title}
                         sx={{ width: 160, height: "100%", display: { xs: "none", sm: "block" } }}
-                        image={imageUrl}
-                        alt={post.attributes.title}
+                        image={data.image.data.attributes.url}
+                        alt={data.title}
                       />
                   </Box>
               </Card>
