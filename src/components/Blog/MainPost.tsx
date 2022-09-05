@@ -20,9 +20,7 @@ const MainPost = (props: { mainpost: any[] }) => {
             slug: string;
           };
         }) => {
-          const imageUrl =
-            process.env.REACT_APP_BACKEND_URL +
-            posts.attributes.image.data.attributes.url;
+          const data = posts.attributes;
 
           return (
             <Paper
@@ -32,7 +30,7 @@ const MainPost = (props: { mainpost: any[] }) => {
                 backgroundColor: "inherit",
                 position: "relative",
                 color: " ",
-                backgroundImage: `url(${imageUrl})`,
+                backgroundImage: `url(${data.image.data.attributes.url})`,
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
@@ -41,8 +39,8 @@ const MainPost = (props: { mainpost: any[] }) => {
               {/* Increase the priority of the hero background image */}
               <img
                 style={{ display: "none" }}
-                src={imageUrl}
-                alt={posts.attributes.image.data.attributes.alternativeText}
+                src={data.image.data.attributes.url}
+                alt={data.image.data.attributes.alternativeText}
               />
 
               {/* overlay */}
@@ -78,7 +76,7 @@ const MainPost = (props: { mainpost: any[] }) => {
                           theme.palette.mode === "light" ? "white" : "white", // for now that is that...
                       }}
                     >
-                      {posts.attributes.title}
+                      {data.title}
                     </Typography>
                     <Typography
                       variant="h5"
@@ -89,14 +87,14 @@ const MainPost = (props: { mainpost: any[] }) => {
                           theme.palette.mode === "light" ? "white" : "white", // for now that is that...
                       }}
                     >
-                      {posts.attributes.synopsis}
+                      {data.synopsis}
                       {"..."}
                     </Typography>
                     <Link
                       component={RouterLink}
                       variant="subtitle1"
                       underline="hover"
-                      to={`/post/${posts.attributes.slug}`}
+                      to={`/post/${data.slug}`}
                       sx={{
                         color: theme.palette.mode === "light" ? "blue" : "blue", // for now that is that...
                       }}

@@ -10,7 +10,7 @@ import {
 
 const CategoryCard = ({ data: postByCategory }) => {
   const query = postByCategory.attributes;
-  const imageUrl = `${process.env.REACT_APP_BACKEND_URL}${query.image.data.attributes.url}`;
+  const imageUrl = query.image.data.attributes.url;
 
   return (
     <Card sx={{ maxWidth: 345 }}>

@@ -5,6 +5,7 @@
   "private": false,
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@cloudinary/react": "^1.4.2",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@fontsource/roboto": "^4.5.8",

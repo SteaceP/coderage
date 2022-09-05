@@ -27,7 +27,7 @@ const UserAvatar = () => {
             data.usersPermissionsUser.data.attributes.avatar.data.attributes;
             
           const avatarAlt = query.alternativeText || undefined;
-          const avatarUrl = `${process.env.REACT_APP_BACKEND_URL}${query.formats.thumbnail.url}` || undefined;
+          const avatarUrl = query.formats.thumbnail.url || undefined;
 
           return (
             <Avatar
