@@ -14,9 +14,6 @@ const Categories = () => {
       component="nav"
       variant="dense"
       sx={{
-        "@media screen and (max-width: 600px)": {
-          fontSize: "718px",
-        },
         justifyContent: "space-around",
         overflow: "visible",
       }}
@@ -24,6 +21,7 @@ const Categories = () => {
       {categoriesArray.map((category) => {
         return (
           <Button
+            tabIndex={categoriesArray.indexOf(category)}
             key={seed(category)}
             component={NavLink}
             to={`/category/${

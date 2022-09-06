@@ -10,7 +10,7 @@ import {
   Fab,
   Divider,
 } from "@mui/material";
-import { format } from 'date-fns'
+import { format } from "date-fns";
 
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
@@ -32,9 +32,15 @@ const ArticleContainer = (props: any) => {
 
           const imageUrl = post.attributes.image.data.attributes.url;
 
-           const datePublished = format(new Date(post.attributes.publishedAt), 'MMMM do, yyyy');
-           const dateEdited = format(new Date(post.attributes.updatedAt), 'MMMM do, yyyy');
-           
+          const datePublished = format(
+            new Date(post.attributes.publishedAt),
+            "MMMM do, yyyy"
+          );
+          const dateEdited = format(
+            new Date(post.attributes.updatedAt),
+            "MMMM do, yyyy"
+          );
+
           return (
             <Grid
               container
@@ -67,7 +73,7 @@ const ArticleContainer = (props: any) => {
                   alt={post.attributes.title}
                 />
                 <CardContent>
-                  <Markdown>{post.attributes.content}</Markdown>
+                  <Markdown children={post.attributes.content} />
                   <Divider />
                   {post.attributes.updatedAt != null ? (
                     <Typography
@@ -77,8 +83,7 @@ const ArticleContainer = (props: any) => {
                         mt: 3,
                       }}
                     >
-                      Edited on{" "}
-                      {dateEdited}
+                      Edited on {dateEdited}
                     </Typography>
                   ) : (
                     ""
