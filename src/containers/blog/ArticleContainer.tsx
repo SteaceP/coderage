@@ -17,7 +17,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { GetPostsQuery } from "components/ApolloQuery";
 import ARTICLE_QUERY from "graphql/queries/query.article";
 
-import Markdown from "components/Markdown";
+import RenderPost from "components/RenderPost";
 import ScrollTop from "components/BackToTop";
 
 const ArticleContainer = (props: any) => {
@@ -73,7 +73,7 @@ const ArticleContainer = (props: any) => {
                   alt={post.attributes.title}
                 />
                 <CardContent>
-                  <Markdown children={post.attributes.content} />
+                  <RenderPost markdown={post.attributes.content} />
                   <Divider />
                   {post.attributes.updatedAt != null ? (
                     <Typography

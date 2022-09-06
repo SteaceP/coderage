@@ -1,4 +1,3 @@
-import Markdown from "../Markdown";
 import { Typography, Grid, Divider, Box } from "@mui/material";
 
 const Rules = () => {
@@ -14,7 +13,7 @@ const Rules = () => {
           flexDirection: "column",
         }}
       >
-        <Markdown>- This functionality is being coded right now.</Markdown>
+        <Typography>- This functionality is being coded right now.</Typography>
       </Box>
     </Grid>
   );
