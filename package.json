@@ -11,12 +11,11 @@
     "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.10.2",
     "@sendgrid/mail": "^7.7.0",
-    "@sentry/react": "^7.11.1",
-    "@sentry/tracing": "^7.11.1",
+    "@sentry/react": "^7.12.1",
+    "@sentry/tracing": "^7.12.1",
     "date-fns": "^2.29.2",
     "graphql": "^16.6.0",
     "js-cookie": "^3.0.1",
-    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
@@ -26,13 +25,12 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-transition-group": "^4.4.5",
     "react-uid": "^2.3.2",
-    "remark-gfm": "^3.0.1",
-    "wrangler": "^2.0.28"
+    "remark-gfm": "^3.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -67,13 +65,16 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^3.14.1",
     "@types/js-cookie": "^3.0.2",
-    "@types/node": "^18.7.13",
+    "@types/node": "^18.7.16",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-helmet": "^6.1.5",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-syntax-highlighter": "^15.5.5",
+    "customize-cra": "^1.0.0",
     "prettier": "^2.7.1",
-    "typescript": "^4.8.2"
+    "react-app-rewired": "^2.2.1",
+    "typescript": "^4.8.2",
+    "wrangler": "^2.0.28"
   }
 }
