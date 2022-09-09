@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Typography, Link, Box, Divider } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import ReactMarkdown from "react-markdown";
@@ -12,16 +11,18 @@ import {
 import jsx from "react-syntax-highlighter/dist/esm/languages/prism/jsx";
 import js from "react-syntax-highlighter/dist/esm/languages/prism/javascript";
 import ts from "react-syntax-highlighter/dist/esm/languages/prism/typescript";
+import json from "react-syntax-highlighter/dist/esm/languages/prism/json";
 import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
 import graphql from "react-syntax-highlighter/dist/esm/languages/prism/graphql";
-
-// import replaceLastString from "utils/replaceLastString"; //? should work but doesn't...
+import markdown from "react-syntax-highlighter/dist/esm/languages/prism/markdown";
 
 SyntaxHighlighter.registerLanguage("jsx", jsx);
 SyntaxHighlighter.registerLanguage("javascript", js);
 SyntaxHighlighter.registerLanguage("typescript", ts);
+SyntaxHighlighter.registerLanguage("json", json);
 SyntaxHighlighter.registerLanguage("bash", bash);
 SyntaxHighlighter.registerLanguage("graphql", graphql);
+SyntaxHighlighter.registerLanguage("markdown", markdown);
 
 const RenderPost = (props: { markdown: string }) => {
   const theme = useTheme();
@@ -68,16 +69,16 @@ const RenderPost = (props: { markdown: string }) => {
         li: (props) => <Box component="li" sx={{ mt: 1 }} {...props} />,
         hr: (props) => <Divider sx={{ mb: 3 }} {...props} />,
         code: (props: any) => {
-          // const removeLastLine = replaceLastString(props.children, "\n", "");
           return (
             <SyntaxHighlighter
               language={
-                props.className ? props.className.replace("language-", "") : ""
+                props.className
+                  ? props.className.replace("language-", "")
+                  : undefined
               }
               style={
                 theme.palette.mode === "light" ? materialLight : materialDark
               }
-              showLineNumbers={true}
               wrapLongLines={true}
               {...props}
             />
