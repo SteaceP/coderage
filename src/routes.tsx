@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { useRoutes } from "react-router-dom";
+import { useSentryRoutes } from "lib/sentry";
 
 const Home = lazy(() => import("containers/Home"));
 const Category = lazy(() => import("./containers/blog/CategoriesContainer"));
@@ -15,7 +15,7 @@ const ArticleContainer = lazy(
 );
 
 const Routing = () => {
-  let elements = useRoutes([
+  let elements = useSentryRoutes([
     {
       path: "/",
       element: <Home />,

@@ -1,5 +1,5 @@
 // replace the last string in the first array of strings
-export function replaceLastString(
+export default function replaceLastString(
   strings: string[],
   stringToReplace: string,
   replacement: string
@@ -14,5 +14,3 @@ export function replaceLastString(
     ...strings.slice(index + 1)
   ];
 }
-
-export default replaceLastString;

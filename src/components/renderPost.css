@@ -1,0 +1,68 @@
+.code-wrap {
+    position: relative;
+    width: 80%;
+  }
+  
+  pre {
+    overflow: auto;
+    margin: 0 0 1em;
+    padding: .5em 2em;
+    white-space: pre-line;
+  }
+  
+  .code-inner {
+    max-width: 80%;
+  }
+  
+  .code-wrap {
+    background: linear-gradient(to right, #264567 60px, #73b9ff 0% 80%);
+    width: 100%;
+    height: 200px;
+    padding: 20px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 18px -7px #000;
+    overflow-y: scroll;
+  }
+  
+  pre code,
+  pre .line-number {
+    font: normal normal 16px/14px Lato, "Courier New", Courier, Monospace;
+    color: black;
+    display: block;
+    line-height: 30px;
+  }
+  
+  pre .line-number {
+    float: left;
+    margin: 0 1em 0 -1em;
+    text-align: right;
+    color: #fff;
+  }
+  
+  pre .line-number span {
+    display: block;
+    padding: 0 .5em 0 1em;
+  }
+  
+  pre .cl {
+    display: block;
+    clear: both;
+  }
+  
+  /* Vertical Scroll */
+  .code-wrap::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  /* Track */
+  .code-wrap::-webkit-scrollbar-track {
+    border-radius: 10px;
+    margin: 10px;
+  }
+  
+  /* Handle */
+  .code-wrap::-webkit-scrollbar-thumb {
+    background: #fff;
+    border-right: 4px #555555 solid;
+  }
+  

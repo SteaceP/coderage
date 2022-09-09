@@ -62,6 +62,7 @@ const ArticleContainer = (props: any) => {
                   }}
                 >
                   <CardHeader
+                    titleTypographyProps={{ variant: "h5", gutterBottom: true }}
                     title={post.attributes.title}
                     subheader={datePublished}
                   />
