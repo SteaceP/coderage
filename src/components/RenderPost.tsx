@@ -16,8 +16,6 @@ import bash from "react-syntax-highlighter/dist/esm/languages/prism/bash";
 import graphql from "react-syntax-highlighter/dist/esm/languages/prism/graphql";
 import markdown from "react-syntax-highlighter/dist/esm/languages/prism/markdown";
 
-import replaceLastString from "utils/replaceLastString"; //? should work but doesn't...
-
 SyntaxHighlighter.registerLanguage("jsx", jsx);
 SyntaxHighlighter.registerLanguage("javascript", js);
 SyntaxHighlighter.registerLanguage("typescript", ts);
@@ -71,9 +69,6 @@ const RenderPost = (props: { markdown: string }) => {
         li: (props) => <Box component="li" sx={{ mt: 1 }} {...props} />,
         hr: (props) => <Divider sx={{ mb: 3 }} {...props} />,
         code: (props: any) => {
-          console.log("first", props.children);
-          const hideLastLine = replaceLastString(props.children, "\n", "");
-          console.log("hideLastLine", hideLastLine);
           return (
             <SyntaxHighlighter
               language={
@@ -85,9 +80,8 @@ const RenderPost = (props: { markdown: string }) => {
                 theme.palette.mode === "light" ? materialLight : materialDark
               }
               wrapLongLines={true}
-            >
-              {hideLastLine}
-            </SyntaxHighlighter>
+              {...props}
+            />
           );
         },
       }}
