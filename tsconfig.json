@@ -11,7 +11,8 @@
       "@types/react",
       "@types/react-dom",
       "@types/node",
-      "@types/js-cookie"
+      "@types/js-cookie",
+      "@types/react-helmet-async"
     ],
     "strict": true,
     "allowJs": true,
