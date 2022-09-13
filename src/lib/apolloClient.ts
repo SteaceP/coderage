@@ -1,13 +1,8 @@
-import {
-  HttpLink,
-  ApolloLink,
-  ApolloClient,
-  InMemoryCache,
-  concat,
-  from
-} from "@apollo/client";
+import { HttpLink, ApolloLink, ApolloClient, from } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import Cookie from "js-cookie";
+
+import { cache } from "./apolloCache";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -35,8 +30,9 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 });
 
 const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: concat(authMiddleware, from([errorLink, httpLink])),
+  cache,
+  link: from([authMiddleware, errorLink.concat(httpLink)]),
+  connectToDevTools: true, //? Gives access to the Apollo Client DevTools in production
 });
 
 export default client;

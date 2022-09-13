@@ -5,6 +5,7 @@ const {
   overrideDevServer,
   adjustWorkbox,
   watchAll,
+  setWebpackTarget,
 } = require("customize-cra");
 
 module.exports = {
@@ -12,6 +13,7 @@ module.exports = {
     // add override for Babel
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useBabelRc(),
+    setWebpackTarget("es2017"),
 
     // add webpack bundle visualizer if BUNDLE_VISUALIZE flag is enabled
     process.env.BUNDLE_VISUALIZE === 1 && addBundleVisualizer(),
@@ -27,10 +29,10 @@ module.exports = {
 
   devServer: overrideDevServer(
     // dev server plugin
-    watchAll(),
+    watchAll()
     // add override for Babel
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useBabelRc()
+    // useBabelRc(),
   ),
 };
 

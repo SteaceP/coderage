@@ -20,13 +20,10 @@ const FeaturedPost = ({ data: featuredPosts }) => {
 
         return (
           <Grid item xs={12} md={6} key={uid(post)}>
-            <CardActionArea
-              component={Link}
-              to={`post/${data.slug}`}
-            >
+            <CardActionArea component={Link} to={`post/${data.slug}`}>
               <Card sx={{ display: "flex" }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <CardContent sx={{ flex: '1 0 auto' }}>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <CardContent sx={{ flex: "1 0 auto" }}>
                     <Typography component="h2" variant="h5">
                       {data.title}
                     </Typography>
@@ -34,16 +31,20 @@ const FeaturedPost = ({ data: featuredPosts }) => {
                       {data.synopsis} ...
                     </Typography>
                   </CardContent>
-                    </Box>
-                  <Box>
+                </Box>
+                <Box>
                   <CardMedia
-                        component="img"
-                        title={data.title}
-                        sx={{ width: 160, height: "100%", display: { xs: "none", sm: "block" } }}
-                        image={data.image.data.attributes.url}
-                        alt={data.title}
-                      />
-                  </Box>
+                    component="img"
+                    title={data.title}
+                    sx={{
+                      width: 160,
+                      height: "100%",
+                      display: { xs: "none", sm: "block" },
+                    }}
+                    image={data.image.data.attributes.url}
+                    alt={data.title}
+                  />
+                </Box>
               </Card>
             </CardActionArea>
           </Grid>

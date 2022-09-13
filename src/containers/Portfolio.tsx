@@ -1,5 +1,5 @@
 import { useState, SyntheticEvent } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useUIDSeed } from "react-uid";
 import {
   Typography,
@@ -65,7 +65,7 @@ const works = [
     attributes: {
       ariaControls: "panel5bh-content",
       id: "panel5bh-header",
-    }
+    },
   },
   {
     name: "Code Rage Backend",
@@ -76,7 +76,7 @@ const works = [
     attributes: {
       ariaControls: "panel6bh-content",
       id: "panel6bh-header",
-    }
+    },
   },
 ];
 
@@ -110,9 +110,9 @@ const Portfolio = () => {
       >
         Link goes to the live project
         <br />
-        Those are projects that are exclusively made by me, others that I worked on are on the way.
-        <br />
-        I just need to make sure witch one I can show.
+        Those are projects that are exclusively made by me, others that I worked
+        on are on the way.
+        <br />I just need to make sure witch one I can show.
       </Typography>
       {works.map((work) => (
         <Accordion

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Cookie from "js-cookie";
 import {
@@ -17,6 +17,7 @@ import {
 
 import AUTH_LOGIN_MUTATION from "graphql/mutation/mutation.auth.login";
 import { useInput } from "utils/hooks";
+import { isEmailValid } from "../../utils/validators";
 import { useAuthDispatch, useAuthState } from "contexts/AuthContext";
 
 import AuthHeader from "components/Auth/AuthHeader";
@@ -24,13 +25,23 @@ import AuthHeader from "components/Auth/AuthHeader";
 const Login = () => {
   const userEmail = useInput("");
   const userPassword = useInput("");
-  const [loginError, setLoginError] = useState("");
+  const [loginError, setLoginError] = useState<string[]>(null);
   const dispatch = useAuthDispatch();
   const [login] = useMutation(AUTH_LOGIN_MUTATION);
   const navigate = useNavigate();
   const { loading } = useAuthState();
 
-  const handleEmailLogin = async () => {
+  const handleEmailLogin = async (
+    event: React.FormEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+
+    if (!isEmailValid(userEmail.value))
+      setLoginError((prevError) => [
+        ...prevError,
+        "Please enter a valid email address",
+      ]); //! This is not working => Uncaught TypeError: prevError is not iterable
+
     await login({
       variables: {
         email: userEmail.value,
@@ -40,14 +51,14 @@ const Login = () => {
         if (process.env.NODE_ENV !== "development") {
           Cookie.set("token", login.jwt, {
             secure: true,
+            httpOnly: true,
             domain: "coderage.pro",
-            sameSite: "strict",
+            sameSite: "Lax",
             expires: 7,
           });
         } else {
           Cookie.set("token", login.jwt, {
-            secure: true,
-            expires: 3,
+            expires: 1,
           });
         }
         dispatch({
@@ -63,7 +74,7 @@ const Login = () => {
         navigate("/");
       },
       onError: (error) => {
-        setLoginError(error.message);
+        setLoginError((prevError) => [...prevError, error.message]);
       },
     });
   };
@@ -88,7 +99,7 @@ const Login = () => {
           sx={{ width: "100%" }}
           severity="error"
           onClose={() => {
-            setLoginError("");
+            setLoginError(null);
           }}
         >
           <AlertTitle>Error</AlertTitle>

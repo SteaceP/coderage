@@ -23,6 +23,14 @@ Sentry.init({
       ),
     }),
   ],
+  beforeSend(event, hint) {
+    // https://docs.sentry.io/platforms/javascript/guides/react/enriching-events/user-feedback/
+    //TODO: need more work
+    if (event.exception) {
+      Sentry.showReportDialog({ eventId: event.event_id });
+    }
+    return event;
+  },
   tracesSampleRate: 1.0,
 });
 
