@@ -31,7 +31,7 @@ const AuthStateContext = createContext<AuthState>({
 const DispatchContext = createContext(null);
 
 //? Devtools Naming
-AuthStateContext.displayName = "AuthAuthStateContext";
+AuthStateContext.displayName = "AuthStateContext";
 DispatchContext.displayName = "DispatchContext";
 
 const reducer = (state: AuthState, action: Action) => {
@@ -77,20 +77,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loading: false,
   });
 
+  // Log in the user if token exists
   useEffect(() => {
     const token = Cookie.get("token");
     if (token === null || token === undefined) {
       return;
     }
 
-    const getUser = async (): Promise<User> => {
+    const getUserFromCookie = async (): Promise<User> => {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/users/me`,
         {
           method: "GET",
           headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json;charset=UTF-8",
           },
         }
       );
@@ -98,7 +99,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return data;
     };
 
-    getUser()
+    getUserFromCookie()
       .then((res) =>
         dispatch({
           type: "LOGIN",

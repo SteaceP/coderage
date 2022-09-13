@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import Cookie from "js-cookie";
@@ -16,10 +16,10 @@ import {
 import AUTH_REGISTER_MUTATION from "graphql/mutation/mutation.auth.register";
 import { useAuthDispatch, useAuthState } from "contexts/AuthContext";
 import { useInput } from "utils/hooks";
+import { isEmailValid } from "utils/validators";
 import AuthHeader from "components/Auth/AuthHeader";
 
-//TODO: Username is unique, make a graphQL request or just an error message(Alert)?...
-//TODO: This will be both, I need to make a graphQL request to check if the email is unique.
+//TODO: Need to make a graphQL request to check if the email is unique.
 
 const SignUp = () => {
   const username = useInput("");
@@ -28,14 +28,22 @@ const SignUp = () => {
   const userConfirmPassword = useInput("");
 
   const [register] = useMutation(AUTH_REGISTER_MUTATION);
-  const [signUpError, setSignUpError] = useState("");
+  const [signupError, setSignupError] = useState<string[] | null>(null);
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
   const { loading } = useAuthState();
 
-  const handleEmailSignUp = async () => {
+  const handleEmailSignUp = async (
+    event: React.FormEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+
+    if (!isEmailValid(userEmail.value))
+      setSignupError((prev) => [
+        ...(prev + "Please enter a valid email address"),
+      ]);
     if (userPassword.value !== userConfirmPassword.value) {
-      setSignUpError("Password don't match");
+      setSignupError((prev) => [...(prev + "Passwords do not match")]);
     }
 
     await register({
@@ -55,32 +63,44 @@ const SignUp = () => {
         if (process.env.NODE_ENV !== "development") {
           Cookie.set("token", register.jwt, {
             secure: true,
+            httpOnly: true,
             domain: "coderage.pro",
-            sameSite: "strict",
+            sameSite: "Lax",
             expires: 7,
           });
         } else {
           Cookie.set("token", register.jwt, {
-            secure: true,
-            expires: 3,
+            expires: 1,
           });
         }
         dispatch({
           type: "REGISTER",
           payload: payload,
-        })
+        });
         dispatch({ type: "STOP_LOADING" });
         navigate("/");
       },
       onError: (error) => {
-        setSignUpError(error.message);
+        setSignupError((prev) => [...(prev + error.message)]);
+        signupError?.map((error) => (
+          <Alert
+            sx={{ width: "100%" }}
+            severity="error"
+            onClose={() => {
+              setSignupError(null);
+            }}
+          >
+            <AlertTitle>Error</AlertTitle>
+            {error}
+          </Alert>
+        ));
       },
     });
   };
 
   const handleGoogleSignupPopup = async () => {
     //TODO: Add google signup;
-  }
+  };
 
   //TODO: Error handling as MUI helperText for what is "ok" to do, else, keep the MUI Alert
 
@@ -95,16 +115,16 @@ const SignUp = () => {
 
       <AuthHeader title="Sign Up" />
 
-      {signUpError && (
+      {signupError && (
         <Alert
           sx={{ width: "100%" }}
           severity="error"
           onClose={() => {
-            setSignUpError("");
+            setSignupError(null);
           }}
         >
           <AlertTitle>Error</AlertTitle>
-          {signUpError}
+          {signupError}
         </Alert>
       )}
       <form>
@@ -132,6 +152,7 @@ const SignUp = () => {
               fullWidth
               id="email"
               label="Enter your email"
+              autoComplete="current-email"
               {...userEmail}
             />
           </Grid>
@@ -143,6 +164,7 @@ const SignUp = () => {
               id="userPassword"
               label="Choose a password"
               type="password"
+              autoComplete="current-password"
               {...userPassword}
             />
           </Grid>
@@ -154,6 +176,7 @@ const SignUp = () => {
               label="Confirm your chosen password"
               type="password"
               id="userConfirmPassword"
+              autoComplete="current-password"
               {...userConfirmPassword}
             />
           </Grid>

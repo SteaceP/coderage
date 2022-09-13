@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { AuthProvider } from "./contexts/AuthContext";
 import { DarkThemeProvider } from "./contexts/DarkModeContext";
 import { Box } from "@mui/material";
