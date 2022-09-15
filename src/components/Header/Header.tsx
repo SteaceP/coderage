@@ -12,7 +12,7 @@ import logoBlackTheme from "assets/images/logoTextBlackTheme.png";
 
 import { useAuthState } from "contexts/AuthContext";
 import { ColorModeContext } from "contexts/DarkModeContext";
-import UserPicture from "components/Header/Menu/UserAvatar";
+import UserAvatar from "components/Header/Menu/UserAvatar";
 
 import Categories from "./Categories";
 import MainMenu from "./Menu/MainMenu";
@@ -78,7 +78,7 @@ const Header = () => {
                 Sign up
               </Button>
             ) : (
-              <UserPicture />
+              <UserAvatar />
             )}
           </Box>
         </Box>

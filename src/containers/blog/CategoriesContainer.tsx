@@ -13,7 +13,7 @@ const Category = () => {
   return (
     <GetPostsQuery query={CATEGORY_ARTICLES_QUERY} slug={id}>
       {({ data: category }) => {
-        const categories = category.categories.data;
+        const categories = category?.categories?.data;
         const postsArrayByCategory = categories[0].attributes.posts.data;
 
         if (postsArrayByCategory.length) {

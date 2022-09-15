@@ -11,8 +11,7 @@
       "@types/react",
       "@types/react-dom",
       "@types/node",
-      "@types/js-cookie",
-      "@types/react-helmet-async"
+      "@types/js-cookie"
     ],
     "strict": true,
     "allowJs": true,
@@ -24,7 +23,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "sourceMap": true,
     "noResolve": false,
     "noEmit": true,
@@ -33,8 +32,8 @@
     "strictNullChecks": false,
     "baseUrl": "./src",
     "jsx": "react-jsx",
+    "include": ["src"],
     "paths": {
-      "@/*": ["./src/*"],
       "@/components/*": ["./components/*"],
       "@/containers/*": ["./containers/*"],
       "@/contexts/*": ["./contexts/*"]

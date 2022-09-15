@@ -1,5 +1,5 @@
 export const menuProps = {
-  elevation: 0,
+  elevation: 5,
   sx: {
     overflow: "visible",
     filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",

@@ -15,27 +15,26 @@ import Logout from "@mui/icons-material/Logout";
 
 import { useAuthDispatch, useAuthState } from "contexts/AuthContext";
 import { menuProps } from "components/Header/Menu/mobileMenuProps";
-import UserPicture from "components/Header/Menu/UserAvatar";
-
+import UserAvatar from "components/Header/Menu/UserAvatar";
 
 const MainMenu = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const isMenuOpen = !!anchorEl;
+  const [isOpen, setIsOpen] = useState(null);
+  const isMenuOpen = !!isOpen;
   const { user } = useAuthState();
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
 
-  const handleMenu = (e: { currentTarget: any }) => {
-    setAnchorEl(e.currentTarget);
+  const handleMenu = (event: { currentTarget: any }) => {
+    setIsOpen(event.currentTarget);
   };
 
   const handleMenuClick = (route: To) => {
     navigate(route);
-    setAnchorEl(null);
+    setIsOpen(null);
   };
 
-  const handleLogout = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const handleLogout = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
     dispatch({ type: "LOGOUT" });
   };
 
@@ -60,17 +59,17 @@ const MainMenu = () => {
         </IconButton>
       </Box>
       <Menu
-        anchorEl={anchorEl}
+        anchorEl={isOpen}
         open={isMenuOpen}
         PaperProps={menuProps}
-        onClose={() => setAnchorEl(null)}
+        onClose={() => setIsOpen(null)}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         {user ? (
           <Box component="div">
             <MenuItem onClick={() => handleMenuClick("/auth/dashboard")}>
-              <UserPicture />
+              <UserAvatar />
               Profile
             </MenuItem>
 

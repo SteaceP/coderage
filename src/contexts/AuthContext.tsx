@@ -5,7 +5,12 @@ type User = {
   email: string;
   username: string;
   id: number;
-  confirmed: boolean;
+  token?: string;
+  confirmed?: boolean;
+  blocked?: boolean;
+  provider?: string;
+  created_at?: Date;
+  updated_at?: Date;
 } | null;
 
 type AuthState = {
@@ -77,6 +82,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loading: false,
   });
 
+  //
   // Log in the user if token exists
   useEffect(() => {
     const token = Cookie.get("token");
@@ -96,6 +102,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
       );
       const data: User = await response.json();
+      console.log("data: ", data);
       return data;
     };
 
@@ -107,7 +114,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             username: res.username,
             email: res.email,
             id: res.id,
-            confirmed: res.confirmed,
+            token,
           },
         })
       )

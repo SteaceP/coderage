@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
-import { wrapUseRoutes } from "@sentry/react";
 import {
   useLocation,
   useNavigationType,
@@ -34,4 +33,4 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-export const useSentryRoutes = wrapUseRoutes(useRoutes);
+export const useSentryRoutes = Sentry.wrapUseRoutes(useRoutes);

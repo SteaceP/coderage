@@ -33,9 +33,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const { loading } = useAuthState();
 
-  const handleEmailSignUp = async (
-    event: React.FormEvent<HTMLButtonElement>
-  ) => {
+  const handleEmailSignUp = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     if (!isEmailValid(userEmail.value))
@@ -57,7 +55,7 @@ const SignUp = () => {
           username: register.user.username,
           email: register.user.email,
           id: register.user.id,
-          confirmed: register.user.confirmed,
+          token: JSON.stringify(register.jwt),
         };
 
         if (process.env.NODE_ENV !== "development") {
@@ -98,7 +96,10 @@ const SignUp = () => {
     });
   };
 
-  const handleGoogleSignupPopup = async () => {
+  const handleGoogleSignupPopup = async (event: {
+    preventDefault: () => void;
+  }) => {
+    event.preventDefault();
     //TODO: Add google signup;
   };
 
