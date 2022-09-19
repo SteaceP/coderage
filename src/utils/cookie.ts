@@ -1,16 +1,17 @@
-interface CookieAttributes {
+type CookieAttributes = {
   path?: string;
   domain?: string;
-  expires?: number | string;
+  expires?: Date | string;
   secure?: boolean;
+  signed?: boolean;
   sameSite?: "Strict" | "Lax" | "None"; //? if it's not set, it will be set to "Lax" by default
   httpOnly?: boolean;
-}
-interface CookieMethods {
+} | null;
+type CookieMethods = {
   get(name: string): string | null;
   set(name: string, value: string, attributes?: CookieAttributes): void;
   remove(name: string, attributes?: CookieAttributes): void;
-}
+};
 
 const Cookie: CookieMethods = {
   get(name) {

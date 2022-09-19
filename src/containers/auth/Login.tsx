@@ -46,14 +46,20 @@ const Login = () => {
         if (process.env.NODE_ENV !== "development") {
           Cookie.set("token", login.jwt, {
             secure: true,
-            httpOnly: true,
+            signed: true,
+            // httpOnly: true,
             domain: "coderage.pro",
             sameSite: "Lax",
-            expires: 7,
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
           });
         } else {
           Cookie.set("token", login.jwt, {
-            expires: 1,
+            secure: true,
+            signed: true,
+            // httpOnly: true,
+            domain: "localhost",
+            sameSite: "Lax",
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 1),
           });
         }
         dispatch({
@@ -62,7 +68,7 @@ const Login = () => {
             username: login.user.username,
             email: login.user.email,
             id: login.user.id,
-            token: JSON.stringify(login.jwt),
+            token: encodeURIComponent(login.jwt),
           },
         });
         dispatch({ type: "STOP_LOADING" });
