@@ -88,7 +88,7 @@
     "@testing-library/react": "^13.4.0",
     "@types/apollo-upload-client": "^17.0.1",
     "@types/customize-cra": "^1.0.3",
-    "@types/jest": "^29.0.2",
+    "@types/jest": "^29.0.3",
     "@types/js-cookie": "^3.0.2",
     "@types/node": "^18.7.18",
     "@types/react": "^18.0.20",
