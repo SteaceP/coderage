@@ -14,7 +14,7 @@ import { useAuthState } from "contexts/AuthContext";
 import Header from "components/Header/Header";
 import Footer from "components/Footer";
 
-const STRAPI = "http://localhost:1338";
+const STRAPI = process.env.REACT_APP_BACKEND_URL;
 
 interface AppWrapperProps {
   children: React.ReactNode;
