@@ -5,3 +5,5 @@ X-Robots-Tag: noindex
 
 /*
 Access-Control-Allow-Origin: https://api.coderage.pro
+x-content-type-options: nosniff
+x-frame-options: DENY
