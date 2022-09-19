@@ -23,7 +23,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "sourceMap": true,
     "noResolve": false,
     "noEmit": true,
@@ -32,8 +32,8 @@
     "strictNullChecks": false,
     "baseUrl": "./src",
     "jsx": "react-jsx",
+    "include": ["src"],
     "paths": {
-      "@/*": ["./src/*"],
       "@/components/*": ["./components/*"],
       "@/containers/*": ["./containers/*"],
       "@/contexts/*": ["./contexts/*"]

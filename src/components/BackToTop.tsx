@@ -8,12 +8,12 @@ function ScrollTop(props: { children: any }) {
   });
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const anchor = (
+    const position = (
       (event.target as HTMLDivElement).ownerDocument || document
     ).querySelector("#back-to-top-anchor");
 
-    if (anchor) {
-      anchor.scrollIntoView({
+    if (position) {
+      position.scrollIntoView({
         behavior: "smooth",
         block: "center",
       });

@@ -21,7 +21,7 @@ const Footer = () => {
     {
       name: "LinkedIn",
       icon: LinkedInIcon,
-      url: "https://www.linkedin.com/in/optimumvape/",
+      url: "https://www.linkedin.com/in/steace/",
       ariaLabel: "LinkedIn Profile",
     },
     {

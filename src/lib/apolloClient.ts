@@ -1,6 +1,7 @@
-import { HttpLink, ApolloLink, ApolloClient, from } from "@apollo/client";
+import { ApolloLink, ApolloClient, from } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-import Cookie from "js-cookie";
+import { createUploadLink } from "apollo-upload-client";
+import Cookie from "utils/cookie";
 
 import { cache } from "./apolloCache";
 
@@ -14,7 +15,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
-const httpLink = new HttpLink({
+const uploadLink = createUploadLink({
   uri: `${process.env.REACT_APP_BACKEND_URL}/graphql`,
 });
 
@@ -23,7 +24,8 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }) => ({
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      Authorization: token ? `Bearer ${token}` : "",
+      "Content-Type": "application/json;charset=UTF-8",
     },
   }));
   return forward(operation);
@@ -31,7 +33,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 
 const client = new ApolloClient({
   cache,
-  link: from([authMiddleware, errorLink.concat(httpLink)]),
+  link: from([authMiddleware, errorLink.concat(uploadLink)]),
   connectToDevTools: true, //? Gives access to the Apollo Client DevTools in production
 });
 

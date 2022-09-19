@@ -1,11 +1,16 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
-import Cookie from "js-cookie";
+import Cookie from "utils/cookie";
 
 type User = {
   email: string;
   username: string;
   id: number;
-  confirmed: boolean;
+  token?: string;
+  confirmed?: boolean;
+  blocked?: boolean;
+  provider?: string;
+  created_at?: Date;
+  updated_at?: Date;
 } | null;
 
 type AuthState = {
@@ -31,8 +36,10 @@ const AuthStateContext = createContext<AuthState>({
 const DispatchContext = createContext(null);
 
 //? Devtools Naming
-AuthStateContext.displayName = "AuthStateContext";
-DispatchContext.displayName = "DispatchContext";
+if (process.env.NODE_ENV === "development") {
+  DispatchContext.displayName = "DispatchContext";
+  AuthStateContext.displayName = "AuthStateContext";
+}
 
 const reducer = (state: AuthState, action: Action) => {
   switch (action.type) {
@@ -77,6 +84,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loading: false,
   });
 
+  //
   // Log in the user if token exists
   useEffect(() => {
     const token = Cookie.get("token");
@@ -107,7 +115,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             username: res.username,
             email: res.email,
             id: res.id,
-            confirmed: res.confirmed,
+            token,
           },
         })
       )

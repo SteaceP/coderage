@@ -1,8 +1,10 @@
 import { lazy } from "react";
 import { useSentryRoutes } from "lib/sentry";
 
-const Home = lazy(() => import("containers/Home"));
-const Category = lazy(() => import("./containers/blog/CategoriesContainer"));
+import Home from "containers/Home";
+import Category from "containers/blog/CategoriesContainer";
+import ArticleContainer from "containers/blog/ArticleContainer";
+
 const Login = lazy(() => import("containers/auth/Login"));
 const SignUp = lazy(() => import("containers/auth/Signup"));
 const ForgotPassword = lazy(() => import("containers/auth/ForgotPassword"));
@@ -10,9 +12,6 @@ const Portfolio = lazy(() => import("containers/Portfolio"));
 const RequireAuth = lazy(() => import("components/Auth/RequireAuth"));
 const Dashboard = lazy(() => import("containers/auth/Dashboard"));
 const NoMatch = lazy(() => import("containers/404"));
-const ArticleContainer = lazy(
-  () => import("./containers/blog/ArticleContainer")
-);
 
 const Routing = () => {
   let elements = useSentryRoutes([

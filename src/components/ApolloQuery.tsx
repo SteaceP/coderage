@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 
 import { useAuthState } from "contexts/AuthContext";
 import CircularLoading from "./Loading";
+import { ArticleSkeleton } from "../components/Skeleton";
 
 //TODO: add more types and find a way to make this more generic
 
@@ -44,7 +45,7 @@ export const GetPostsQuery = ({ children, query, slug }) => {
     variables: { slug: slug },
   });
 
-  if (loading) return <CircularLoading />;
+  if (loading) return <ArticleSkeleton />;
   if (error) return <p>Error: {JSON.stringify(error)}</p>;
   if (!data) return <p>No data!</p>;
   return children({ data });

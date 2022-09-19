@@ -7,7 +7,7 @@ const Categories = () => {
   const theme = useTheme();
   const seed = useUIDSeed();
 
-  const categoriesArray = ["Unraid", "Coding", "News", "Tutorials"];
+  const categoriesArray = ["Unraid", "Coding", "News", "Blog"];
 
   return (
     <Toolbar

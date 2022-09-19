@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Helmet } from "react-helmet-async";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import Cookie from "js-cookie";
+import Cookie from "utils/cookie";
 import {
   Button,
   TextField,
@@ -25,22 +25,17 @@ import AuthHeader from "components/Auth/AuthHeader";
 const Login = () => {
   const userEmail = useInput("");
   const userPassword = useInput("");
-  const [loginError, setLoginError] = useState<string[]>(null);
+  const [loginError, setLoginError] = useState("");
   const dispatch = useAuthDispatch();
   const [login] = useMutation(AUTH_LOGIN_MUTATION);
   const navigate = useNavigate();
   const { loading } = useAuthState();
 
-  const handleEmailLogin = async (
-    event: React.FormEvent<HTMLButtonElement>
-  ) => {
+  const handleEmailLogin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     if (!isEmailValid(userEmail.value))
-      setLoginError((prevError) => [
-        ...prevError,
-        "Please enter a valid email address",
-      ]); //! This is not working => Uncaught TypeError: prevError is not iterable
+      setLoginError("Please enter a valid email address");
 
     await login({
       variables: {
@@ -67,20 +62,16 @@ const Login = () => {
             username: login.user.username,
             email: login.user.email,
             id: login.user.id,
-            confirmed: login.user.confirmed,
+            token: JSON.stringify(login.jwt),
           },
         });
         dispatch({ type: "STOP_LOADING" });
         navigate("/");
       },
       onError: (error) => {
-        setLoginError((prevError) => [...prevError, error.message]);
+        setLoginError(error.message);
       },
     });
-  };
-
-  const handleGoogleLogin = async () => {
-    //TODO: Google login
   };
 
   return (
@@ -146,20 +137,6 @@ const Login = () => {
           }}
         >
           Log In
-        </Button>
-
-        <Button
-          disabled={loading}
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          onClick={handleGoogleLogin}
-          sx={{
-            mt: 3,
-          }}
-        >
-          Log In With Google
         </Button>
 
         <Grid

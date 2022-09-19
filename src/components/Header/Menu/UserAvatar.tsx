@@ -1,50 +1,50 @@
-import { Avatar } from "@mui/material";
+import { useQuery } from "@apollo/client";
+import { Avatar, Skeleton } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import { UserQuery } from "components/ApolloQuery";
 import GET_USER_AVATAR_QUERY from "graphql/queries/query.getUserAvatar";
+import { useAuthState } from "contexts/AuthContext";
 
-const UserAvatar = () => {
+type UserAvatarProps = {
+  size: number;
+};
+
+const UserAvatar: React.FunctionComponent<UserAvatarProps> = (props) => {
+  const { size } = props;
+  const { user } = useAuthState();
+
+  const { loading, data } = useQuery(GET_USER_AVATAR_QUERY, {
+    variables: { id: user?.id },
+  });
+
+  if (loading)
+    return <Skeleton variant="circular" width={size} height={size} />;
+  // if (!data) return <p>No data!</p>;
+
+  const avatar = data?.usersPermissionsUser?.data?.attributes?.avatar;
+
+  if (!avatar) {
+    return (
+      <NavLink to={`/auth/dashboard`}>
+        <Avatar sx={{ width: size, height: size }}>
+          <AccountCircleIcon />
+        </Avatar>
+      </NavLink>
+    );
+  }
+
+  const avatarUrl = avatar?.data?.attributes?.formats?.thumbnail?.url;
+  const avatarAlt = avatar?.data?.attributes?.alternativeText;
+
   return (
-    <UserQuery query={GET_USER_AVATAR_QUERY}>
-      {({ data }) => {
-        if (!data.usersPermissionsUser.data.attributes.avatar.data) {
-          return (
-            <Avatar
-              component={NavLink}
-              to="/auth/dashboard"
-              sx={{
-                width: 32,
-                height: 32,
-                ml: 2.3,
-              }}
-              >
-                {data.usersPermissionsUser.data.attributes.username[0]}
-            </Avatar>
-          );
-        } else {
-          const query =
-            data.usersPermissionsUser.data.attributes.avatar.data.attributes;
-            
-          const avatarAlt = query.alternativeText || undefined;
-          const avatarUrl = query.formats.thumbnail.url || undefined;
-
-          return (
-            <Avatar
-              component={NavLink}
-              to="/auth/dashboard"
-              src={avatarUrl}
-              alt={avatarAlt}
-              sx={{
-                width: 32,
-                height: 32,
-                ml: 2.3,
-              }}
-            />
-          );
-        }
-      }}
-    </UserQuery>
+    <NavLink to="/auth/dashboard">
+      <Avatar
+        alt={avatarAlt}
+        src={avatarUrl}
+        sx={{ width: size, height: size }}
+      />
+    </NavLink>
   );
 };
 

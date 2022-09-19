@@ -22,8 +22,8 @@ const ForgotPassword = () => {
   const [message, setMessage] = useState("");
   const { loading } = useAuthState();
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
+    event.preventDefault();
     // TODO: A token is needed to be able to reset the password. An email need to be sent. Implement Sendgrid
   };
 
