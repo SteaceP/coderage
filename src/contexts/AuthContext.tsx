@@ -88,9 +88,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // Log in the user if token exists
   useEffect(() => {
     const token = Cookie.get("token");
-    if (token === null || token === undefined) {
-      return;
-    }
+    if (token === null || token === undefined) return;
 
     const getUserFromCookie = async (): Promise<User> => {
       const response = await fetch(
@@ -98,6 +96,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         {
           method: "GET",
           headers: {
+            credentials: "include",
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json;charset=UTF-8",
           },
@@ -115,7 +114,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             username: res.username,
             email: res.email,
             id: res.id,
-            token,
+            token: encodeURIComponent(token),
           },
         })
       )

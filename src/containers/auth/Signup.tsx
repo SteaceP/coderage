@@ -55,20 +55,24 @@ const SignUp = () => {
           username: register.user.username,
           email: register.user.email,
           id: register.user.id,
-          token: JSON.stringify(register.jwt),
+          token: encodeURIComponent(register.jwt),
         };
 
         if (process.env.NODE_ENV !== "development") {
           Cookie.set("token", register.jwt, {
             secure: true,
-            httpOnly: true,
             domain: "coderage.pro",
             sameSite: "Lax",
-            expires: 7,
+            signed: true,
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
           });
         } else {
           Cookie.set("token", register.jwt, {
-            expires: 1,
+            secure: true,
+            domain: "localhost",
+            sameSite: "Lax",
+            signed: true,
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 1),
           });
         }
         dispatch({
