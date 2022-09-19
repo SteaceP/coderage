@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import {
   Box,
-  Grid,
-  List,
   Button,
   ListItem,
   ListItemText,
@@ -10,11 +8,20 @@ import {
   CircularProgress,
   TextField,
   Typography,
+  Paper,
+  ListItemIcon,
+  Divider,
 } from "@mui/material";
-import CommentsContext from "./CommentsProvider";
+
+import ArrowRight from "@mui/icons-material/ArrowRight";
+import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
+
+import UserAvatar from "components/Header/Menu/UserAvatar";
+
 import { ISOToFull } from "lib/date-formats";
+
+import CommentsContext, { IComment } from "contexts/CommentsProvider";
 import Reply from "./Reply";
-import { IComment, ISubcomment } from "./CommentsProvider";
 
 export type CommentProps = {
   data: IComment;
@@ -36,82 +43,132 @@ const Comment = ({ data, subcommentsLength }: CommentProps) => {
     return null;
   };
 
-  //! TO use between name and date •
-
   const [replies, setReplies] = useState(renderReplies());
 
   useEffect(() => {
     setReplies(renderReplies());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subcommentsLength]);
+
   const toggleReplies = () => {
-    setShowReplies((prev) => !prev);
+    if (showFormReply) setShowFormReply(false);
+    setShowReplies((prevShowReplies) => !prevShowReplies);
   };
   const toggleShowFormReply = () => {
-    setShowFormReply((prev) => !prev);
+    if (showReplies) setShowReplies(false);
+    setShowFormReply((prevShowFormReply) => !prevShowFormReply);
   };
+
   return (
-    <ListItem>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
+    <Box
+      sx={{
+        width: "60vw",
+        "& .MuiTextField-root": { m: 1, width: "50vw" },
+        "& .MuiBox-root .MuiListItem-root": {
+          // TextArea with the reply text and the 2 buttons
+          display: "inherit",
+          flexDirection: "column",
+          alignContent: "flex-end",
+          ml: 4.2,
+        },
+        "& .MuiBox-root .MuiListItem-root .css-iz5a6l": {
+          // Only Reply
+          display: "flex",
+          flexDirection: "row",
+          alignContent: "flex-end",
+          justifyContent: "flex-end",
+          ml: 4.2,
+        },
+      }}
+    >
+      <Paper elevation={0} variant="outlined">
+        <ListItem component="div">
+          <ListItemIcon sx={{ fontSize: 25 }}>
+            <UserAvatar size={28} />
+          </ListItemIcon>
           <ListItemText
+            sx={{ my: 0, ml: -1.5 }}
             primary={
-              <Typography variant="subtitle2">
-                {data.from_admin
-                  ? "Admin"
-                  : data.author
-                  ? data.author.username
-                  : "User"}
-              </Typography>
-            }
-            secondary={
               <Typography variant="caption">
-                {ISOToFull(data.createdAt)}
+                {data?.from_admin
+                  ? "Admin"
+                  : data?.author
+                  ? data?.author.username
+                  : "User"}{" "}
+                wrote, on {ISOToFull(data.createdAt)}
               </Typography>
             }
-          />
-          <Typography variant="caption"></Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
+            primaryTypographyProps={{
+              fontSize: 12,
+              letterSpacing: 0,
             }}
-          >
-            {replies && replies.length ? (
-              <Button
-                variant="text"
-                onClick={toggleReplies}
-                sx={{ textTransform: "none" }}
-              >
-                1 {replies.length === 1 ? " reply" : " replies"}{" "}
-                {/*//! Hardcoded */}
-              </Button>
-            ) : (
-              <Button disabled>0 replies</Button>
-            )}
-            {user && (
-              <Button
-                variant="text"
-                onClick={toggleShowFormReply}
-                sx={{ textTransform: "none" }}
-              >
-                Leave a reply
-              </Button>
-            )}
-          </Box>
-        </Grid>
-        {showFormReply && (
-          <FormReply
-            commentID={data.id}
-            closeForm={() => setShowFormReply(false)}
           />
-        )}
-        {showReplies && <Box>{replies}</Box>}
-      </Grid>
-    </ListItem>
+        </ListItem>
+        <Divider />
+        <ListItem component="div">
+          <ListItemText
+            primary={data.content}
+            key={data.id}
+            primaryTypographyProps={{
+              color: "primary",
+              fontWeight: "medium",
+              variant: "body2",
+            }}
+          />
+          {replies && replies.length ? (
+            <Button
+              onClick={toggleReplies}
+              sx={{
+                p: 0.2,
+                fontSize: 10,
+              }}
+            >
+              {replies.length} {replies.length === 1 ? " reply" : " replies"}
+            </Button>
+          ) : (
+            <Button
+              disabled
+              sx={{
+                p: 0.2,
+                fontSize: 10,
+              }}
+            >
+              0 replies
+            </Button>
+          )}
+        </ListItem>
+
+        <ListItem>
+          {user && (
+            <Button
+              variant="text"
+              disableRipple
+              endIcon={showFormReply ? <KeyboardArrowDown /> : <ArrowRight />}
+              component="span"
+              onClick={toggleShowFormReply}
+              sx={{
+                fontSize: 10,
+                letterSpacing: 0,
+                p: 0.2,
+              }}
+            >
+              Reply
+            </Button>
+          )}
+        </ListItem>
+        <ListItem>
+          {showFormReply && (
+            <FormReply
+              commentID={data.id}
+              closeForm={() => setShowFormReply(false)}
+            />
+          )}
+          {showReplies && (
+            <Box sx={{ overflowWrap: "break-word" }}>{replies}</Box>
+          )}
+        </ListItem>
+      </Paper>
+    </Box>
   );
 };
 
@@ -127,14 +184,12 @@ const FormReply = ({ commentID, closeForm }: FormReplyProps) => {
   const [content, setContent] = useState("");
   const [sending, setSending] = useState(false);
 
-  const handleInput = (
-    e: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setContent(e.currentTarget.value);
+  const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(event.currentTarget.value);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
+    event.preventDefault();
     if (!content) {
       return;
     }
@@ -151,91 +206,28 @@ const FormReply = ({ commentID, closeForm }: FormReplyProps) => {
       onSubmit={handleSubmit}
       sx={{
         display: "flex",
-        justifyContent: "center",
-        // flexDirection: "column",
-        my: 3,
-        // px: 30,
+        flexDirection: "column",
+        alignItems: "flex-start",
+        maxWidth: "80vw",
       }}
     >
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <FormLabel>Reply</FormLabel>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            multiline
-            rows={4}
-            variant="outlined"
-            value={content}
-            onChange={handleInput}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Button
-              variant="text"
-              onClick={closeForm}
-              sx={{ textTransform: "none" }}
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={sending}
-              sx={{ textTransform: "none" }}
-            >
-              {sending ? <CircularProgress size={20} /> : "Reply"}
-            </Button>
-          </Box>
-        </Grid>
-      </Grid>
+      <ListItem>
+        <FormLabel>Reply</FormLabel>
+        <TextField
+          multiline
+          autoFocus
+          rows={4}
+          variant="outlined"
+          value={content}
+          onChange={handleInput}
+        />
+        <Box>
+          <Button onClick={closeForm}>Cancel</Button>
+          <Button onClick={handleSubmit} disabled={sending}>
+            {sending ? <CircularProgress size={20} /> : "Reply"}
+          </Button>
+        </Box>
+      </ListItem>
     </Box>
   );
 };
-
-{
-  /* </form>
-<Box
-  component="form"
-  onSubmit={handleSubmit}
-  sx={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    maxWidth: 900,
-    my: 3,
-  }}
->
-  <Textfield
-    name="content"
-    value={content}
-    multiline
-    rows={3}
-    onChange={handleInput}
-    placeholder="Leave a reply"
-    cols={50}
-  />
-  <Button
-    type="submit"
-    variant="contained"
-    disabled={content.length < 1 || sending ? true : undefined}
-    sx={{ mt: 1 }}
-  >
-    {sending ? "Sending..." : "Send"}
-  </Button>
-  <Button
-    type="button"
-    disabled={sending ? true : undefined}
-    onClick={closeForm}
-  >
-    Cancel
-  </Button>
-</Box> */
-}

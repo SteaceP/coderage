@@ -78,7 +78,7 @@ const Header = () => {
                 Sign up
               </Button>
             ) : (
-              <UserAvatar />
+              <UserAvatar size={32} />
             )}
           </Box>
         </Box>

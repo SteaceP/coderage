@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
-import Cookie from "js-cookie";
+import Cookie from "utils/cookie";
 
 type User = {
   email: string;
@@ -36,8 +36,10 @@ const AuthStateContext = createContext<AuthState>({
 const DispatchContext = createContext(null);
 
 //? Devtools Naming
-AuthStateContext.displayName = "AuthStateContext";
-DispatchContext.displayName = "DispatchContext";
+if (process.env.NODE_ENV === "development") {
+  DispatchContext.displayName = "DispatchContext";
+  AuthStateContext.displayName = "AuthStateContext";
+}
 
 const reducer = (state: AuthState, action: Action) => {
   switch (action.type) {
@@ -102,7 +104,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
       );
       const data: User = await response.json();
-      console.log("data: ", data);
       return data;
     };
 

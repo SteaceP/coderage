@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Helmet } from "react-helmet-async";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import Cookie from "js-cookie";
+import Cookie from "utils/cookie";
 import {
   Button,
   TextField,
@@ -74,11 +74,6 @@ const Login = () => {
     });
   };
 
-  const handleGoogleLogin = async (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-    //TODO: Google login
-  };
-
   return (
     <Container maxWidth="sm">
       <Helmet>
@@ -142,20 +137,6 @@ const Login = () => {
           }}
         >
           Log In
-        </Button>
-
-        <Button
-          disabled={loading}
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          onClick={handleGoogleLogin}
-          sx={{
-            mt: 3,
-          }}
-        >
-          Log In With Google
         </Button>
 
         <Grid

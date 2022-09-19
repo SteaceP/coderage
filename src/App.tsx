@@ -8,10 +8,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import CircularLoading from "components/Loading";
 import Routing from "routes";
 
-import {
-  CommentsProvider,
-  ConfigContext,
-} from "components/Comment/CommentsProvider";
+import { CommentsProvider, ConfigContext } from "contexts/CommentsProvider";
 import { useAuthState } from "contexts/AuthContext";
 
 import Header from "components/Header/Header";

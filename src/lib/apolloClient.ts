@@ -1,7 +1,7 @@
 import { ApolloLink, ApolloClient, from } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { createUploadLink } from "apollo-upload-client";
-import Cookie from "js-cookie";
+import Cookie from "utils/cookie";
 
 import { cache } from "./apolloCache";
 
@@ -24,7 +24,8 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }) => ({
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      Authorization: token ? `Bearer ${token}` : "",
+      "Content-Type": "application/json;charset=UTF-8",
     },
   }));
   return forward(operation);

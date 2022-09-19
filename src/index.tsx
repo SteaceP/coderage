@@ -4,8 +4,6 @@ import { ApolloProvider } from "@apollo/client";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 import client from "./lib/apolloClient";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 import ErrorBoundary from "react-error-boundaries";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 

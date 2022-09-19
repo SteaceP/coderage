@@ -1,14 +1,13 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import {
   Box,
   Typography,
   Button,
   TextField,
-  FormLabel,
   CircularProgress,
 } from "@mui/material";
 
-import CommentsContext from "./CommentsProvider";
+import CommentsContext from "contexts/CommentsProvider";
 
 export type CommentFormProps = {
   label?: string;
@@ -25,76 +24,52 @@ const CommentForm = (props: CommentFormProps) => {
     setContent(event.currentTarget.value);
   };
 
-  const handleSubmit = async (
-    event: React.FormEvent<HTMLTextAreaElement | HTMLFormElement>
-  ) => {
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    if (!content) {
-      return;
-    }
+
+    if (!content) return;
     setSending(true);
     const successful = await postComment(content);
-    if (successful) {
-      setContent("");
-    }
+    if (successful) setContent("");
     setSending(false);
   };
 
-  if (!user) {
-    return <Typography>Login to post a comment</Typography>;
-  }
+  if (!user) return <Typography>Login to post a comment</Typography>;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       <Box
+        component="form"
+        autoComplete="off"
         sx={{
-          py: 3,
-          px: 25,
+          display: "flex",
+          flexDirection: "column",
+          width: "35vw",
         }}
       >
-        <Typography variant="body1">
-          {props.label || "Post a comment"}
-        </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            mb: 1,
-          }}
-        >
-          <FormLabel htmlFor="content" sx={{ mb: 1 }}>
-            Your Comment
-          </FormLabel>
-          <TextField
-            name="content"
-            value={content}
-            type="text"
-            onChange={handleInput}
-            multiline
-            rows={3}
-            fullWidth
-            variant="filled"
-            placeholder="Type your comment here"
-          />
-
-          <Box
-            sx={{
-              display: "inherit",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={content.length < 1 || sending ? true : undefined}
-              sx={{ mt: 1 }}
-            >
-              {sending ? <CircularProgress size={24} /> : "Send"}
-            </Button>
-          </Box>
-        </Box>
+        <TextField
+          name="replyContent"
+          value={content}
+          id="replyContent"
+          type="text"
+          onChange={handleInput}
+          multiline
+          placeholder={props.label ? props.label : "Write a new comment..."}
+          rows={3}
+          autoFocus
+          margin="dense"
+        />
       </Box>
-    </form>
+      <Button
+        type="submit"
+        variant="contained"
+        onClick={handleSubmit}
+        size="small"
+        disabled={content.length < 1 || sending ? true : undefined}
+      >
+        {sending ? <CircularProgress size={24} /> : "Send"}
+      </Button>
+    </>
   );
 };
 

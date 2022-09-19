@@ -28,8 +28,8 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
 
     if (passwordInput.value !== confirmPasswordInput.value) {
       return setError("Passwords don't match");
@@ -59,8 +59,8 @@ const Dashboard = () => {
       });
   };
 
-  const handleLogout = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
+  const handleLogout = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     dispatch({ type: "LOGOUT" });
   };
 

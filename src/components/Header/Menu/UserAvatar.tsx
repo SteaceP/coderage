@@ -6,14 +6,20 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import GET_USER_AVATAR_QUERY from "graphql/queries/query.getUserAvatar";
 import { useAuthState } from "contexts/AuthContext";
 
-const UserAvatar: React.FunctionComponent = () => {
+type UserAvatarProps = {
+  size: number;
+};
+
+const UserAvatar: React.FunctionComponent<UserAvatarProps> = (props) => {
+  const { size } = props;
   const { user } = useAuthState();
 
   const { loading, data } = useQuery(GET_USER_AVATAR_QUERY, {
-    variables: { id: user.id },
+    variables: { id: user?.id },
   });
 
-  if (loading) return <Skeleton variant="circular" width={32} height={32} />;
+  if (loading)
+    return <Skeleton variant="circular" width={size} height={size} />;
   // if (!data) return <p>No data!</p>;
 
   const avatar = data?.usersPermissionsUser?.data?.attributes?.avatar;
@@ -21,7 +27,7 @@ const UserAvatar: React.FunctionComponent = () => {
   if (!avatar) {
     return (
       <NavLink to={`/auth/dashboard`}>
-        <Avatar sx={{ width: 32, height: 32 }}>
+        <Avatar sx={{ width: size, height: size }}>
           <AccountCircleIcon />
         </Avatar>
       </NavLink>
@@ -33,7 +39,11 @@ const UserAvatar: React.FunctionComponent = () => {
 
   return (
     <NavLink to="/auth/dashboard">
-      <Avatar alt={avatarAlt} src={avatarUrl} sx={{ width: 32, height: 32 }} />
+      <Avatar
+        alt={avatarAlt}
+        src={avatarUrl}
+        sx={{ width: size, height: size }}
+      />
     </NavLink>
   );
 };

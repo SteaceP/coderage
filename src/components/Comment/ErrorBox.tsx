@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Box, Alert, AlertTitle } from "@mui/material";
 
-import CommentsContext from "./CommentsProvider";
+import CommentsContext from "contexts/CommentsProvider";
 
 const ErrorBox = () => {
   const { errorHelperMessage } = useContext(CommentsContext);

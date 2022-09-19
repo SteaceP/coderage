@@ -4,6 +4,7 @@ import { useSentryRoutes } from "lib/sentry";
 import Home from "containers/Home";
 import Category from "containers/blog/CategoriesContainer";
 import ArticleContainer from "containers/blog/ArticleContainer";
+
 const Login = lazy(() => import("containers/auth/Login"));
 const SignUp = lazy(() => import("containers/auth/Signup"));
 const ForgotPassword = lazy(() => import("containers/auth/ForgotPassword"));

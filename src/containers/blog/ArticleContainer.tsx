@@ -17,16 +17,13 @@ import { format } from "date-fns";
 
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-// import { GetPostsQuery } from "components/ApolloQuery";
 import ARTICLE_QUERY from "graphql/queries/query.article";
 
 import RenderPost from "components/RenderPost";
 import ScrollTop from "components/BackToTop";
 
-import { ConfigContext } from "components/Comment/CommentsProvider";
-import Comments from "components/Comment/Comments";
-import CommentForm from "components/Comment/CommentForm";
-import ErrorBox from "components/Comment/ErrorBox";
+import { ConfigContext } from "contexts/CommentsProvider";
+import Comments from "containers/blog/CommentsContainer";
 
 const ArticleContainer: React.FunctionComponent = () => {
   const { id } = useParams();
@@ -41,19 +38,19 @@ const ArticleContainer: React.FunctionComponent = () => {
   }, [id, setContentID]);
 
   if (error) return <Typography>`Error! ${error.message}`</Typography>;
-  if (!data) return <Typography></Typography>;
+  if (!data) return <p></p>; //! Sometimes "data" is loaded after the constants are loaded, simple fix (find a better solution)
 
-  const posts = data.posts.data;
+  const posts = data?.posts.data;
   const post = posts[0];
 
-  const imageUrl = post.attributes.image.data.attributes.url;
+  const imageUrl = post?.attributes.image.data.attributes.url;
 
   const datePublished = format(
-    new Date(post.attributes.publishedAt),
+    new Date(post?.attributes.publishedAt),
     "MMMM do, yyyy"
   );
   const dateEdited = format(
-    new Date(post.attributes.updatedAt),
+    new Date(post?.attributes.updatedAt),
     "MMMM do, yyyy"
   );
 
@@ -69,7 +66,7 @@ const ArticleContainer: React.FunctionComponent = () => {
           <Card
             sx={{
               //TODO: Set minWidth for Desktop
-              maxWidth: 1200,
+              maxWidth: "65vw",
               m: 2,
             }}
           >
@@ -90,7 +87,7 @@ const ArticleContainer: React.FunctionComponent = () => {
                 <CardHeader
                   titleTypographyProps={{ variant: "h5", gutterBottom: true }}
                   title={post.attributes.title}
-                  subheader={datePublished}
+                  subheader={datePublished ? datePublished : dateEdited}
                 />
               </Box>
             )}
@@ -128,25 +125,23 @@ const ArticleContainer: React.FunctionComponent = () => {
             </CardContent>
           </Card>
         </Grid>
-
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            maxWidth: 1000,
-          }}
-        >
-          <Comments />
-          {/* <CommentForm /> */}
-          <ErrorBox />
-        </Box>
-        <ScrollTop>
-          <Fab color="primary" size="small" aria-label="scroll back to top">
-            <KeyboardArrowUpIcon />
-          </Fab>
-        </ScrollTop>
       </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          overflow: "hidden",
+          mb: 2,
+        }}
+      >
+        <Comments />
+      </Box>
+      <ScrollTop>
+        <Fab color="primary" size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
     </>
   );
 };

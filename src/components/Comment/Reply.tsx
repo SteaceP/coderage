@@ -1,13 +1,6 @@
-import { ISubcomment } from "./CommentsProvider";
+import { ISubcomment } from "@/contexts/CommentsProvider";
 import { ISOToFull } from "lib/date-formats";
-import {
-  Divider,
-  Grid,
-  ListItem,
-  ListItemText,
-  Typography,
-  Box,
-} from "@mui/material";
+import { Divider, Typography, Box } from "@mui/material";
 
 export interface ReplyProps {
   data: ISubcomment;
@@ -40,7 +33,7 @@ const Reply = ({ data }: ReplyProps) => {
             ml: 1.5,
           }}
         >
-          on {ISOToFull(data.createdAt)}
+          replied on {ISOToFull(data.createdAt)}
         </Typography>
       </Box>
       <Typography

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import { Link as RouterLink } from "react-router-dom";
 import { useUIDSeed } from "react-uid";
 import { useTheme } from "@mui/material/styles";
@@ -20,7 +21,7 @@ const MainPost = (props: { mainpost: any[] }) => {
             slug: string;
           };
         }) => {
-          const data = posts.attributes;
+          const data = posts?.attributes;
 
           return (
             <Paper
@@ -39,8 +40,8 @@ const MainPost = (props: { mainpost: any[] }) => {
               {/* Increase the priority of the hero background image */}
               <img
                 style={{ display: "none" }}
-                src={data.image.data.attributes.url}
-                alt={data.image.data.attributes.alternativeText}
+                src={data.image.data.attributes?.url}
+                alt={data.image.data.attributes?.alternativeText}
               />
 
               {/* overlay */}

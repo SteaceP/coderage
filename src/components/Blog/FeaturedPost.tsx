@@ -15,8 +15,8 @@ const FeaturedPost = ({ data: featuredPosts }) => {
 
   return (
     <>
-      {featuredPosts.map((post) => {
-        const data = post.attributes;
+      {featuredPosts.map((post: any) => {
+        const data = post?.attributes;
 
         return (
           <Grid item xs={12} md={6} key={uid(post)}>
@@ -41,7 +41,7 @@ const FeaturedPost = ({ data: featuredPosts }) => {
                       height: "100%",
                       display: { xs: "none", sm: "block" },
                     }}
-                    image={data.image.data.attributes.url}
+                    image={data.image.data.attributes?.url}
                     alt={data.title}
                   />
                 </Box>

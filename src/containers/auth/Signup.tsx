@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import Cookie from "js-cookie";
+import Cookie from "utils/cookie";
 import {
   Button,
   TextField,
@@ -96,13 +96,6 @@ const SignUp = () => {
     });
   };
 
-  const handleGoogleSignupPopup = async (event: {
-    preventDefault: () => void;
-  }) => {
-    event.preventDefault();
-    //TODO: Add google signup;
-  };
-
   //TODO: Error handling as MUI helperText for what is "ok" to do, else, keep the MUI Alert
 
   return (
@@ -192,18 +185,6 @@ const SignUp = () => {
             onClick={handleEmailSignUp}
           >
             Sign Up
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            disabled={loading}
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={handleGoogleSignupPopup}
-          >
-            Sign Up With Google
           </Button>
         </Grid>
         <Grid
