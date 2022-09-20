@@ -1,18 +1,18 @@
 # Headers to use with Cloudflare Pages
-https://:project.pages.dev/*
-  X-Robots-Tag: noindex
 
-/auth/*
+https://:project.pages.dev/\*
 X-Robots-Tag: noindex
 
-/*
-Access-Control-Allow-Origin: https://api.coderage.pro
-Access-Control-Allow-Methods: POST, GET, OPTIONS
-Access-Control-Allow-Headers: Authorization, Content-Type, Origin, X-Requested-With, Accept, Accept-Language, Content-Language
-Access-Control-Expose-Headers: Cache-Control, Content-Language, Content-Length, Content-Type, Expires, Last-Modified, Pragma
-Access-Control-Max-Age: 86400
-Content-Security-Policy: script-src 'self'; frame-ancestors 'none';
-Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-Referrer-Policy: strict-origin-when-cross-origin
-Permissions-Policy: microphone 'none'; camera 'none'
-X-Content-Type-Options: nosniff
+/auth/\*
+X-Robots-Tag: noindex
+
+/\*
+Access-Control-Allow-Origin: https://api.coderage.pro;
+Access-Control-Allow-Methods: POST, GET, OPTIONS;
+Access-Control-Allow-Headers: Authorization, Content-Type, Origin, X-Requested-With, Accept, Accept-Language, Content-Language;
+Access-Control-Expose-Headers: Cache-Control, Content-Language, Content-Length, Content-Type, Expires, Last-Modified, Pragma;
+Access-Control-Max-Age: 86400;
+Content-Security-Policy: script-src 'self', https:, 'cloudflareinsights.com', 'api.coderage,pro'; frame-ancestors 'none';
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload;
+Permissions-Policy: microphone 'none'; camera 'none';
+X-Content-Type-Options: nosniff;

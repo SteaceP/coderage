@@ -38,11 +38,15 @@ const App = () => {
             <Helmet>
               <meta charSet="utf-8" />
               <title>Code Rage</title>
+              <link rel="canonical" href="https://coderage.pro" />
               <meta
                 name="description"
                 content="Blog about Web Development, computers and electronics."
               />
-              <link rel="canonical" href="https://coderage.pro" />
+              <meta
+                name="keywords"
+                content="Web Development, computers, electronics, blog, javascript, typescript, strapi, unraid, linux, react, nextjs, gatsby, material-ui, tailwindcss, nodejs, express, graphql, apollo, docker, kubernetes, nginx, apache, letsencrypt, certbot, cloudflare, aws, azure, google cloud, digital ocean, heroku, netlify, vercel, github, gitlab, bitbucket, vscode, vim, tmux, bash, zsh, linux, ubuntu, debian, cent"
+              />
             </Helmet>
             <Box
               component="div"

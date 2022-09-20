@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router";
 import { useQuery } from "@apollo/client";
+import { Helmet } from "react-helmet-async";
 import {
   Skeleton,
   Grid,
@@ -56,6 +57,31 @@ const ArticleContainer: React.FunctionComponent = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{post?.attributes.title}</title>
+        <meta name="description" content={post?.attributes.description} />
+        <meta name="keywords" content={post?.attributes.keywords} />
+        <meta name="author" content={post?.attributes.author} />
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="og:title" content={post?.attributes.title} />
+        <meta name="og:description" content={post?.attributes.description} />
+        <meta name="og:image" content={imageUrl} />
+        <meta name="og:url" content={window.location.href} />
+        <meta name="og:site_name" content="Strapi Blog" />
+        <meta name="og:locale" content="en_US" />
+        <meta name="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post?.attributes.title} />
+        <meta
+          name="twitter:description"
+          content={post?.attributes.description}
+        />
+        <meta name="twitter:image" content={imageUrl} />
+        <meta name="twitter:site" content="@strapi" />
+        <meta name="twitter:creator" content="@strapi" />
+      </Helmet>
       <Box>
         <Grid
           container
