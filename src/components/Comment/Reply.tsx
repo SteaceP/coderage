@@ -1,12 +1,8 @@
-import { ISubcomment } from "@/contexts/CommentsProvider";
+import { ISubcomment } from "contexts/CommentsProvider";
 import { ISOToFull } from "lib/date-formats";
 import { Divider, Typography, Box } from "@mui/material";
 
-export interface ReplyProps {
-  data: ISubcomment;
-}
-
-const Reply = ({ data }: ReplyProps) => {
+const Reply = ({ data }: { data: ISubcomment }) => {
   const authorLabel = data.from_admin
     ? "Admin"
     : data.author

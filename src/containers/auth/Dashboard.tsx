@@ -38,7 +38,7 @@ const Dashboard = () => {
     const promises = [];
     setLoading(true);
 
-    if (emailInput.value !== user.email) {
+    if (emailInput.value !== user!.email) {
       // promises.push(updateEmail(emailInput.value));
       console.log("should work!!");
     }
@@ -61,7 +61,7 @@ const Dashboard = () => {
 
   const handleLogout = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    dispatch({ type: "LOGOUT" });
+    dispatch({ type: "logout" });
   };
 
   return (
@@ -97,7 +97,7 @@ const Dashboard = () => {
               fullWidth
               id="usernameInput"
               label="Display Name"
-              placeholder={`Your current username is "${user.username}"`}
+              placeholder={`Your current username is "${user?.username}"`}
               {...usernameInput}
             />
           </Grid>
@@ -107,7 +107,7 @@ const Dashboard = () => {
               fullWidth
               id="emailInput"
               label="Email Address"
-              placeholder={`Your current email is "${user.email}"`}
+              placeholder={`Your current email is "${user?.email}"`}
               {...emailInput}
             />
           </Grid>

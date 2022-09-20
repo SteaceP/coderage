@@ -1,7 +1,7 @@
 import { Suspense, useContext, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { AuthProvider } from "./contexts/AuthContext";
-import { DarkThemeProvider } from "./contexts/DarkModeContext";
+import { AuthProvider } from "contexts/AuthContext";
+import { DarkThemeProvider } from "contexts/DarkModeContext";
 import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 
@@ -16,11 +16,7 @@ import Footer from "components/Footer";
 
 const STRAPI = process.env.REACT_APP_BACKEND_URL;
 
-interface AppWrapperProps {
-  children: React.ReactNode;
-}
-
-const AppWrapper = (props: AppWrapperProps) => {
+const AppWrapper = (props: { children: React.ReactNode }) => {
   const { user } = useAuthState();
   const { setUser } = useContext(ConfigContext);
   useEffect(() => {

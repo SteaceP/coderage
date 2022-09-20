@@ -20,7 +20,7 @@ const ForgotPassword = () => {
   const email = useInput("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const { loading } = useAuthState();
+  const { isLoading } = useAuthState();
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -79,7 +79,7 @@ const ForgotPassword = () => {
           {...email}
         />
         <Button
-          disabled={loading}
+          disabled={isLoading}
           type="submit"
           fullWidth
           variant="contained"

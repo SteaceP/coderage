@@ -29,7 +29,7 @@ const Login = () => {
   const dispatch = useAuthDispatch();
   const [login] = useMutation(AUTH_LOGIN_MUTATION);
   const navigate = useNavigate();
-  const { loading } = useAuthState();
+  const { isLoading } = useAuthState();
 
   const handleEmailLogin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -47,7 +47,6 @@ const Login = () => {
           Cookie.set("token", login.jwt, {
             secure: true,
             signed: true,
-            // httpOnly: true,
             domain: "coderage.pro",
             sameSite: "Lax",
             expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
@@ -56,22 +55,21 @@ const Login = () => {
           Cookie.set("token", login.jwt, {
             secure: true,
             signed: true,
-            // httpOnly: true,
             domain: "localhost",
             sameSite: "Lax",
             expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 1),
           });
         }
         dispatch({
-          type: "LOGIN",
+          type: "login",
           payload: {
             username: login.user.username,
             email: login.user.email,
             id: login.user.id,
-            token: encodeURIComponent(login.jwt),
+            token: login.jwt,
           },
         });
-        dispatch({ type: "STOP_LOADING" });
+        dispatch({ type: "setLoading", payload: false });
         navigate("/");
       },
       onError: (error) => {
@@ -96,7 +94,7 @@ const Login = () => {
           sx={{ width: "100%" }}
           severity="error"
           onClose={() => {
-            setLoginError(null);
+            setLoginError("");
           }}
         >
           <AlertTitle>Error</AlertTitle>
@@ -132,7 +130,7 @@ const Login = () => {
         />
 
         <Button
-          disabled={loading}
+          disabled={isLoading}
           type="submit"
           fullWidth
           variant="contained"

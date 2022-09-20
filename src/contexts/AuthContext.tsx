@@ -1,96 +1,105 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
 import Cookie from "utils/cookie";
 
-type User = {
+export type APIResponse = {
   email: string;
   username: string;
   id: number;
-  token?: string;
+  token: string;
   confirmed?: boolean;
-  blocked?: boolean;
-  provider?: string;
   created_at?: Date;
   updated_at?: Date;
+  blocked?: boolean;
+  provider?: string;
 } | null;
 
-type AuthState = {
-  authenticated: boolean;
-  user: User;
-  loading: boolean;
+export type AuthState = {
+  user: APIResponse;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  error?: string;
 };
 
 type Action =
-  | { type: "LOGIN"; payload: User }
-  | { type: "REGISTER"; payload: User }
-  | { type: "LOGOUT" }
-  | { type: "STOP_LOADING" };
-
-type Dispatch = React.Dispatch<Action>;
+  | { type: "login"; payload: APIResponse }
+  | { type: "register"; payload: APIResponse }
+  | { type: "updateUser"; payload: APIResponse }
+  | { type: "logout" }
+  | { type: "error"; error: string }
+  | { type: "setLoading"; payload: boolean };
 
 const AuthStateContext = createContext<AuthState>({
-  authenticated: false,
   user: null,
-  loading: true,
+  isLoading: true,
+  isAuthenticated: false,
 });
 
-const DispatchContext = createContext(null);
-
-//? Devtools Naming
-if (process.env.NODE_ENV === "development") {
-  DispatchContext.displayName = "DispatchContext";
-  AuthStateContext.displayName = "AuthStateContext";
-}
-
-const reducer = (state: AuthState, action: Action) => {
+const reducer = (state: AuthState, action: Action): AuthState => {
   switch (action.type) {
-    case "LOGIN":
+    case "login":
       return {
-        ...state,
-        authenticated: true,
-        loading: true,
         user: action.payload,
+        isLoading: true,
+        isAuthenticated: true,
       };
-    case "LOGOUT":
+    case "logout":
       Cookie.remove("token");
       return {
         ...state,
-        authenticated: false,
         user: null,
+        isLoading: false,
+        isAuthenticated: false,
       };
-    case "REGISTER":
+    case "register":
       return {
         ...state,
-        authenticated: true,
-        loading: true,
-        user: {
-          ...state.user,
-          ...action.payload,
-        },
+        user: action.payload,
+        isLoading: true,
+        isAuthenticated: true,
       };
-    case "STOP_LOADING":
+    case "updateUser":
       return {
         ...state,
-        loading: false,
+        user: action.payload,
+      };
+    case "error":
+      return {
+        user: null,
+        isLoading: false,
+        isAuthenticated: false,
+        error: action.error,
+      };
+    case "setLoading":
+      return {
+        ...state,
+        isLoading: action.payload,
       };
     default:
       throw new Error("Unknown action type");
   }
 };
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(reducer, {
+type AuthProviderProps = {
+  children: React.ReactNode;
+};
+
+type Reducer<State, Action> = (prevState: State, action: Action) => State;
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [state, dispatch] = useReducer<Reducer<AuthState, Action>>(reducer, {
     user: null,
-    authenticated: false,
-    loading: false,
+    isLoading: false,
+    isAuthenticated: false,
   });
 
-  //
   // Log in the user if token exists
   useEffect(() => {
-    const token = Cookie.get("token");
-    if (token === null || token === undefined) return;
+    let ignore = false;
 
-    const getUserFromCookie = async (): Promise<User> => {
+    const token = Cookie.get("token");
+    if (!token) return;
+
+    const getUserFromCookie = async (): Promise<APIResponse> => {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/users/me`,
         {
@@ -102,26 +111,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           },
         }
       );
-      const data: User = await response.json();
+      const data: APIResponse = await response.json();
       return data;
     };
 
-    getUserFromCookie()
-      .then((res) =>
-        dispatch({
-          type: "LOGIN",
-          payload: {
-            username: res.username,
-            email: res.email,
-            id: res.id,
-            token: encodeURIComponent(token),
-          },
+    if (!ignore) {
+      getUserFromCookie()
+        .then((user) => {
+          if (user) {
+            dispatch({ type: "login", payload: user });
+          }
         })
-      )
-      .catch((error) => {
-        console.log(error);
-      })
-      .then(() => dispatch({ type: "STOP_LOADING" }));
+        .then(() => dispatch({ type: "setLoading", payload: false }))
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   return (
@@ -132,7 +141,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     </AuthStateContext.Provider>
   );
 };
+const DispatchContext = createContext((payload: Action) => {});
 
-export const useAuthState = () => useContext(AuthStateContext);
-export const useAuthDispatch: () => Dispatch = () =>
-  useContext(DispatchContext);
+export const useAuthState = () => {
+  const context = useContext(AuthStateContext);
+  return context;
+};
+
+export const useAuthDispatch = () => {
+  const context = useContext(DispatchContext);
+  return context;
+};
+
+export const useAuth = () => {
+  return [useAuthState(), useAuthDispatch()];
+};
+
+//? Devtools Naming
+if (process.env.NODE_ENV === "development") {
+  DispatchContext.displayName = "DispatchContext";
+  AuthStateContext.displayName = "AuthStateContext";
+}

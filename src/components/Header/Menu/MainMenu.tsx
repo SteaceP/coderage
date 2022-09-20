@@ -35,7 +35,7 @@ const MainMenu = () => {
 
   const handleLogout = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    dispatch({ type: "LOGOUT" });
+    dispatch({ type: "logout" });
   };
 
   return (
@@ -69,7 +69,7 @@ const MainMenu = () => {
         {user ? (
           <Box component="div">
             <MenuItem onClick={() => handleMenuClick("/auth/dashboard")}>
-              <UserAvatar />
+              <UserAvatar size={32} />
               Profile
             </MenuItem>
 

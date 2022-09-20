@@ -109,7 +109,7 @@ export interface ProviderProps {
   collapseReplies?: boolean;
   children: React.ReactNode;
   contentID?: string;
-  apiURL: string;
+  apiURL?: string;
 }
 
 export const CommentsProvider: FC<ProviderProps> = (props: ProviderProps) => {
@@ -271,7 +271,7 @@ export const CommentsProvider: FC<ProviderProps> = (props: ProviderProps) => {
       value={{
         ...commentsData,
         collapseReplies: props.collapseReplies || true,
-        apiURL: props.apiURL,
+        apiURL: props.apiURL || "",
         setContentID,
         loadingComments,
         errorHelperMessage,
