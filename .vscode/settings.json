@@ -2,6 +2,7 @@
   "cSpell.words": [
     "bgcolor",
     "browserslist",
+    "cacheable",
     "clickaway",
     "cloudflare",
     "coderage",
@@ -18,6 +19,9 @@
     "nosniff",
     "Paquette",
     "Pokedex",
+    "precache",
+    "precached",
+    "precaching",
     "roboto",
     "sendgrid",
     "signup",

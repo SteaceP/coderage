@@ -24,7 +24,9 @@ const CategoryCard = ({ data: postByCategory }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
+        <Button disabled size="small">
+          Share
+        </Button>
         <Button size="small" component={Link} to={`/post/${query.slug}`}>
           Read post
         </Button>

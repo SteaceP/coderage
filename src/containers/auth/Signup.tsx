@@ -14,7 +14,11 @@ import {
 } from "@mui/material";
 
 import AUTH_REGISTER_MUTATION from "graphql/mutation/mutation.auth.register";
-import { useAuthDispatch, useAuthState } from "contexts/AuthContext";
+import {
+  useAuthDispatch,
+  useAuthState,
+  APIResponse,
+} from "contexts/AuthContext";
 import { useInput } from "utils/hooks";
 import { isEmailValid } from "utils/validators";
 import AuthHeader from "components/Auth/AuthHeader";
@@ -31,7 +35,7 @@ const SignUp = () => {
   const [signupError, setSignupError] = useState<string[] | null>(null);
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
-  const { loading } = useAuthState();
+  const { isLoading } = useAuthState();
 
   const handleEmailSignUp = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -51,11 +55,11 @@ const SignUp = () => {
         password: userPassword.value,
       },
       onCompleted: ({ register }) => {
-        const payload = {
-          username: register.user.username,
-          email: register.user.email,
-          id: register.user.id,
-          token: encodeURIComponent(register.jwt),
+        const payload: APIResponse = {
+          username: register.user.username as string,
+          email: register.user.email as string,
+          id: register.user.id as number,
+          token: register.jwt as string,
         };
 
         if (process.env.NODE_ENV !== "development") {
@@ -76,10 +80,10 @@ const SignUp = () => {
           });
         }
         dispatch({
-          type: "REGISTER",
+          type: "register",
           payload: payload,
         });
-        dispatch({ type: "STOP_LOADING" });
+        dispatch({ type: "setLoading", payload: false });
         navigate("/");
       },
       onError: (error) => {
@@ -181,7 +185,7 @@ const SignUp = () => {
         </Grid>
         <Grid item xs={12} sx={{ mb: 2 }}>
           <Button
-            disabled={loading}
+            disabled={isLoading}
             type="submit"
             fullWidth
             variant="contained"
