@@ -56,7 +56,6 @@ const CommentForm = (props: CommentFormProps) => {
           multiline
           placeholder={props.label ? props.label : "Write a new comment..."}
           rows={3}
-          autoFocus
           margin="dense"
         />
       </Box>

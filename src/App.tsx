@@ -4,6 +4,7 @@ import { AuthProvider } from "contexts/AuthContext";
 import { DarkThemeProvider } from "contexts/DarkModeContext";
 import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import logo from "assets/images/logo.svg";
 
 import CircularLoading from "components/Loading";
 import Routing from "routes";
@@ -45,6 +46,7 @@ const App = () => {
               />
               <meta
                 name="description"
+                property="og:description"
                 content="Blog about Web Development, computers and electronics. I'm not trying to reinvent the wheel, I'm just trying to make it better by adding some rage to it!"
               />
               <meta
@@ -53,6 +55,11 @@ const App = () => {
               />
               <meta name="robots" content="index, follow" />
               <meta name="language" content="English" />
+              <meta property="og:title" content="Code Rage - Home" />
+              <meta property="og:type" content="website" />
+              <meta property="og:url" content="https://coderage.pro" />
+              <meta property="og:image" content={logo} />
+              <meta property="og:site_name" content="Code Rage" />
             </Helmet>
             <Box
               component="div"

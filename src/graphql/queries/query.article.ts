@@ -12,6 +12,20 @@ const ARTICLE_QUERY = gql`
           rating
           publishedAt
           updatedAt
+          writer {
+            data {
+              attributes {
+                Name
+                posts {
+                  data {
+                    attributes {
+                      slug
+                    }
+                  }
+                }
+              }
+            }
+          }
           category {
             data {
               attributes {
@@ -23,6 +37,7 @@ const ARTICLE_QUERY = gql`
           image {
             data {
               attributes {
+                formats
                 url
               }
             }

@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { useUIDSeed } from "react-uid";
-import { Grid, Typography, Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
 import CATEGORY_ARTICLES_QUERY from "graphql/queries/query.articlesByCategories";
 import Card from "components/Card";

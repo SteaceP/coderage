@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
 const FEATURED_ARTICLES_QUERY = gql`
   query isFeatured {
@@ -20,6 +20,7 @@ const FEATURED_ARTICLES_QUERY = gql`
           image {
             data {
               attributes {
+                formats
                 url
               }
             }
@@ -28,6 +29,6 @@ const FEATURED_ARTICLES_QUERY = gql`
       }
     }
   }
-`
+`;
 
-export default FEATURED_ARTICLES_QUERY
+export default FEATURED_ARTICLES_QUERY;

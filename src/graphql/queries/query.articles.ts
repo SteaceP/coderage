@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
 const ARTICLES_QUERY = gql`
   query Posts {
@@ -18,6 +18,7 @@ const ARTICLES_QUERY = gql`
           image {
             data {
               attributes {
+                formats
                 url
               }
             }
@@ -26,6 +27,6 @@ const ARTICLES_QUERY = gql`
       }
     }
   }
-`
+`;
 
-export default ARTICLES_QUERY
+export default ARTICLES_QUERY;
