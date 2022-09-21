@@ -1,6 +1,6 @@
 import { Box, Skeleton } from "@mui/material";
 
-export const ArticleSkeleton: React.FunctionComponent = () => {
+const ArticleSkeleton: React.FC = () => {
   return (
     <Box
       sx={{
@@ -10,8 +10,9 @@ export const ArticleSkeleton: React.FunctionComponent = () => {
         pt: 0.5,
       }}
     >
-      {/* <Skeleton /> */}
       <Skeleton variant="rectangular" width="60%" height="100vh" />
     </Box>
   );
 };
+
+export default ArticleSkeleton;

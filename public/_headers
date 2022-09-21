@@ -16,4 +16,3 @@ Content-Security-Policy: script-src 'self', https:, 'cloudflareinsights.com', 'a
 Strict-Transport-Security: max-age=63072000; includeSubDomains; preload;
 Permissions-Policy: microphone 'none'; camera 'none';
 X-Content-Type-Options: nosniff;
-Content-Type: text/html; charset=UTF-8;

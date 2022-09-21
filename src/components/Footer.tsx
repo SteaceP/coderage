@@ -8,7 +8,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import Copyright from "./Copyright";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const seed = useUIDSeed();
 
   const socialNetworks = [
@@ -27,7 +27,7 @@ const Footer = () => {
     {
       name: "Twitter",
       icon: TwitterIcon,
-      url: "https://twitter.com/PaquetteSteacy",
+      url: "https://twitter.com/Code_Rage_Blog",
       ariaLabel: "Twitter Account",
     },
     {

@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { Helmet } from "react-helmet-async";
 import {
@@ -58,7 +58,7 @@ const ArticleContainer: React.FunctionComponent = () => {
   return (
     <>
       <Helmet>
-        <title>{post?.attributes.title}</title>
+        <title>{post?.attributes.title} @ Code Rage</title>
         <meta name="description" content={post?.attributes.description} />
         <meta name="keywords" content={post?.attributes.keywords} />
         <meta name="author" content={post?.attributes.author} />
@@ -69,7 +69,7 @@ const ArticleContainer: React.FunctionComponent = () => {
         <meta name="og:description" content={post?.attributes.description} />
         <meta name="og:image" content={imageUrl} />
         <meta name="og:url" content={window.location.href} />
-        <meta name="og:site_name" content="Strapi Blog" />
+        <meta name="og:site_name" content="Code Rage" />
         <meta name="og:locale" content="en_US" />
         <meta name="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -79,21 +79,21 @@ const ArticleContainer: React.FunctionComponent = () => {
           content={post?.attributes.description}
         />
         <meta name="twitter:image" content={imageUrl} />
-        <meta name="twitter:site" content="@strapi" />
-        <meta name="twitter:creator" content="@strapi" />
+        <meta name="twitter:site" content="@Code_Rage_Blog" />
+        <meta name="twitter:creator" content="@Code_Rage_Blog" />
       </Helmet>
       <Box>
         <Grid
           container
-          spacing={0}
           direction="column"
           sx={{ alignItems: "center", justifyContent: "center" }}
         >
           <Card
             sx={{
               //TODO: Set minWidth for Desktop
-              maxWidth: "65vw",
-              m: 2,
+              maxWidth: (theme) => theme.breakpoints.values.lg,
+              mb: 2,
+              mx: 1,
             }}
           >
             {loading ? (

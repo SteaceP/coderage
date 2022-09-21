@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
 import { useUIDSeed } from "react-uid";
-import {
-  Typography,
-  Grid,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Box,
-} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import CardActionArea from "@mui/material/CardActionArea";
+import Card from "@mui/material/Card";
+import Box from "@mui/material/Box";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 
 const FeaturedPost = ({ data: featuredPosts }) => {
   const uid = useUIDSeed();

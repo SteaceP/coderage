@@ -1,6 +1,6 @@
 import { Link, Typography, Box } from "@mui/material";
 
-const Copyright = () => {
+const Copyright: React.FC = () => {
   return (
     <Box
       sx={{

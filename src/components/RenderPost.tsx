@@ -74,7 +74,7 @@ const RenderPost = (props: { markdown: string }) => {
               language={
                 props.className
                   ? props.className.replace("language-", "")
-                  : undefined
+                  : "bash"
               }
               style={
                 theme.palette.mode === "light" ? materialLight : materialDark

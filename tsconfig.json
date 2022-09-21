@@ -23,6 +23,7 @@
     "strictNullChecks": true,
     "baseUrl": "./src",
     "jsx": "react-jsx",
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "paths": {
       "@src/*": ["*"],
       "components/*": ["components/*"],

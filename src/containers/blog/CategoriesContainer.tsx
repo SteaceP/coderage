@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { useUIDSeed } from "react-uid";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Box } from "@mui/material";
 
 import CATEGORY_ARTICLES_QUERY from "graphql/queries/query.articlesByCategories";
 import Card from "components/Card";
@@ -29,21 +29,27 @@ const Category = () => {
               >
                 Articles About {categories[0].attributes.Name}
               </Typography>
-              <Grid
-                container
-                spacing={2}
+              <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "center",
-                  mb: 4,
+                  justifyContent: "space-around",
+                  flexWrap: "wrap",
+                  minWidth: 300,
+                  mb: (theme) => theme.spacing(5),
+                  px: (theme) => theme.spacing(10),
                 }}
               >
                 {postsArrayByCategory.map((postByCategory) => (
-                  <Grid item key={seed(postByCategory)}>
+                  <Box
+                    key={seed(postByCategory)}
+                    sx={{
+                      mb: (theme) => theme.spacing(4),
+                    }}
+                  >
                     <Card data={postByCategory} />
-                  </Grid>
+                  </Box>
                 ))}
-              </Grid>
+              </Box>
             </>
           );
         } else {

@@ -18,13 +18,13 @@ import { menuProps } from "components/Header/Menu/mobileMenuProps";
 import UserAvatar from "components/Header/Menu/UserAvatar";
 
 const MainMenu = () => {
-  const [isOpen, setIsOpen] = useState(null);
+  const [isOpen, setIsOpen] = useState<null | HTMLElement>(null);
   const isMenuOpen = !!isOpen;
   const { user } = useAuthState();
   const dispatch = useAuthDispatch();
   const navigate = useNavigate();
 
-  const handleMenu = (event: { currentTarget: any }) => {
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setIsOpen(event.currentTarget);
   };
 

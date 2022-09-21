@@ -10,7 +10,7 @@ type UserAvatarProps = {
   size: number;
 };
 
-const UserAvatar: React.FunctionComponent<UserAvatarProps> = (props) => {
+const UserAvatar: React.FC<UserAvatarProps> = (props) => {
   const { size } = props;
   const { user } = useAuthState();
 
@@ -20,9 +20,8 @@ const UserAvatar: React.FunctionComponent<UserAvatarProps> = (props) => {
 
   if (loading)
     return <Skeleton variant="circular" width={size} height={size} />;
-  // if (!data) return <p>No data!</p>;
 
-  const avatar = data?.usersPermissionsUser?.data?.attributes?.avatar;
+  const avatar = data?.usersPermissionsUser.data.attributes?.avatar;
 
   if (!avatar) {
     return (

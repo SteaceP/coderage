@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { Link as RouterLink } from "react-router-dom";
 import { useUIDSeed } from "react-uid";
-import { useTheme } from "@mui/material/styles";
 import { Typography, Paper, Grid, Box, Link } from "@mui/material";
 
 const MainPost = (props: { mainpost: any[] }) => {
   const seed = useUIDSeed();
-  const theme = useTheme();
 
   return (
     <>
@@ -73,8 +71,7 @@ const MainPost = (props: { mainpost: any[] }) => {
                       color="inherit"
                       gutterBottom
                       sx={{
-                        color:
-                          theme.palette.mode === "light" ? "white" : "white", // for now that is that...
+                        color: (theme) => theme.palette.grey[900],
                       }}
                     >
                       {data.title}
@@ -84,7 +81,7 @@ const MainPost = (props: { mainpost: any[] }) => {
                       color="inherit"
                       paragraph
                       sx={{
-                        color:
+                        color: (theme) =>
                           theme.palette.mode === "light" ? "white" : "white", // for now that is that...
                       }}
                     >
@@ -97,7 +94,8 @@ const MainPost = (props: { mainpost: any[] }) => {
                       underline="hover"
                       to={`/post/${data.slug}`}
                       sx={{
-                        color: theme.palette.mode === "light" ? "blue" : "blue", // for now that is that...
+                        color: (theme) =>
+                          theme.palette.mode === "light" ? "blue" : "blue", // for now that is that...
                       }}
                     >
                       Read more...

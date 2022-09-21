@@ -1,12 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { useUIDSeed } from "react-uid";
 import { useTheme } from "@mui/material/styles";
-import { Toolbar, Button } from "@mui/material";
+import Toolbar from "@mui/material/Toolbar";
 
 const Categories = () => {
   const theme = useTheme();
   const seed = useUIDSeed();
-
   const categoriesArray = ["Unraid", "Coding", "News", "Blog"];
 
   return (
@@ -18,21 +17,20 @@ const Categories = () => {
         overflow: "visible",
       }}
     >
-      {categoriesArray.map((category) => {
-        return (
-          <Button
-            tabIndex={categoriesArray.indexOf(category)}
-            key={seed(category)}
-            component={NavLink}
-            to={`/category/${
-              category.charAt(0).toLowerCase() + category.slice(1)
-            }`}
-            sx={{ color: theme.palette.mode === "light" ? "blue" : "white" }}
-          >
-            {category}
-          </Button>
-        );
-      })}
+      {categoriesArray.map((category) => (
+        <NavLink
+          key={seed(category)}
+          to={`/category/${category.toLowerCase()}`}
+          style={({ isActive }) => ({
+            fontWeight: isActive ? "bold" : "normal",
+            textDecoration: isActive ? "underline" : "none",
+            textUnderlineOffset: "1vh",
+            color: theme.palette.text.primary,
+          })}
+        >
+          {category}
+        </NavLink>
+      ))}
     </Toolbar>
   );
 };

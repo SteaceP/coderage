@@ -8,12 +8,12 @@ import {
   Typography,
 } from "@mui/material";
 
-const CategoryCard = ({ data: postByCategory }) => {
-  const query = postByCategory.attributes;
+const CategoryCard = ({ data }) => {
+  const query = data.attributes;
   const imageUrl = query.image.data.attributes.url;
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 365, maxHeight: 450 }}>
       <CardMedia component="img" alt="C sa!" height="200" image={imageUrl} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

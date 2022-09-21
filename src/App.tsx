@@ -14,7 +14,7 @@ import { useAuthState } from "contexts/AuthContext";
 import Header from "components/Header/Header";
 import Footer from "components/Footer";
 
-const STRAPI = process.env.REACT_APP_BACKEND_URL;
+const STRAPI = process.env.REACT_APP_BACKEND_URL!;
 
 const AppWrapper = (props: { children: React.ReactNode }) => {
   const { user } = useAuthState();
@@ -37,16 +37,22 @@ const App = () => {
           <AppWrapper>
             <Helmet>
               <meta charSet="utf-8" />
-              <title>Code Rage</title>
-              <link rel="canonical" href="https://coderage.pro" />
+              <title>Code Rage - Home</title>
+              <link
+                data-rh="true"
+                rel="canonical"
+                href="https://coderage.pro"
+              />
               <meta
                 name="description"
-                content="Blog about Web Development, computers and electronics."
+                content="Blog about Web Development, computers and electronics. I'm not trying to reinvent the wheel, I'm just trying to make it better by adding some rage to it!"
               />
               <meta
                 name="keywords"
-                content="Web Development, computers, electronics, blog, javascript, typescript, strapi, unraid, linux, react, nextjs, gatsby, material-ui, tailwindcss, nodejs, express, graphql, apollo, docker, kubernetes, nginx, apache, letsencrypt, certbot, cloudflare, aws, azure, google cloud, digital ocean, heroku, netlify, vercel, github, gitlab, bitbucket, vscode, vim, tmux, bash, zsh, linux, ubuntu, debian, cent"
+                content="Code Rage, Web Development, computers, electronics, coding, functional programming, guide, auth, authentication, develop, developer, fullstack, tutorials, snippets, blog, javascript, typescript, strapi, unraid, linux, react, nextjs, gatsby, material-ui, MUI, tailwindcss, nodejs, express, koa, graphql, apollo, jest, babel, docker, kubernetes, nginx, apache, letsencrypt, certbot, cloudflare, aws, azure, google cloud, gcp, digital ocean, heroku, netlify, vercel, github, gitlab, bitbucket, vscode, vim, tmux, bash, zsh, linux, ubuntu, debian, cent, strapi, render, react.js, react native, react router, wrangler, create react app, cra, android, ios, chrome, firefox, joy ui, styled, prettier, eslint"
               />
+              <meta name="robots" content="index, follow" />
+              <meta name="language" content="English" />
             </Helmet>
             <Box
               component="div"
