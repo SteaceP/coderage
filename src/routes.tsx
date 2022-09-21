@@ -1,6 +1,5 @@
 import { lazy } from "react";
-import { useSentryRoutes } from "lib/sentry";
-
+import { useRoutes } from "react-router-dom";
 import Home from "containers/Home";
 import Category from "containers/blog/CategoriesContainer";
 import ArticleContainer from "containers/blog/ArticleContainer";
@@ -14,7 +13,7 @@ const Dashboard = lazy(() => import("containers/auth/Dashboard"));
 const NoMatch = lazy(() => import("containers/404"));
 
 const Routing = () => {
-  let elements = useSentryRoutes([
+  let elements = useRoutes([
     {
       path: "/",
       element: <Home />,
