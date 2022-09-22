@@ -44,7 +44,10 @@ const ArticleContainer: React.FunctionComponent = () => {
   const posts = data?.posts.data;
   const post = posts[0];
 
-  const imageUrl = post?.attributes.image.data.attributes.url;
+  const imageUrl = post?.attributes.image.data.attributes.formats.large.url;
+  const imageAlt = post?.attributes.image.data.attributes.alternativeText;
+
+  const writer = post?.attributes.writer.data.attributes;
 
   const datePublished = format(
     new Date(post?.attributes.publishedAt),
@@ -60,27 +63,49 @@ const ArticleContainer: React.FunctionComponent = () => {
       <Helmet>
         <title>{post?.attributes.title} @ Code Rage</title>
         <meta name="description" content={post?.attributes.description} />
-        <meta name="keywords" content={post?.attributes.keywords} />
-        <meta name="author" content={post?.attributes.author} />
+        <meta
+          name="keywords"
+          content="coding, react, reactJS, tutorials, vscode, backend, frontend, tools, MUI"
+        />{" "}
+        {/*// TODO: Add more keywords and use backend */}
+        <meta name="author" property="article:author" content={writer.name} />
         <meta name="robots" content="index, follow" />
         <meta name="language" content="English" />
         <meta name="revisit-after" content="7 days" />
-        <meta name="og:title" content={post?.attributes.title} />
-        <meta name="og:description" content={post?.attributes.description} />
-        <meta name="og:image" content={imageUrl} />
-        <meta name="og:url" content={window.location.href} />
-        <meta name="og:site_name" content="Code Rage" />
-        <meta name="og:locale" content="en_US" />
-        <meta name="og:type" content="article" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post?.attributes.title} />
+        <meta property="article:published_time" content={datePublished} />
+        <meta property="article:modified_time" content={dateEdited} />
         <meta
-          name="twitter:description"
+          property="article:section"
+          content={post?.attributes.category.name}
+        />
+        <meta
+          property="article:tag"
+          content="coding, react, reactJS, tutorials, vscode, backend, frontend, tools, MUI"
+        />{" "}
+        {/*// TODO: Add more tags and use backend */}
+        <meta property="profile:first_name" content="Steacy" />
+        <meta property="profile:last_name" content="Paquette" />
+        <meta property="profile:username" content="Steace" />
+        <meta property="og:title" content={post?.attributes.title} />
+        <meta
+          property="og:description"
           content={post?.attributes.description}
         />
-        <meta name="twitter:image" content={imageUrl} />
-        <meta name="twitter:site" content="@Code_Rage_Blog" />
-        <meta name="twitter:creator" content="@Code_Rage_Blog" />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:image:alt" content={imageAlt} />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:site_name" content="Code Rage" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:type" content="article" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content={post?.attributes.title} />
+        <meta
+          property="twitter:description"
+          content={post?.attributes.description}
+        />
+        <meta property="twitter:image" content={imageUrl} />
+        <meta property="twitter:site" content="@Code_Rage_Blog" />
+        <meta property="twitter:creator" content="@Code_Rage_Blog" />
       </Helmet>
       <Box>
         <Grid
@@ -129,7 +154,7 @@ const ArticleContainer: React.FunctionComponent = () => {
                 component="img"
                 height="350"
                 src={imageUrl}
-                alt={post.attributes.title}
+                alt={imageAlt}
               />
             )}
             <CardContent>

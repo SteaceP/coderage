@@ -21,7 +21,7 @@ const UserAvatar: React.FC<UserAvatarProps> = (props) => {
   if (loading)
     return <Skeleton variant="circular" width={size} height={size} />;
 
-  const avatar = data?.usersPermissionsUser.data.attributes?.avatar;
+  const avatar = data?.usersPermissionsUser.data.attributes.avatar;
 
   if (!avatar) {
     return (
@@ -33,8 +33,8 @@ const UserAvatar: React.FC<UserAvatarProps> = (props) => {
     );
   }
 
-  const avatarUrl = avatar?.data?.attributes?.formats?.thumbnail?.url;
-  const avatarAlt = avatar?.data?.attributes?.alternativeText;
+  const avatarUrl = avatar?.data.attributes.formats.thumbnail.url;
+  const avatarAlt = avatar?.data.attributes.alternativeText;
 
   return (
     <NavLink to="/auth/dashboard">

@@ -39,7 +39,7 @@ const FeaturedPost = ({ data: featuredPosts }) => {
                       height: "100%",
                       display: { xs: "none", sm: "block" },
                     }}
-                    image={data.image.data.attributes?.url}
+                    image={data.image.data.attributes?.formats.small.url}
                     alt={data.title}
                   />
                 </Box>

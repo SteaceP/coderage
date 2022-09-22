@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
 const CATEGORY_ARTICLES_QUERY = gql`
   query ArticlesByCategory($slug: String!) {
@@ -23,6 +23,7 @@ const CATEGORY_ARTICLES_QUERY = gql`
                 image {
                   data {
                     attributes {
+                      formats
                       url
                     }
                   }
@@ -34,6 +35,6 @@ const CATEGORY_ARTICLES_QUERY = gql`
       }
     }
   }
-`
+`;
 
-export default CATEGORY_ARTICLES_QUERY
+export default CATEGORY_ARTICLES_QUERY;

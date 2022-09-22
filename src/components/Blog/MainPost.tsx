@@ -12,7 +12,17 @@ const MainPost = (props: { mainpost: any[] }) => {
         (posts: {
           attributes: {
             image: {
-              data: { attributes: { url: string; alternativeText: string } };
+              data: {
+                attributes: {
+                  url: string;
+                  alternativeText: string;
+                  formats: {
+                    medium: {
+                      url: string;
+                    };
+                  };
+                };
+              };
             };
             title: string;
             synopsis: string;
