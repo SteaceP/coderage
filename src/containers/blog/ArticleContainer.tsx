@@ -107,76 +107,72 @@ const ArticleContainer: React.FunctionComponent = () => {
         <meta property="twitter:site" content="@Code_Rage_Blog" />
         <meta property="twitter:creator" content="@Code_Rage_Blog" />
       </Helmet>
-      <Box>
-        <Grid
-          container
-          direction="column"
-          sx={{ alignItems: "center", justifyContent: "center" }}
+      <Grid
+        container
+        direction="column"
+        sx={{ alignItems: "center", justifyContent: "center" }}
+      >
+        <Card
+          component="article"
+          sx={{
+            //TODO: Set minWidth for Desktop
+            maxWidth: (theme) => theme.breakpoints.values.lg,
+            mb: 2,
+            mx: 1,
+          }}
         >
-          <Card
-            sx={{
-              //TODO: Set minWidth for Desktop
-              maxWidth: (theme) => theme.breakpoints.values.lg,
-              mb: 2,
-              mx: 1,
-            }}
-          >
-            {loading ? (
-              <Skeleton
-                animation="wave"
-                variant="text"
-                width={250}
-                height={45}
+          {loading ? (
+            <Skeleton animation="wave" variant="text" width={250} height={45} />
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                mr: 2,
+              }}
+            >
+              <CardHeader
+                component="header"
+                titleTypographyProps={{ variant: "h5", gutterBottom: true }}
+                title={post.attributes.title}
+                subheader={datePublished ? datePublished : dateEdited}
               />
-            ) : (
-              <Box
+            </Box>
+          )}
+          {loading ? (
+            <Skeleton
+              animation="wave"
+              variant="rectangular"
+              width="100%"
+              height={350}
+            />
+          ) : (
+            <CardMedia
+              component="img"
+              height="350"
+              src={imageUrl}
+              alt={imageAlt}
+            />
+          )}
+          <CardContent>
+            <RenderPost markdown={post.attributes.content} />
+            <Divider />
+            {post.attributes.updatedAt != null ? (
+              <Typography
+                align="left"
+                variant="caption"
                 sx={{
-                  display: "flex",
-                  mr: 2,
+                  mt: 3,
                 }}
               >
-                <CardHeader
-                  titleTypographyProps={{ variant: "h5", gutterBottom: true }}
-                  title={post.attributes.title}
-                  subheader={datePublished ? datePublished : dateEdited}
-                />
-              </Box>
-            )}
-            {loading ? (
-              <Skeleton
-                animation="wave"
-                variant="rectangular"
-                width="100%"
-                height={350}
-              />
+                {loading ? <Skeleton /> : `Edited on ${dateEdited}`}
+              </Typography>
             ) : (
-              <CardMedia
-                component="img"
-                height="350"
-                src={imageUrl}
-                alt={imageAlt}
-              />
+              ""
             )}
-            <CardContent>
-              <RenderPost markdown={post.attributes.content} />
-              <Divider />
-              {post.attributes.updatedAt != null ? (
-                <Typography
-                  align="left"
-                  variant="caption"
-                  sx={{
-                    mt: 3,
-                  }}
-                >
-                  {loading ? <Skeleton /> : `Edited on ${dateEdited}`}
-                </Typography>
-              ) : (
-                ""
-              )}
-            </CardContent>
-          </Card>
-        </Grid>
-      </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+
       <Box
         sx={{
           display: "flex",

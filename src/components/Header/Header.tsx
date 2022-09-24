@@ -25,6 +25,7 @@ const Header = () => {
   return (
     <>
       <Toolbar
+        aria-label="main toolbar"
         id="back-to-top-anchor" // BackToTop component refer to it
         sx={{
           justifyContent: "space-between",
@@ -60,7 +61,7 @@ const Header = () => {
           </IconButton>
           <Box
             sx={{
-              "@media screen and (max-width: 601px)": {
+              "@media screen and (max-width: 600px)": {
                 display: "none",
               },
             }}
@@ -89,7 +90,8 @@ const Header = () => {
       <Categories />
       <Divider
         variant="middle"
-        light={true}
+        light
+        flexItem
         sx={{
           mb: 2,
         }}

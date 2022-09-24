@@ -1,19 +1,21 @@
-import { Grid, Paper, Typography, Box } from "@mui/material";
+import { Paper, Typography, Box } from "@mui/material";
 
-interface SidebarProps {
+type SidebarProps = {
   title: string;
   description: string;
-}
+};
 
-const Sidebar = (props: SidebarProps) => {
+const Sidebar: React.FC<SidebarProps> = (props) => {
   const { title, description } = props;
 
   return (
-    <Grid item xs={12} md={4}>
+    <Box>
       <Paper
-        elevation={3}
+        // elevation={3}
+        variant="elevation"
         sx={{
           p: 2,
+          maxWidth: { xs: "100%", sm: "100%", md: "30vw" },
           backgroundColor: (theme) =>
             theme.palette.mode === "light"
               ? theme.palette.grey[300]
@@ -25,17 +27,7 @@ const Sidebar = (props: SidebarProps) => {
         </Typography>
         <Typography>{description}</Typography>
       </Paper>
-
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          "@media screen and (max-width: 900px)": {
-            alignItems: "center",
-          },
-        }}
-      ></Box>
-    </Grid>
+    </Box>
   );
 };
 

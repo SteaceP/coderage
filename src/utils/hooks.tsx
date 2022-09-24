@@ -4,8 +4,8 @@ import { useState } from "react";
 export const useInput = (initialValue: string) => {
   const [value, setValue] = useState(initialValue);
 
-  const handleChange = (event: { target: { value: string } }) => {
-    setValue(event.target.value);
+  const handleChange = (event: React.SyntheticEvent) => {
+    setValue((event.target as HTMLInputElement).value);
   };
 
   return {
@@ -33,10 +33,10 @@ export const useArray = (initialValue: any) => {
         slice: (arg0: number, arg1: number) => any;
         length: number;
       }) => [
-          ...array.slice(0, index),
-          newElement,
-          ...array.slice(index + 1, array.length - 1),
-        ]
+        ...array.slice(0, index),
+        newElement,
+        ...array.slice(index + 1, array.length - 1),
+      ]
     );
   };
 
@@ -46,9 +46,9 @@ export const useArray = (initialValue: any) => {
         slice: (arg0: number, arg1: number) => any;
         length: number;
       }) => [
-          ...array.slice(0, index),
-          ...array.slice(index + 1, array.length - 1),
-        ]
+        ...array.slice(0, index),
+        ...array.slice(index + 1, array.length - 1),
+      ]
     );
   };
 

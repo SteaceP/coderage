@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useUIDSeed } from "react-uid";
 import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
+import Container from "@mui/material/Container";
 
 const Categories = () => {
   const theme = useTheme();
@@ -9,29 +10,33 @@ const Categories = () => {
   const categoriesArray = ["Unraid", "Coding", "News", "Blog"];
 
   return (
-    <Toolbar
-      component="nav"
-      variant="dense"
-      sx={{
-        justifyContent: "space-around",
-        overflow: "visible",
-      }}
-    >
-      {categoriesArray.map((category) => (
-        <NavLink
-          key={seed(category)}
-          to={`/category/${category.toLowerCase()}`}
-          style={({ isActive }) => ({
-            fontWeight: isActive ? "bold" : "normal",
-            textDecoration: isActive ? "underline" : "none",
-            textUnderlineOffset: "1vh",
-            color: theme.palette.text.primary,
-          })}
-        >
-          {category}
-        </NavLink>
-      ))}
-    </Toolbar>
+    <Container>
+      <Toolbar
+        component="nav"
+        variant="dense"
+        aria-label="Categories of articles"
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          overflow: "visible",
+        }}
+      >
+        {categoriesArray.map((category) => (
+          <NavLink
+            key={seed(category)}
+            to={`/category/${category.toLowerCase()}`}
+            style={({ isActive }) => ({
+              fontWeight: isActive ? "bold" : "normal",
+              textDecoration: isActive ? "underline" : "none",
+              textUnderlineOffset: "1vh",
+              color: theme.palette.text.primary,
+            })}
+          >
+            {category}
+          </NavLink>
+        ))}
+      </Toolbar>
+    </Container>
   );
 };
 
