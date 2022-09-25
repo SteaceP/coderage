@@ -6,7 +6,6 @@ import { ApolloProvider } from "@apollo/client";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 import client from "./lib/apolloClient";
-// import ErrorBoundary from "react-error-boundaries";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 export const muiCache = createCache({
@@ -18,7 +17,6 @@ const container = document.getElementById("app");
 const root = createRoot(container!);
 
 root.render(
-  // <ErrorBoundary>
   <CacheProvider value={muiCache}>
     <HelmetProvider>
       <ApolloProvider client={client}>
@@ -28,7 +26,9 @@ root.render(
       </ApolloProvider>
     </HelmetProvider>
   </CacheProvider>
-  // </ErrorBoundary>
 );
 
-serviceWorkerRegistration.register();
+if (process.env.REACT_APP_REGISTER_PWA) {
+  serviceWorkerRegistration.register();
+}
+console.log(process.env.REACT_APP_REGISTER_PWA);

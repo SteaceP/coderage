@@ -18,17 +18,16 @@ const Categories = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          overflow: "visible",
         }}
       >
-        {categoriesArray.map((category) => (
+        {categoriesArray.map(category => (
           <NavLink
             key={seed(category)}
             to={`/category/${category.toLowerCase()}`}
             style={({ isActive }) => ({
               fontWeight: isActive ? "bold" : "normal",
               textDecoration: isActive ? "underline" : "none",
-              textUnderlineOffset: "1vh",
+              textUnderlineOffset: "5px",
               color: theme.palette.text.primary,
             })}
           >
