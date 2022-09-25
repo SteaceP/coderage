@@ -69,9 +69,13 @@ const App = () => {
                 minHeight: "100vh",
               }}
             >
-              <Header />
+              <Box component="header">
+                <Header />
+              </Box>
               <Suspense fallback={<CircularLoading />}>
-                <Routing />
+                <Box component="main">
+                  <Routing />
+                </Box>
               </Suspense>
               <Footer />
             </Box>

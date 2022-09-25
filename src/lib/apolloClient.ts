@@ -3,6 +3,7 @@ import { InMemoryCache } from "@apollo/client/core";
 import { createUploadLink } from "apollo-upload-client";
 import Cookie from "utils/cookie";
 
+//? Temporary deactivate the persistent cache
 // import { cache } from "./apolloCache";
 
 const uploadLink = createUploadLink({
@@ -14,8 +15,8 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }) => ({
     headers: {
       ...headers,
-      credentials: "include",
-      Authorization: token ? `Bearer ${token}` : "",
+      "credentials": "include",
+      "Authorization": token ? `Bearer ${token}` : "",
       "Content-Type": "application/json;charset=UTF-8",
     },
   }));

@@ -5,40 +5,6 @@ import CircularLoading from "./Loading";
 
 //TODO: add more types and find a way to make this more generic
 
-type QueryIsFeaturedProps = {
-  attributes?: {
-    title?: string;
-    description?: string;
-    synopsis?: string;
-    slug?: string;
-    isFeatured: boolean;
-    publishedAt: string;
-    category: {
-      data: {
-        attributes?: {
-          Name: string;
-        };
-      };
-    };
-    image: {
-      data: {
-        attributes?: {
-          url: string;
-        };
-      };
-    };
-  };
-};
-
-export const HomePageQuery = ({ children, query }) => {
-  const { data, loading, error } = useQuery<QueryIsFeaturedProps>(query);
-
-  if (loading) return <CircularLoading />;
-  if (error) return <p>Error: {JSON.stringify(error)}</p>;
-  if (!data) return <p>No data!</p>;
-  return children({ data });
-};
-
 export const GetPostsQuery = ({ children, query, slug }) => {
   const { data, loading, error } = useQuery(query, {
     variables: { slug: slug },

@@ -105,8 +105,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         {
           method: "GET",
           headers: {
-            credentials: "include",
-            Authorization: `Bearer ${token}`,
+            "credentials": "include",
+            "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json;charset=UTF-8",
           },
         }
@@ -117,13 +117,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     if (!ignore) {
       getUserFromCookie()
-        .then((user) => {
+        .then(user => {
           if (user) {
             dispatch({ type: "login", payload: user });
           }
         })
         .then(() => dispatch({ type: "setLoading", payload: false }))
-        .catch((error) => {
+        .catch(error => {
           console.log(error.message);
         });
     }

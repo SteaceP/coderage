@@ -1,7 +1,13 @@
 {
-  "printWidth": 80,
+  "printWidth": 90,
   "singleQuote": false,
   "trailingComma": "es5",
   "semi": true,
-  "tabWidth": 2
+  "tabWidth": 2,
+  "useTabs": false,
+  "endOfLine": "lf",
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "jsxSingleQuote": false,
+  "quoteProps": "consistent"
 }

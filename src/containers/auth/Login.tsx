@@ -78,6 +78,11 @@ const Login = () => {
     });
   };
 
+  const handleGoogleLogin = async (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    window.location.href = "http://localhost:3000/auth/login";
+  };
+
   return (
     <Container maxWidth="sm">
       <Helmet>
@@ -141,6 +146,20 @@ const Login = () => {
           }}
         >
           Log In
+        </Button>
+
+        <Button
+          disabled={isLoading}
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={handleGoogleLogin}
+          sx={{
+            mt: 3,
+          }}
+        >
+          Log In With Google
         </Button>
 
         <Grid

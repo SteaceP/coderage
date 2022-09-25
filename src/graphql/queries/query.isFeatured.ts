@@ -1,6 +1,32 @@
 import { gql } from "@apollo/client";
 
-const FEATURED_ARTICLES_QUERY = gql`
+export type QueryIsFeaturedTypes = {
+  attributes?: {
+    title?: string;
+    description?: string;
+    synopsis?: string;
+    slug?: string;
+    isFeatured: boolean;
+    publishedAt: string;
+    category: {
+      data: {
+        attributes?: {
+          Name: string;
+        };
+      };
+    };
+    image: {
+      data: {
+        attributes?: {
+          formats: any;
+          url: string;
+        };
+      };
+    };
+  };
+};
+
+export const FEATURED_ARTICLES_QUERY = gql`
   query isFeatured {
     posts(filters: { isFeatured: { eq: true } }) {
       data {
@@ -30,5 +56,3 @@ const FEATURED_ARTICLES_QUERY = gql`
     }
   }
 `;
-
-export default FEATURED_ARTICLES_QUERY;
