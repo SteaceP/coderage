@@ -44,7 +44,7 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.6.9",
+    "@apollo/client": "^3.7.0",
     "@datadog/browser-logs": "^4.19.1",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -89,7 +89,7 @@
     "@types/apollo-upload-client": "^17.0.1",
     "@types/customize-cra": "^1.0.3",
     "@types/jest": "^29.0.3",
-    "@types/node": "^18.7.18",
+    "@types/node": "^18.8.0",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
     "@types/react-helmet-async": "^1.0.3",
