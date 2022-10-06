@@ -89,7 +89,7 @@
     "@types/apollo-upload-client": "^17.0.1",
     "@types/customize-cra": "^1.0.3",
     "@types/jest": "^29.0.3",
-    "@types/node": "^18.7.18",
+    "@types/node": "^18.8.0",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
     "@types/react-helmet-async": "^1.0.3",
@@ -103,7 +103,7 @@
     "react-app-rewired": "^2.2.1",
     "react-error-boundaries": "^1.1.4",
     "react-test-renderer": "^18.2.0",
-    "typescript": "4.8.3",
+    "typescript": "4.8.4",
     "wrangler": "^2.1.4"
   }
 }
