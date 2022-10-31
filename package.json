@@ -44,7 +44,7 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.6.9",
+    "@apollo/client": "^3.7.1",
     "@datadog/browser-logs": "^4.19.1",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
