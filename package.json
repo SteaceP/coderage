@@ -90,7 +90,7 @@
     "@types/customize-cra": "^1.0.3",
     "@types/jest": "^29.0.3",
     "@types/node": "^18.8.0",
-    "@types/react": "^18.0.20",
+    "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.6",
     "@types/react-helmet-async": "^1.0.3",
     "@types/react-router-dom": "^5.3.3",
