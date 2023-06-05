@@ -2786,12 +2786,12 @@
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-5.11.12.tgz#b2ea89ba71321a79c89dfb6b2a1b1886dc7de6e4"
   integrity sha512-LHh8HZQ5nPVcW5QnyLwkAZ40txc/S2bzKMQ3bTO+5mjuwAJ2AzQrjZINLVy1geY7ei1pHXVqO1hcWHg/QdT44w==
 
-"@mui/icons-material@^5.10.6":
-  version "5.10.6"
-  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.10.6.tgz#a032395cfe7fe8e9a8edde2d27b9e3bd23e5b935"
-  integrity sha512-QwxdRmLA46S94B0hExPDx0td+A2unF+33bQ6Cs+lNpJKVsm1YeHwNdYXYcnpWeHeQQ07055OXl7IB2GKDd0MfA==
+"@mui/icons-material@^5.11.16":
+  version "5.11.16"
+  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.11.16.tgz#417fa773c56672e39d6ccfed9ac55591985f0d38"
+  integrity sha512-oKkx9z9Kwg40NtcIajF9uOXhxiyTZrrm9nmIJ4UjkU2IdHpd4QVLbCc/5hZN/y0C6qzi2Zlxyr9TGddQx2vx2A==
   dependencies:
-    "@babel/runtime" "^7.19.0"
+    "@babel/runtime" "^7.21.0"
 
 "@mui/lab@^5.0.0-alpha.101":
   version "5.0.0-alpha.101"
@@ -5216,7 +5216,7 @@ cssstyle@^2.3.0:
   dependencies:
     cssom "~0.3.6"
 
-csstype@^3.0.2, csstype@^3.1.0, csstype@^3.1.1:
+csstype@^3.0.2, csstype@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.1.tgz#841b532c45c758ee546a11d5bd7b7b473c8c30b9"
   integrity sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==
