@@ -1,16 +1,16 @@
-import { ApolloLink, ApolloClient, concat } from "@apollo/client";
-import { InMemoryCache } from "@apollo/client/core";
-import { createUploadLink } from "apollo-upload-client";
 import Cookie from "utils/cookie";
+
+const { ApolloLink, ApolloClient, InMemoryCache, concat } = require("@apollo/client");
+// const { createUploadLink } = require('apollo-upload-client');
 
 //? Temporary deactivate the persistent cache
 // import { cache } from "./apolloCache";
 
-const uploadLink = createUploadLink({
-  uri: `${process.env.REACT_APP_BACKEND_URL}/graphql`,
-});
+// const uploadLink = createUploadLink({
+//   uri: `${process.env.REACT_APP_BACKEND_URL}/graphql`,
+// });
 
-const authMiddleware = new ApolloLink((operation, forward) => {
+const authMiddleware = new ApolloLink((operation: { setContext: (arg0: ({ headers }: { headers?: {} | undefined; }) => { headers: { credentials: string; Authorization: string; "Content-Type": string; }; }) => void; }, forward: (arg0: any) => any) => {
   const token = Cookie.get("token");
   operation.setContext(({ headers = {} }) => ({
     headers: {
@@ -35,7 +35,7 @@ const cache = new InMemoryCache({
             });
           },
           keyArgs: ["filters"],
-          merge(existing, incoming) {
+          merge(existing: { data: any; }, incoming: { data: any; }) {
             //? This is a test for something that I'll add sooner or later doesn't do much right now
             return {
               ...incoming,
@@ -50,8 +50,19 @@ const cache = new InMemoryCache({
 
 const client = new ApolloClient({
   cache,
-  link: concat(authMiddleware, uploadLink),
-  connectToDevTools: true, //? Gives access to the Apollo Client DevTools in production
+  // link: authMiddleware,
+  uri: 'https://remove-me-soon.com/',
+  connectToDevTools: (process.env.REACT_APP_ENABLE_APOLLO_DEV_TOOL === "true") ? true : false,
+
+    // Optional constructor fields
+    name: 'coderage-web-client',
+    version: '0.1.1',
+    queryDeduplication: false,
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'cache-and-network',
+      },
+    },
 });
 
 export default client;

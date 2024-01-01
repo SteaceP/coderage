@@ -1,4 +1,4 @@
-import { Typography, Grid, Divider, Box } from "@mui/material";
+import { Typography, Divider, Box } from "@mui/material";
 
 const Rules = () => {
   return (

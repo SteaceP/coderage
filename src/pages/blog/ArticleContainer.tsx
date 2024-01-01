@@ -24,7 +24,7 @@ import RenderPost from "components/RenderPost";
 import ScrollTop from "components/BackToTop";
 
 import { ConfigContext } from "contexts/CommentsProvider";
-import Comments from "containers/blog/CommentsContainer";
+import Comments from "pages/blog/CommentsContainer";
 
 const ArticleContainer: React.FunctionComponent = () => {
   const { id } = useParams();

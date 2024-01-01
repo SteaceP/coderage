@@ -1,16 +1,16 @@
-import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
-import Home from "containers/Home";
-import Category from "containers/blog/CategoriesContainer";
-import ArticleContainer from "containers/blog/ArticleContainer";
 
-const Login = lazy(() => import("containers/auth/Login"));
-const SignUp = lazy(() => import("containers/auth/Signup"));
-const ForgotPassword = lazy(() => import("containers/auth/ForgotPassword"));
-const Portfolio = lazy(() => import("containers/Portfolio"));
-const RequireAuth = lazy(() => import("components/Auth/RequireAuth"));
-const Dashboard = lazy(() => import("containers/auth/Dashboard"));
-const NoMatch = lazy(() => import("containers/404"));
+import Home from "pages/Home"
+import Category from "pages/blog/CategoriesContainer";
+import ArticleContainer from "pages/blog/ArticleContainer";
+
+import Login from "pages/auth/Login.tsx";
+import SignUp from "pages/auth/Signup";
+import ForgotPassword from "pages/auth/ForgotPassword";
+import Portfolio from "pages/Portfolio";
+import RequireAuth from "components/Auth/RequireAuth";
+import Dashboard from "pages/auth/Dashboard";
+import NoMatch from "pages/404";
 
 const Routing = () => {
   let elements = useRoutes([

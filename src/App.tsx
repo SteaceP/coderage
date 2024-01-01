@@ -1,4 +1,4 @@
-import { Suspense, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { AuthProvider } from "contexts/AuthContext";
 import { DarkThemeProvider } from "contexts/DarkModeContext";
@@ -6,7 +6,6 @@ import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import logo from "assets/images/logo.svg";
 
-import CircularLoading from "components/Loading";
 import Routing from "routes";
 
 import { CommentsProvider, ConfigContext } from "contexts/CommentsProvider";
@@ -72,11 +71,9 @@ const App = () => {
               <Box component="header">
                 <Header />
               </Box>
-              <Suspense fallback={<CircularLoading />}>
                 <Box component="main">
                   <Routing />
                 </Box>
-              </Suspense>
               <Footer />
             </Box>
           </AppWrapper>
