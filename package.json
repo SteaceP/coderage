@@ -23,7 +23,8 @@
   "exports": [
     "./node_modules/apollo-upload-client/createUploadLink.mjs",
     "./node_modules/apollo-upload-client/formDataAppendFile.mjs",
-    "./node_modules/apollo-upload-client/isExtractableFile.mjs"
+    "./node_modules/apollo-upload-client/isExtractableFile.mjs",
+    "./node_modules/@apollo/client/apollo-client.cjs"
   ],
   "browserslist": {
     "production": [
