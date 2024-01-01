@@ -25,10 +25,10 @@ const Footer: React.FC = () => {
       ariaLabel: "LinkedIn Profile",
     },
     {
-      name: "Twitter",
+      name: "X",
       icon: TwitterIcon,
-      url: "https://twitter.com/Code_Rage_Blog",
-      ariaLabel: "Twitter Account",
+      url: "https://x.com/Code_Rage_Blog",
+      ariaLabel: "X Account",
     },
     {
       name: "Facebook",
